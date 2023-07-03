@@ -1,0 +1,530 @@
+---
+title: "Summarising Data"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+## Data
+
+```{r setup}
+#| include: false
+library(iNZightPlots); library(ggplot2); library(ggthemes)
+```
+
+> In statistical parlance, **data** is a plural word referring to a collection of numbers or other pieces of information to which meaning has been attached
+
+::: {style="font-size: 0.8em; text-align: right; margin-top: -0.5em;"}
+ --- Utts (2014)
+:::
+
+::: {.aside}
+Utts, J. M. (2014). *Seeing Through Statistics* (4th ed.). Cengage Learning.
+:::
+
+## Observations, values, and variables
+
+An [observation]{style="color: tomato;"} is an individual that we measure *or* categorise **data** about
+
+::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 0.75;"}
+- An apple
+- A hospital
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+A [value]{style="color: steelblue;"} is a singular piece of **data** about an [observation]{style="color: tomato;"}
+:::
+
+::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid steelblue; color: #4d4d4d; line-height: 0.75;"}
+- The weight of an apple picked from Tree A1
+- The percent occupancy of beds at Waikato Hospital
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+A [variable]{style="color: orchid;"} is a collection of one *type* of **data** collected on all [observations]{style="color: tomato;"}
+:::
+
+::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid orchid; color: #4d4d4d; line-height: 0.75;"}
+- The weight for all apples picked from Tree A1
+- The percent occupancy of beds for all hospitals in the Waikato region
+:::
+
+## More on variables
+
+> ... we measure *or* categorise **data** about
+
+::::: {.columns}
+:::: {.column .fragment}
+**Numeric** <small>Quantitative</small>  
+Data that can be described with numbers
+
+::: {.tightListTwo .incremental style="font-size: 0.9em;"}
+- [Discrete]{style="color: darkorange;"} <small>Integer</small>  
+&dash; Number of siblings  
+&dash; Age [(if measured in years)]{.fragment}
+- [Continuous]{style="color: darkorange;"} <small>Real</small>  
+&dash; Diastolic & systolic blood pressure  
+&dash; Strength of a gravitational wave
+:::
+
+::::
+:::: {.column .fragment}
+**Categorical** <small>Qualitative, Factor</small>  
+Data that is best described with text
+
+::: {.tightListTwo .incremental style="font-size: 0.9em;"}
+- [Nominal]{style="color: darkorange;"} <small>No order</small>  
+&dash; Te Whatu Ora -- Health NZ regions   
+&dash; Eye colour
+- [Ordinal]{style="color: darkorange;"} <small>Natural order</small>  
+&dash; Number of Wordle guesses  
+&dash; Highest educational degree earned
+:::
+
+::::
+:::::
+
+## [Ex 1:]{style='color: tomato;'} Chocs and Blocks
+
+> An exercise that gets you to estimate the "true" average block weight using *only* a sample of 10 blocks.
+
+:::::: {.columns}
+::::: {.column style="width: 45%;"}
+:::: {style="font-size: 0.75em;"}
+| [Variables]{style="color: #4758AB;"} | |
+| :-           | :------------ |
+| **Block.ID** | A numeric variable which denotes the block's identification number |
+| **Weight** | A numeric variable that denotes the weight of the block (grams) |
+::::
+:::::
+
+::::: {.column .fragment style="width: 55%;"}
+:::: {style="width: 60%; display: block; margin: auto;"}
+```{r}
+#| echo: false
+#| results: asis
+#| classes: excel
+davidsSample.df <- read.csv("datasets/davids-sample.csv")
+
+# rbind(colnames(davidsSample.df), head(davidsSample.df, n = 5), rep("...", ncol(davidsSample.df))) |>
+rbind(colnames(davidsSample.df), davidsSample.df) |>
+  knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(davidsSample.df)])
+```
+::: {.excel-caption}
+This is the `davids-sample.csv` data from [Moodle]{.Moodle}
+:::
+::::
+:::::
+::::::
+
+::: {.aside}
+**URL:** [https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html](https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html)
+:::
+
+## Tidy data
+
+In ENGEN102, most, if not all, datasets follow *tidy data* principles
+
+::: {.incremental style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 1; margin-left: 1em;"}
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+
+:::
+
+::: {style="font-size: 0.8em; text-align: right; margin-top: -1em;"}
+ --- Wickham et al. (in press)
+:::
+
+::: {.aside}
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (in press). *R for Data Science* (2nd ed.). O'Reilly.
+:::
+
+## Stacked dot plot
+
+::::: {.columns}
+:::: {.column style="width: 55%" .margin-bottom}
+Plot each value of the numeric variable on the number line
+
+Stack *similar* values on top of each other
+::::
+:::: {.column style="width: 45%;"}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj <- ggplot(data = davidsSample.df, aes(x = Weight)) +
+  labs(x = "Weight (grams)", title = "Distribution of Block Weights") +
+  theme_bw()
+plotObj +
+  geom_dotplot(binwidth = 1) +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL)
+```
+::::
+:::::
+
+## Box plot^[Also known as a box and whisker plot]
+
+::::: {.columns}
+:::: {.column style="width: 55%" .margin-bottom}
+Summarise the values of the numeric variable with **order** statistics
+
+Plot the *central* 50% of the variable as a box with two segments and *outer* 50% of the variable as lines on the number line
+
+Most software uses the spread of the *central* 50% of the variable to identify "interesting" observations
+::::
+:::: {.column style="width: 45%;"}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_boxplot(fill = "lemonchiffon") +
+  scale_y_continuous(breaks = NULL, limits = c(-1, 1))
+```
+::::
+:::::
+
+## Histogram
+
+::::: {.columns}
+:::: {.column style="width: 55%" .margin-bottom}
+Split the values of the numeric variable into **equally-sized** intervals
+
+Plot a bar for each interval, whose height is equal to the number of observations within the interval
+
+Most software uses an algorithm to determine the *default* number of intervals
+::::
+:::: {.column style="width: 45%;"}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_histogram(fill = "lightblue", colour = "black", bins = 9) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
+  labs(y = "Frequency")
+```
+::::
+:::::
+
+## Sample mean^[Most people implicitly refer to the (sample) mean when they talk about an **average**]
+
+::::::: {.columns}
+:::::: {.column width="57.5%"}
+::::: {.margin-bottom}
+A measure of centre that is often coined as the balancing point of a numeric variable
+:::::
+
+::::: {.fragment fragment-index=2}
+Let $x_i$ be the $i$th value and $n$ be the total number of observations. Then, the **sample** mean is
+
+:::: {.definition style="font-size: 0.8em; width: 80%; display: block; margin: auto;"}
+$$
+\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{\sum^n_{i=1} x_i}{n}
+$$
+::::
+:::::
+
+::::::
+:::::: {.column width="42.5%" .fragment fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_dotplot(binwidth = 1) +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17)
+```
+[`r mean(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+::::::
+:::::::
+
+## Sample median
+
+::::::: {.columns}
+:::::: {.column width="57.5%"}
+::::: {.margin-bottom}
+A measure of centre that is often coined as the middle value (50^th^ percentile) of a numeric variable
+:::::
+
+::::: {.fragment fragment-index=2}
+Let $n$ be the total number of observations. Then, the **sample** median, $m$, can be determined by
+
+:::: {.definition style="font-size: 0.8em; padding-left: 1em; display: block; margin: auto;"}
+
+<ol>
+  <li> Sort the values in ascending (or descending) order </li>
+  <li class="fragment" data-fragment-index=3> <ul>
+    <li class="fragment" data-fragment-index=3> If $n$ is **odd**, then $m$ is the value of the $\frac{n + 1}{2}$^th^ observation</li>
+    <li class="fragment" data-fragment-index=4> If $n$ is **even**, then $m$ is the *mean* of the values from the observations "above" and "below" $\frac{n + 1}{2}$ </li>
+  </ul> </li>
+</ol>
+
+::::
+
+:::::
+
+::::::
+:::::: {.column width="42.5%" .fragment fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_dotplot(binwidth = 1) +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+  geom_point(inherit.aes = FALSE, x = median(davidsSample.df$Weight), y = -0.15, colour = "blue", size = 6.5, pch = 17)
+```
+
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+#| classes: fragment
+
+plotObj +
+  geom_boxplot(fill = "lemonchiffon") +
+  geom_dotplot(binwidth = 1, fill = NA, colour = NA)  +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL, limits = c(-1, 1))
+```
+
+[`r median(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+::::::
+:::::::
+
+## Sample standard deviation
+
+::::::: {.columns}
+:::::: {.column width="57.5%"}
+::::: {.margin-bottom}
+A measure of spread for a numeric variable that is mathematically associated with the **sample** mean
+:::::
+
+::::: {.fragment fragment-index=2}
+Let $x_i$ be the $i$^th^ value, $\bar{x}$ be the sample mean, and $n$ be the total number of observations. Then, the **sample** standard deviation is
+
+:::: {.definition style="font-size: 0.8em; display: block; margin: auto;"}
+$$
+\begin{aligned}
+  s &= \sqrt{\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2}{n - 1}} \\
+    &= \cdots \\
+    &= \sqrt{\frac{\sum^n_{i=1} (x_i)^2 - n\bar{x}^2}{n - 1}}
+\end{aligned}
+$$
+::::
+
+:::::
+
+::::::
+:::::: {.column width="42.5%" .fragment fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_dotplot(binwidth = 1) +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
+  geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight), y = -0.08, yend = -0.08, colour = "red", linewidth = 1.15,  arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
+```
+[`r sd(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+::::::
+:::::::
+
+## Standard error of the sample mean
+
+::::::: {.columns}
+:::::: {.column width="57.5%"}
+::::: {.margin-bottom}
+A measure that describes how precise the **sample** mean is as an estimate of the "**true**" mean (under some assumptions)
+:::::
+
+::::: {.fragment fragment-index=2}
+Let $s$ be the sample standard deviation and $n$ be the total number of observations. Then, the **standard error**^[A standard error quantifies the standard deviation of a statistic] of the sample mean is:
+
+:::: {.definition style="font-size: 0.8em; width: 50%; display: block; margin: auto;"}
+$$
+\text{se}(\bar{x}) = \frac{s}{\sqrt{n}}
+$$
+::::
+
+:::::
+
+::::::
+:::::: {.column width="42.5%" .fragment fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+plotObj +
+  geom_dotplot(binwidth = 1) +
+  labs(y = "") +
+  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
+  geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight) / sqrt(10), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight) / sqrt(10), y = -0.08, yend = -0.08, colour = "black", linewidth = 1.15, arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
+```
+::::::
+:::::::
+
+## [Ex 1]{style='color: tomato;'} in [iNZight]{.R}
+
+:::::: {.columns}
+::::: {.column style="width: 50%;"}
+```{r}
+#| include: false
+#| fig-dpi: 300
+#| fig-height: 5
+#| fig-width: 7
+
+png(filename = "figures/davidsSample.png", width = 7, height = 5, units = "in", res = 300)
+iNZightPlot(Weight, data = davidsSample.df, xlab = "Weight (grams)", main = "Distribution of Weight", bg = "white")
+dev.off()
+```
+![](figures/davidsSample.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
+:::::
+
+::::: {.column .fragment style="width: 50%;"}
+```{r}
+#| echo: false
+#| classes: output-small-80
+getPlotSummary(Weight, data = davidsSample.df, width = 83)
+```
+:::::
+::::::
+
+## [Ex 2:]{style='color: tomato;'} Note taking
+
+> A study randomly assigned students to take notes either longhand or using a laptop. The researchers had the students take a test after they wrote their notes. Does the data provide evidence of a difference in taking notes longhand rather than on a laptop?
+
+:::::: {.columns}
+::::: {.column style="width: 45%;"}
+:::: {style="font-size: 0.75em;"}
+| [Variables]{style="color: #4758AB;"} | |
+| :-           | :------------ |
+| **score** | A numeric variable denoting the test score (unitless) |
+| **method** | A categorical variable denoting the note taking method, "longhand" or "laptop" |
+::::
+:::::
+
+::::: {.column .fragment style="width: 55%;"}
+:::: {style="width: 60%; display: block; margin: auto;"}
+```{r}
+#| echo: false
+#| results: asis
+#| classes: excel
+noteTaking.df <- read.csv("datasets/note-taking.csv")
+
+rbind(colnames(noteTaking.df), head(noteTaking.df, n = 7), rep("...", ncol(noteTaking.df))) |>
+# rbind(colnames(davidsSample.df), davidsSample.df) |>
+  knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(noteTaking.df)])
+```
+::: {.excel-caption}
+This is the `note-taking.csv` data from [Moodle]{.Moodle}
+:::
+::::
+:::::
+::::::
+
+::: {.aside}
+Based on research by Mueller, P. A. & Oppenheimer, D. M. (2014). The Pen Is Mightier Than the Keyboard: Advantages of Longhand Over Laptop Note Taking. *Psychological Science* **25**(6), 1159--1168.
+:::
+
+## [Ex 2]{style='color: tomato;'} in [iNZight]{.R}
+
+:::::: {.columns}
+::::: {.column style="width: 50%;"}
+```{r}
+#| include: false
+#| fig-dpi: 300
+#| fig-height: 5
+#| fig-width: 7
+
+png(filename = "figures/noteTaking.png", width = 7, height = 5, units = "in", res = 300)
+iNZightPlot(score, method, data = noteTaking.df, xlab = "Test Score (unitless)", ylab = "Note Taking Method", main = "Distribution of Test Score by Note Taking Method", bg = "white")
+dev.off()
+```
+![](figures/noteTaking.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
+:::::
+
+::::: {.column .fragment style="width: 50%;"}
+```{r}
+#| echo: false
+#| classes: output-small-80
+getPlotSummary(score, method, data = noteTaking.df, width = 83)
+```
+:::::
+::::::
+
+## [Terminology Reference]{style="color: darkorange;"} 
+
+::::: {.columns}
+:::: {.column .margin-bottom style="font-size: 0.8em;"}
+**Centre**  
+The "typical size" of the numeric variable, e.g. the sample mean & median
+
+**Spread**  
+The "variability" of the numeric variable, e.g. the sample standard deviation, range, & interquartile range
+
+**Outliers**  
+An observation whose value is notably distinct from other values in the numeric variable
+
+**Cluster**  
+A distinct group of values
+
+**Sample size**  
+A shorter way of saying: "The total number of observations"
+::::
+:::: {.column .margin-bottom style="font-size: 0.8em;"}
+**Shape** [(Distribution)]{style="font-size: 0.6em;"}  
+The form of the numeric variable, e.g. U-shaped or bell-shaped
+
+**Mode** [(Distribution)]{style="font-size: 0.6em;"}  
+The "frequent value(s)" of the numeric variable, e.g. the peaks of a histogram
+
+**Symmetrical** [(Distribution)]{style="font-size: 0.6em;"}  
+A distribution whose two sides approximately match when folded on a vertical centre line
+
+**Skewed to the left** [(Distribution)]{style="font-size: 0.6em;"}  
+A distribution whose values piles up on the right and the tail extends relatively far out to the **left**
+
+**Skewed to the right** [(Distribution)]{style="font-size: 0.6em;"}  
+A distribution whose values piles up on the left and the tail extends relatively far out to the **right**
+::::
+:::::
