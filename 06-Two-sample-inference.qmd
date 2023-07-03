@@ -1,0 +1,38 @@
+---
+title: "Inference for two groups of numeric data"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+## New Ex
+
+insulating-paper.csv
+
+## Practical motivations for 
+
+## C.I Equation
+
+## C.I. Example
+
+## Hypothesis test
+
+## Test example
+
+
+## [Ex 2:]{style='color: tomato;'} Note taking in iNZight Lite
+
+## Write-up one
+
+## Write-up two

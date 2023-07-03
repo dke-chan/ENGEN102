@@ -1,0 +1,38 @@
+---
+title: "Summarising Data"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+## Modesl for generating data
+
+## Why events have probabilities rather than outcomes
+
+EVEN FOR DISCRETE VS CONTINUOUS
+
+## The Normal Distriubiton as a model generating data
+
+## The pi argument why you shouldn't evaluate the function as-is
+
+## Events with the Normal
+s
+## The Standard Normal
+
+## Calculation Examples
+
+## Normal Distribution fits?
+
+
+## Empirical rule for normals
