@@ -1,0 +1,158 @@
+---
+title: "@bird21 Textbook"
+format: html
+theme: ["bird.scss"]
+bibliography: references.bib
+embed-resources: true
+toc: true
+toc-depth: 2
+---
+
+## Preface
+
+The following topics from @bird21 **Section M:** Statistics and probability are covered as part of the statistics component of ENGEN102.
+
+- Mean, median, mode and standard deviation (pg. 743--750).
+- Probability (pg. 751--763)
+- The Normal distribution (pg. 771--779).
+- Sampling and estimation theories (pg. 792--804).
+- Significance testing (pg. 805--821).
+
+::: {.callout-warning appearance="simple"}
+This is not an exhaustive list of all topics covered in the statistics component of ENGEN102.
+:::
+
+## Relevant Practice Exercises
+
+The following lists which questions from the @bird21 practice exercises are relevant to the statistics component of ENGEN102.
+
+- Practice Exercise 289: Questions 1--4
+- Practice Exercise 291: Questions 1--3
+- Practice Exercise 293: Questions 1--6
+- Practice Exercise 294: Questions 1, 2, 3(a), 3(b), 4, and 5
+- Practice Exercise 302: Questions 1--8
+- Practice Exercise 304: Questions 1--5
+- Practice Exercise 307: Questions 1, 3(a), 5, 6, and 7
+- Practice Exercise 308: Questions 5 and 6
+- Practice Exercise 309: Questions 1--3  
+- Practice Exercise 311: Questions 2, 4, 5, and 6
+- Practice Exercise 312: Questions 1, 2, 3, 5, and 6
+
+::: {.callout-tip appearance="simple"}
+Some *t*-multipliers you may require that are not provided by @bird21 are:
+
+- *t*~0.9875~(*&nu;* = 9) = 2.69
+- *t*~0.975~(*&nu;* = 39) = 2.02
+- *t*~0.975~(*&nu;* = 49) = 2.01
+- *t*~0.975~(*&nu;* = 59) = 2.00
+- *t*~0.95~(*&nu;* = 79) = 1.66
+:::
+
+
+## Answers to Relevant Practice Exercises
+
+The style of these brief solutions follows the same style as @bird21. That is, only the final answer is presented without full working. All solutions with the [&starf;]{.tomato} superscript use the methods taught in the statistics component of ENGEN102.
+
+### Practice Exercise 289
+
+1. Mean 7 1&frasl;3, median 8, mode 8
+2. Mean 27.25, median 27, mode 26
+3. Mean 4.7225, median 4.72, mode 4.72
+4. Mean 115.2, median 126.4, no mode
+
+### Practice Exercise 291
+
+1. 4.97 ^[&starf;]{.tomato}^
+2. 3.01 &mu;F ^[&starf;]{.tomato}^
+3. Mean 34.53 MPa, standard deviation 0.07737 MPa ^[&starf;]{.tomato}^
+
+### Practice Exercise 293
+
+1. Option (d\)
+2. Option (a\)
+3. Option (b\)
+4. Option (c\)
+5. Option (d\)
+6. Option (b\)
+
+### Practice Exercise 294
+
+1. (a\) 2&frasl;9 &emsp; (b\) 7&frasl;9
+2. (a\) 23&frasl;139 &emsp; (b\) 47&frasl;139 &emsp; (c\) 69&frasl;139
+3. (a\) 1&frasl;6 &emsp; (b\) 1&frasl;6
+4. 7&frasl;10
+5. 5&frasl;36
+
+### Practice Exercise 302
+
+1. 6
+2. 22
+3. (a\) 479 &emsp; (b\) 63 &emsp; (c\) 21
+4. 4
+5. (a\) 131 &emsp; (b\) 553
+6. (a\) 15 &emsp; (b\) 4
+7. (a\) 65 &emsp; (b\) 209 &emsp; (c\) 89
+8. (a\) 1 &emsp; (b\) 85 &emsp; (c\) 13
+
+### Practice Exercise 304
+
+1. Option (b\)
+2. Option (c\)
+3. Option (a\)
+4. Option (d\)
+5. Option (a\)
+
+### Practice Exercise 307
+
+<ol>
+  <li> *&mu;*~*x&#772;*~ = *&mu;* = 22.4 cm, *&sigma;*~*x&#772;*~ = 0.0080 cm
+  <li value="3"> (a\) *&mu;*~*x&#772;*~ = *&mu;* = 1.70 cm, *&sigma;*~*x&#772;*~ = 2.91 &times; 10^&minus;3^ cm
+  <li value="5"> 0.023
+  <li> 0.497
+  <li> 0.0038
+</ol>
+
+### Practice Exercise 308
+
+5. 10.91 to 11.27 tonnes ^[&starf;]{.tomato}^ 
+6. 46.94 seconds ^[&starf;]{.tomato}^
+
+### Practice Exercise 309
+
+1. 5.127 to 5.207 MPa ^[&starf;]{.tomato}^
+2. 5.119 to 5.221 MPa ^[&starf;]{.tomato}^
+3. 1.09 to 1.16 &ohm;m^&minus;1^ ^[&starf;]{.tomato}^
+
+### Practice Exercise 311
+
+<ol>
+  <li value="2"> *t*\*~[0.95]{.ch-0}~(*&nu;* = 8) = 1.86, *t*~0~ = 2. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 80 %, is rejected in favour of the alternative, H~1~: *&mu;* > 80 %, at the 5% significance level
+  <li value="4"> *x&#772;* = 10.38, *s* = 0.34, *t*\*~[0.95]{.ch-0}~(*&nu;* = 19) = 1.73, *t*~0~ = 1.70. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 10.25 kN, is not rejected in favour of the alternative, H~1~: *&mu;* > 10.25 kN, at the 5% significance level
+  <li> (a\) *t*\*~[0.975]{.ch-0}~(*&nu;* = 9) = 2.26, *t*~0~ = 3.16. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 0.5 cm, is rejected in favour of the alternative, H~1~: *&mu;* &ne; 0.5 cm, at the 5% significance level  
+(b\) *t*\*~[0.995]{.ch-0}~(*&nu;* = 9) = 3.25, *t*~0~ = 3.16. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 0.5 cm, is not rejected in favour of the alternative, H~1~: *&mu;* &ne; 0.5 cm, at the 1% significance level
+  <li> (a\) *t*\*~[0.95]{.ch-0}~(*&nu;* = 5) = 2.02, *t*~0~ = 3.38. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 8000, is not rejected in favour of the alternative, H~1~: *&mu;* > 8000, at the 10% significance level  
+(b\) *t*\*~[0.99]{.ch-0}~(*&nu;* = 5) = 3.36, *t*~0~ = 3.38. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;* = 8000, is not rejected in favour of the alternative, H~1~: *&mu;* > 8000, at the 2% significance level
+</ol>
+
+### Practice Exercise 312
+
+<ol>
+  <li> *t*\*~[0.95]{.ch-0}~(*&nu;* = 79) = 1.66, *t*~0~ = 1.28. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~B~ &minus; *&mu;*~A~ = 15, is not rejected in favour of the alternative, H~1~: *&mu;*~B~ &minus; *&mu;*~A~ > 15, at the 5% significance level
+  <li> *t*\*~[0.975]{.ch-0}~(*&nu;* = 49) = 2.01, *t*~0~ = &minus;2.35. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0, at the 5% significance level
+  <li> *t*\*~[0.995]{.ch-0}~(*&nu;* = 4) = 4.60, *t*~0~ = &minus;1.32. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ < 0, at the 1% significance level
+  <li value="5"> (a\) *t*\*~[0.99]{.ch-0}~(*&nu;* = 11) = 2.72, *t*~0~ = &minus;1.93. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ > 0, at the 1% significance level  
+(b\) *t*\*~[0.95]{.ch-0}~(*&nu;* = 11) = 1.80, *t*~0~ = &minus;1.93. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ > 0, at the 5% significance level
+  <li> *t*\*~[0.95]{.ch-0}~(*&nu;* = 4) = 2.13, *t*~0~ = 3.71. ^[&starf;]{.tomato}^  
+Hence the null hypothesis, H~0~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ > 0, at the 5% significance level
+</ol>

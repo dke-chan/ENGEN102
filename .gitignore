@@ -1,0 +1,9 @@
+# RStudio & qmd files
+.Rproj.user/
+*_files/
+*.html
+*.pdf
+.Rhistory
+
+# Datasets
+datasets/

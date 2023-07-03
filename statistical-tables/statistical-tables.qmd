@@ -1,0 +1,91 @@
+---
+format: html
+theme: [default, "statistical-tables.scss"]
+scrollable: false
+---
+
+```{r setup}
+#| include: false
+library(knitr)
+```
+
+### Table A
+
+:::: {.columns}
+::: {.column width="65%"}
+Partial areas under the Standard Normal distribution, $Z$, for $\mathbb{P}(0 < Z < z)$, where $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$.
+:::
+::: {.column width="35%"}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-width: 5
+#| fig-height: 2
+#| out-width: 60%
+
+par(mai = c(0.05, 0, 0, 0))
+z <- seq(0, 1.5, length.out = 1000)
+z0 <- seq(-5, 5, length.out = 1000)
+plot(0, type = "n", xlim = c(-4, 4), ylim = c(0, dnorm(0) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
+lines(x = z0, y = dnorm(z0), col = "gray")
+polygon(x = c(z, rev(z)), y = c(dnorm(z), rep(0, length(z))), col = "yellow")
+abline(h = 0, v = 0, col = "black")
+```
+:::
+::::
+
+```{r}
+#| echo: false
+#| results: asis
+Tab71.1 <- outer(seq(0, 3.9, by = 0.1), seq(0, 9), \(x, y) {
+  (pnorm(x + y / 100) - pnorm(0)) |> 
+    sprintf(fmt = "%.4f")
+})
+
+Tab71.1 <- cbind(paste0("<b>", sprintf(fmt = "%.1f", seq(0, 3.9, by = 0.1)), "</b>"), Tab71.1)
+colnames(Tab71.1) <- c("<i>z</i> = (<i>x</i> &minus; <i>&mu;</i>)/<i>&sigma;</i>", seq(0, 9))
+
+kable(Tab71.1, align = "c", format = "html", escape = FALSE, table.attr = "id=\"BirdTable\"")
+```
+
+### Table B
+
+:::: {.columns}
+::: {.column width="65%"}
+Percentile values (*t*\*~[*p*]{.ch-0}~) for the Student's *t*-distribution with *&nu;* degrees of freedom. Note that the partial area is $\mathbb{P}(T < t^*_p) = p$, where $T \sim \text{Student}(\nu)$.
+:::
+::: {.column width="35%"}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-width: 5
+#| fig-height: 2
+#| out-width: 60%
+
+par(mai = c(0.05, 0, 0, 0))
+t <- seq(-6, 1.25, length.out = 1000)
+t0 <- seq(min(t), max(abs(t)), length.out = 1000)
+plot(0, type = "n", xlim = c(-4, 4), ylim = c(0, dnorm(0) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
+lines(x = t0, y = dt(t0, 25), col = "gray")
+polygon(x = c(t, rev(t)), y = c(dt(t, 25), rep(0, length(t))), col = "yellow")
+abline(h = 0, v = 0, col = "black")
+```
+:::
+::::
+
+```{r}
+#| echo: false
+#| results: asis
+
+nu <- c(seq(1, 30), 40, 60, 120, Inf)
+p <- c(0.995, 0.99, 0.975, 0.95, 0.9, 0.8, 0.75, 0.7, 0.6, 0.55)
+Tab74.2 <- outer(nu, p, \(x, y) {
+  qt(y, df = x) |> 
+    sprintf(fmt = "%.2f")
+})
+
+Tab74.2 <- cbind(paste0("<b>", c(nu[1:(length(nu)-1)], "&infin;"), "</b>"), Tab74.2)
+colnames(Tab74.2) <- c("<i>&nu;</i>", paste0("<i>t</i>*<sub><span class=\"ch-0\">", p, "</span></sub>"))
+
+kable(Tab74.2, align = "c", format = "html", escape = FALSE, table.attr = "id=\"BirdTable\"")
+```
