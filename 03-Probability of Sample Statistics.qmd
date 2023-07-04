@@ -1,0 +1,44 @@
+---
+title: "Probability of Sample Statistics"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+How is data generated
+
+Define Sample
+-> Probability statement of a sample
+
+Sample statistics
+-> Changes sample-to-sample
+
+In the ideal world
+-> P(... = mu) = 1
+-> Showcase with Ex 1
+
+A probability distribution for sample statistics?
+
+Central Limit Theorem
+-> Defn
+-> Model assumptions to use Normal as the probability distribution
+
+Define Sample Distribution of xbar
+-> 
+
+Ex 4 (Paul's example with beer?)
+
+Why Model Assumptions?s
+
+

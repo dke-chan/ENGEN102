@@ -13,6 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: ayu
     code-line-numbers: false
+    embed-resources: true
 editor: source
 ---
 
@@ -71,7 +72,7 @@ The values a **random variable** could take are denoted with lowercase letters: 
 
 . . .
 
-Hence a **random variable** *models* the outcomes we could potentially observe from a random process[, and a potential **sample** of the random process]{.fragment}
+Hence a **random variable** *models* the outcomes we could potentially observe from a random process
 
 ## Probability distribution {.margin-bottom}
 

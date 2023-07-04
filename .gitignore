@@ -5,3 +5,4 @@
 *.pdf
 .Rhistory
 figures/*
+*.rmarkdown
