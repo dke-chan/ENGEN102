@@ -284,7 +284,7 @@ Let $n$ be the total number of observations. Then, the **sample** median, $m$, c
   <li> Sort the values in ascending (or descending) order </li>
   <li class="fragment" data-fragment-index=3> <ul>
     <li class="fragment" data-fragment-index=3> If $n$ is **odd**, then $m$ is the value of the $\frac{n + 1}{2}$^th^ observation</li>
-    <li class="fragment" data-fragment-index=4> If $n$ is **even**, then $m$ is the *mean* of the values from the observations "above" and "below" $\frac{n + 1}{2}$ </li>
+    <li class="fragment" data-fragment-index=4> If $n$ is **even**, then $m$ is the *sample mean* of the values from the observations "above" and "below" $\frac{n + 1}{2}$ </li>
   </ul> </li>
 </ol>
 

@@ -424,10 +424,10 @@ $$
 . . .
 
 ::: {style="margin-top: 25px;"}
-For example, if $\mathbb{P}\!(a < X < b)$, the equivalent probability statement in terms of $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$ is:
+For example, if $\mathbb{P}(a < X < b)$, the equivalent probability statement in terms of $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$ is:
 :::
 
-[$~~ \mathbb{P}\left(\frac{a - \mu}{\sigma} < Z < \frac{b - \mu}{\sigma}\right)$]{.fragment}
+[$~~ \mathbb{P}\!\left(\frac{a - \mu}{\sigma} < Z < \frac{b - \mu}{\sigma}\right)$]{.fragment}
 
 ## Calculating probabilities by hand [(cont'd)]{style="font-size: 0.5em;"}
 
