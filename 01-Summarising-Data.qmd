@@ -438,8 +438,8 @@ getPlotSummary(Weight, data = davidsSample.df, width = 83)
 :::: {style="font-size: 0.75em;"}
 | [Variables]{style="color: #4758AB;"} | |
 | :-           | :------------ |
-| **score** | A numeric variable denoting the test score (unitless) |
-| **method** | A categorical variable denoting the note taking method, "longhand" or "laptop" |
+| **score** | A numeric variable which denotes the student's test score (unitless) |
+| **method** | A categorical variable which denotes the student's note taking method, "longhand" or "laptop" |
 ::::
 :::::
 
