@@ -13,6 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: ayu
     code-line-numbers: false
+    embed-resources: true
 editor: source
 ---
 

@@ -1,6 +1,7 @@
 ---
 format: html
 theme: [default, "statistical-tables.scss"]
+embed-resources: true
 scrollable: false
 ---
 
