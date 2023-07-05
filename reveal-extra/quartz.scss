@@ -202,6 +202,12 @@ html.print-pdf .reveal pre code {
   font-style: italic;
 }
 
+.reveal .python {
+  color: #ffd43b;
+  font-style: italic;
+  -webkit-text-stroke: 2px black;
+}
+
 .reveal .hat {
   position: absolute; 
   left: 11px; 

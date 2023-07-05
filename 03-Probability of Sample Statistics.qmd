@@ -16,29 +16,55 @@ format:
 editor: source
 ---
 
+## Random variables &zigrarr; Sample
+
 How is data generated
 
-Define Sample
+## [Definition:]{style='color: darkorange'} Sample
+
 -> Probability statement of a sample
 
-Sample statistics
+## Sample statistics
 -> Changes sample-to-sample
 
+## Strong Law of Large Numbers
 In the ideal world
 -> P(... = mu) = 1
 -> Showcase with Ex 1
 
-A probability distribution for sample statistics?
+## Random variable for sample statistics
+-> A probability distribution for sample statistics?
+-> How about something a bit more general
 
-Central Limit Theorem
+```{r}
+sds <- sapply(1:5000, \(x) {
+  y <- rnorm(25, 100, 25)
+  sd(y)
+})
+```
+
+## Central Limit Theorem
 -> Defn
 -> Model assumptions to use Normal as the probability distribution
 
-Define Sample Distribution of xbar
+## Sampling distribution of *x&#772;*
 -> 
 
-Ex 4 (Paul's example with beer?)
 
-Why Model Assumptions?s
+## [Ex 4:]{style='color: tomato;'} Beer!
 
+Suppose a beer is sold in 330ml bottles. Each bottle is supposed to
+contain 330ml, but due to variation in the manufacturing process, the real
+amount is Normally Distributed with mean 328ml and standard deviation
+of 3ml.
+a) Find the probability that a randomly selected bottle contains less
+than 330ml
+b) Find the probability that the average volume of bottles of beer in a
+randomly selected crate of beer (24 bottles) contains more than
+330ml
 
+## Calculating [Ex 4]{style='color: tomato;'} with software
+
+## Why check assumptions? [--- Bathtub distribution]{.fragment}
+
+## Why check assumptions? [--- *Not* i.i.d.]{.fragment}
