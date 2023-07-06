@@ -16,55 +16,172 @@ format:
 editor: source
 ---
 
-## Random variables &zigrarr; Sample
+## Properties of a random variable {.margin-bottom}
 
-How is data generated
+Previously, we developed the idea of a **random variable** to model the outcomes we could potentially observe from a random process
 
-## [Definition:]{style='color: darkorange'} Sample
+. . .
 
--> Probability statement of a sample
+A **random variable** can also be summarised in terms of a mean^[Technically, the **random variable's** expected value], $\mu$, and standard deviation, $\sigma$
 
-## Sample statistics
--> Changes sample-to-sample
+. . .
 
-## Strong Law of Large Numbers
-In the ideal world
--> P(... = mu) = 1
--> Showcase with Ex 1
+However, a **random variable** effectively represents only a single observation from a random process[. So how could we model more than one observation?]{.fragment}
 
-## Random variable for sample statistics
--> A probability distribution for sample statistics?
--> How about something a bit more general
+## What is a sample? {.margin-bottom}
 
-```{r}
-sds <- sapply(1:5000, \(x) {
-  y <- rnorm(25, 100, 25)
-  sd(y)
-})
-```
+Let's consider a sequence of $n$ **random variables:** $X_1, X_2, \cdots, X_n$
 
-## Central Limit Theorem
--> Defn
--> Model assumptions to use Normal as the probability distribution
+. . .
 
-## Sampling distribution of *x&#772;*
--> 
+A reasonable assumption is that all $n$ $X_i$s model the outcomes of the *same* random process[. So we state that $X_1, X_2, \cdots, X_n$ are [identically]{style="color: red;"} distributed]{.fragment}
 
+. . .
 
+A mathematically convenient assumption is that all $n$ $X_i$s are [independent]{style="color: red;"}[. This implies that the outcomes we see for each $X_i$ does not **depend** on other $X_i$...]{.fragment}
+
+. . .
+
+We could develop notation etc. to handle multiple $X_i$s to model the outcomes we could potentially observe in a sample...
+
+## [Sample statistics]{.fragment} {.margin-bottom}
+
+More often than not, we are more interested in whether the sample mean, $\bar{x}$, is an unbiased and precise estimate of the underlying mean $\mu$
+
+. . .
+
+More generally, let $\mu$ be the mean of the **random variable** we are using to model the outcomes we could potentially observe from a random process
+
+. . .
+
+However, $\bar{x}$ would change sample-to-sample...
+
+. . .
+
+Could we use a **random variable** to model potential sample means we could observe from a sample with $n$ observations?
+
+## Visualising sample-to-sample variation
+
+:::::: {.columns}
+::::: {.column style="width: 55%;"}
+Recall [Ex 1]{style="color: tomato;"} where we used a sample of 10 blocks to estimate the "true" average block weight
+
+:::: {.fragment style="margin-top: 25px;"}
+Let's carry out a *brief* numerical experiment on the distribution of potential sample means as $n \rightarrow N$ (as [Ex 1]{style="color: tomato;"} has a finite population size of 100)
+::::
+:::::
+::::: {.column style="width: 45%;"}
+:::: {.r-stack}
+n = 10 -> n = 25 -> n = 50 -> n = 100
+::::
+:::::
+::::::
+
+## Strong Law of Large Numbers {.margin-bottom}
+
+What we just saw was the **Strong Law of Large Numbers**^[This only applies to sample means] in action. It states that
+
+. . .
+
+::: {.definition style="width: 60%;"}
+$$
+\mathbb{P} \! \left(\lim_{n\rightarrow \infty}\frac{X_1 + X_2 + \cdots X_n}{n} = \mu\right) = 1
+$$
+:::
+
+. . .
+
+Is there a more general result?
+
+## Central Limit Theorem {.margin-bottom}
+
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with finite $\mu_X$ and $\sigma_X$
+
+. . .
+
+Suppose that $S_n = X_1 + X_2 + \cdots + X_n$
+
+. . .
+
+::: {.definition style="width: 70%;"}
+$$
+S_n \rightarrow_D \text{Normal} \! \left(\mu = n\mu_X, \sigma = \sqrt{n}\,\sigma_X\right)
+$$
+:::
+
+::: {style="font-size: 0.9em; margin-top: 25px;"}
+$\rightarrow_D$ means converges in distribution
+:::
+
+. . .
+
+How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$? 
+
+. . .
+
+$n \geq 30$ for the majority of **probability distributions** with finite $\mu_X$ and $\sigma_X$
+
+## Sampling distribution of *x&#772;* {.margin-bottom}
+
+Let $X_1, X_2, \cdots, X_n$ be $n$  independent and identically distributed **random variables** with finite $\mu_X$ and $\sigma_X$
+
+. . .
+
+Suppose that $\overline{X} = \frac{X_1 \, + X_2 \, + \, \cdots \, + \, X_n}{n}$, then **Central Limit Theorem** states that
+
+. . .
+
+::: {.definition style="width: 70%;"}
+$$
+\overline{X} \rightarrow_D \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)
+$$
+:::
+
+. . . 
+
+::: {style="margin-top: 25px;"}
+Similarly, $n \geq 30$ is good enough to use a Normally distributed **random variable** to model $\overline{X}$
+:::
 ## [Ex 4:]{style='color: tomato;'} Beer!
 
-Suppose a beer is sold in 330ml bottles. Each bottle is supposed to
-contain 330ml, but due to variation in the manufacturing process, the real
-amount is Normally Distributed with mean 328ml and standard deviation
-of 3ml.
-a) Find the probability that a randomly selected bottle contains less
-than 330ml
-b) Find the probability that the average volume of bottles of beer in a
-randomly selected crate of beer (24 bottles) contains more than
-330ml
+> Suppose a beer is sold in 330 ml bottles. Each bottle is supposed to contain 330 ml, but due to variation in the manufacturing process, the real amount is Normally Distributed with mean 328 ml and standard deviation of 3 ml.
+
+::: {.incremental}
+1. Calculate the probability that a randomly selected bottle contains less than 330 ml of beer
+2. Calculate the probability that the average volume of beer in a randomly selected crate of 24 bottles is greater than 330 ml
+:::
 
 ## Calculating [Ex 4]{style='color: tomato;'} with software
 
+::: {style="width: 55%"}
+```{python}
+#| echo: true
+# A Python script to calculate the exact probabilities on Slide 12
+from scipy import integrate
+from scipy.stats import norm
+import math
+```
+:::
+
+1. Calculate the probability that a randomly selected bottle contains less than 330 ml of beer
+
+::: {style="width: 55%"}
+```{python}
+#| echo: true
+integrate.quad(norm.pdf, -math.inf, 330, args=(328, 3))
+```
+:::
+
+2. Calculate the probability that the average volume of beer in a randomly selected crate of 24 bottles is greater than 330 ml
+
+::: {style="width: 55%"}
+```{python}
+#| echo: true
+integrate.quad(norm.pdf, 330, math.inf, args=(328, 3/math.sqrt(24)))
+```
+:::
+
+
 ## Why check assumptions? [--- Bathtub distribution]{.fragment}
 
-## Why check assumptions? [--- *Not* i.i.d.]{.fragment}
+## Why check assumptions? --- The importance of i.i.d.
