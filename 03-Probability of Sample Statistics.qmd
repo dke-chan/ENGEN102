@@ -13,6 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: ayu
     code-line-numbers: false
+    embed-resources: true
 editor: source
 ---
 
@@ -58,7 +59,7 @@ However, $\bar{x}$ would change sample-to-sample...
 
 . . .
 
-Could we use a **random variable** to model potential sample means we could observe from a sample with $n$ observations?
+Could we use a **random variable** to model potential sample means we could observe from a single sample of $n$ observations?
 
 ## Visualising sample-to-sample variation
 
@@ -66,13 +67,113 @@ Could we use a **random variable** to model potential sample means we could obse
 ::::: {.column style="width: 55%;"}
 Recall [Ex 1]{style="color: tomato;"} where we used a sample of 10 blocks to estimate the "true" average block weight
 
-:::: {.fragment style="margin-top: 25px;"}
-Let's carry out a *brief* numerical experiment on the distribution of potential sample means as $n \rightarrow N$ (as [Ex 1]{style="color: tomato;"} has a finite population size of 100)
+:::: {.fragment style="margin-top: 25px;" fragment-index=0}
+Let's carry out a *brief* numerical experiment on the distribution of potential sample means as $n \rightarrow N$ [(as [Ex 1]{style="color: tomato;"} has a finite population size of 100)]{style="font-size: 0.5em;"}
 ::::
 :::::
 ::::: {.column style="width: 45%;"}
 :::: {.r-stack}
-n = 10 -> n = 25 -> n = 50 -> n = 100
+::: {.fragment .fade-in-then-out fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(1)
+block.popn <- read.csv("datasets/blocks-popn.csv")
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 10
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- sample(block.popn$weight, size = n)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, xlim = c(0, 70), prob = TRUE, h = 1, axes = FALSE, col = "lightblue")
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=2}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(2)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 25
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- sample(block.popn$weight, size = n)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, xlim = c(0, 70), prob = TRUE, h = 1, axes = FALSE, col = "lightblue")
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=3}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(3)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 50
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- sample(block.popn$weight, size = n)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, xlim = c(0, 70), prob = TRUE, h = 1, axes = FALSE, col = "lightblue")
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=4}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(4)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 100
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- sample(block.popn$weight, size = n)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, xlim = c(0, 70), prob = TRUE, h = 1, axes = FALSE, col = "lightblue")
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
 ::::
 :::::
 ::::::
@@ -91,7 +192,9 @@ $$
 
 . . .
 
+::: {style="margin-top: 25px;"}
 Is there a more general result?
+:::
 
 ## Central Limit Theorem {.margin-bottom}
 
@@ -109,7 +212,7 @@ S_n \rightarrow_D \text{Normal} \! \left(\mu = n\mu_X, \sigma = \sqrt{n}\,\sigma
 $$
 :::
 
-::: {style="font-size: 0.9em; margin-top: 25px;"}
+::: {style="font-size: 0.5em; margin-top: 25px;"}
 $\rightarrow_D$ means converges in distribution
 :::
 
@@ -121,7 +224,7 @@ How large does $n$ has to be to ensure the convergence is good enough to use a N
 
 $n \geq 30$ for the majority of **probability distributions** with finite $\mu_X$ and $\sigma_X$
 
-## Sampling distribution of *x&#772;* {.margin-bottom}
+## Sampling distribution of *X&#772;* {.margin-bottom}
 
 Let $X_1, X_2, \cdots, X_n$ be $n$  independent and identically distributed **random variables** with finite $\mu_X$ and $\sigma_X$
 
@@ -142,6 +245,12 @@ $$
 ::: {style="margin-top: 25px;"}
 Similarly, $n \geq 30$ is good enough to use a Normally distributed **random variable** to model $\overline{X}$
 :::
+
+. . .
+
+Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$: [$\overline{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$]{.fragment}
+
+
 ## [Ex 4:]{style='color: tomato;'} Beer!
 
 > Suppose a beer is sold in 330 ml bottles. Each bottle is supposed to contain 330 ml, but due to variation in the manufacturing process, the real amount is Normally Distributed with mean 328 ml and standard deviation of 3 ml.
@@ -181,7 +290,222 @@ integrate.quad(norm.pdf, 330, math.inf, args=(328, 3/math.sqrt(24)))
 ```
 :::
 
+## Why check assumptions? [--- Bathtub distribution]{.fragment fragment-index=0}
 
-## Why check assumptions? [--- Bathtub distribution]{.fragment}
+**Central Limit Theorem** and its primary application to the sampling distribution of $\overline{X}$ means that it works with "most" probability distributions once $n$ is large enough
+
+:::::: {.columns}
+::::: {.column .fragment fragment-index=0}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(10)
+par(mai = c(0.6, 0, 0, 0))
+
+x <- rbeta(100000, 0.5, 0.5)
+# x <- x[which(x < 1)]
+
+MASS::truehist(x, prob = TRUE, axes = FALSE, h = 0.05, x0 = -0.05, col = "tomato")
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
+```
+:::::
+::::: {.column}
+:::: {.r-stack}
+::: {.fragment .fade-in-then-out fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(11)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 3
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- rbeta(n, 0.5, 0.5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, h = 0.05, x0 = -0.05, axes = FALSE, col = "lightblue", ylim = c(0, dnorm(0.5, 0.5, sqrt(0.125 / n))), xlim = c(0, 1))
+curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=2}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(12)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 15
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- rbeta(n, 0.5, 0.5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, h = 0.05, x0 = -0.05, axes = FALSE, col = "lightblue", ylim = c(0, dnorm(0.5, 0.5, sqrt(0.125 / n))), xlim = c(0, 1))
+curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=3}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(13)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 30
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  x <- rbeta(n, 0.5, 0.5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, h = 0.05, x0 = -0.05, axes = FALSE, col = "lightblue", ylim = c(0, dnorm(0.5, 0.5, sqrt(0.125 / n))), xlim = c(0, 1))
+curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::::
+:::::
+::::::
 
 ## Why check assumptions? --- The importance of i.i.d.
+
+The independence assumption is quite peculiar[, but its purpose is to prompt the modeller to consider whether the data was collected properly]{.fragment fragment-index=0}
+
+:::::: {.columns}
+::::: {.column}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(21)
+par(mai = c(0.6, 0, 0, 0))
+
+X <- c(rnorm(5000, 0, 5), rnorm(5000, 50, 5))
+# x <- x[which(x < 1)]
+
+MASS::truehist(X, prob = TRUE, axes = FALSE, col = "lemonchiffon", h = 2.5, xlim = c(-20, 70))
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
+```
+:::::
+::::: {.column}
+:::: {.r-stack}
+::: {.fragment .fade-in-then-out fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(22)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 3
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  coin <- sample(c(0, 50), size = 1)
+  x <- rnorm(n, coin, 5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, axes = FALSE, col = "lightblue", xlim = c(-20, 70), h = 2.5)
+# curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::: {.fragment .fade-in-then-out fragment-index=2}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(23)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 15
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  coin <- sample(c(0, 50), size = 1)
+  x <- rnorm(n, coin, 5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, axes = FALSE, col = "lightblue", xlim = c(-20, 70), h = 2.5)
+# curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+<!-- ::: {.fragment .fade-in-then-out fragment-index=3} -->
+::: {.fragment fragment-index=3}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+set.seed(24)
+par(mai = c(0.6, 0, 0, 0))
+
+n <- 30
+mus <- numeric(5000)
+
+for (i in 1:length(mus)) {
+  coin <- sample(c(0, 50), size = 1)
+  x <- rnorm(n, coin, 5)
+  mus[i] <- mean(x)
+}
+
+MASS::truehist(mus, prob = TRUE, axes = FALSE, col = "lightblue", xlim = c(-20, 70), h = 2.5)
+# curve(dnorm(x, 0.5, sqrt(0.125 / n)), add = TRUE, lwd = 2)
+legend("topright", legend = paste("n =", n), bty = "n", cex = 1.5)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext(bquote(bold(bar(x))), side = 1, line = 1.7, font = 2)
+```
+:::
+::::
+:::::
+::::::
