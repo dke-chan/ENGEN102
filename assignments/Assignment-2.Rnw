@@ -1,0 +1,144 @@
+\documentclass[twoside, 12pt, a4paper]{article}
+
+%% Packages with options
+\usepackage[left=0.75in,right=0.75in,top=0.95in,bottom=0.95in]{geometry}
+\usepackage[labelfont=bf,font=small,format=hang]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage[none]{hyphenat}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+%% All other packages
+\usepackage{framed, bm, graphicx, lastpage, fancyhdr, parskip, amsmath, amsfonts, titlesec, tabularray, booktabs, pifont, amssymb}
+
+%% Headers and footers
+\definecolor{hfgray}{RGB}{90,90,90}
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{hfgray}{Assignment Two}}
+\rhead{\textcolor{hfgray}{ENGEN102-23B}}
+\cfoot{\textcolor{hfgray}{Page \thepage\ of \pageref{LastPage}}}
+% \cfoot{\textcolor{hfgray}{Page \thepage\ of 8}}
+% \fancyfoot[RO]{\textcolor{hfgray}{TURN OVER}}
+% \fancyfoot[RE]{\textcolor{hfgray}{CONTINUED}}
+
+%% Section headings - pushes the header to the center of the page
+\titleformat{\section}[block]{\Large\bfseries\filright}{}{0pt}{}
+\titlespacing{\section}{0pt}{*2}{*0.2}
+
+%% Subsection headings - pushes the heading to the left of the page
+\titleformat{\subsection}[block]{\large\bfseries\filright}{}{0pt}{}
+\titlespacing{\subsection}{0pt}{*2}{*0.2}
+
+%% Enumerate styling for questions
+\setlist[enumerate]{style=multiline, font=\bfseries, leftmargin=\labelwidth, align=right, after=\vspace{16pt}}
+
+%% Enumerate styling for choices
+\setlist[enumerate,2]{style=multiline, font=\bfseries, leftmargin=\labelwidth, align=right}
+
+\begin{document}
+
+\section{ENGEN102 -- Assignment Two}
+
+\textbf{Due 11 am Monday, 24th July}
+
+\textbf{Show ALL working} \textit{and} write your name and ID number on the front page.
+
+Submit handwritten original pages to the ENGEN102 hand-in boxes located at ground floor of FG link. 
+
+\subsection{To Hand In}
+\medskip
+
+\begin{enumerate}
+  \item A beekeeper wanted to investigate the effect of smoke in reducing their risk of getting stung. They ran an intricate smoke experiment nine times that allowed them to quantify the effectiveness of smoke as a numeric value. A positive value meant that a particular smoke experiment reduced their risk of getting stung, whereas a negative value meant that it increased their risk. \medskip \\ The values recorded for all nine smoke experiments are as follows. \vspace{-6pt}
+    \begin{equation*}
+      -6, \quad 0, \quad 12, \quad 18, \quad -2
+    \end{equation*} \vspace{-18pt}
+    \begin{equation*}
+      6, \quad 2, \quad 18, \quad 60
+    \end{equation*}
+  \begin{enumerate}
+    \item Sketch a stacked dot plot of the values recorded for all nine smoke experiments.
+    \item Calculate the sample mean, $\bar{x}$.
+    \item Based on your answers to \textbf{Questions 1(a)}\ and \textbf{1(b)}, are the smoke experiment values symmetrically distributed about $\bar{x}$? Explain why or why not.
+  \end{enumerate}
+  
+  \item The time that it takes a driver to react to the brake lights on a decelerating vehicle is critical in helping to avoid rear-end collisions. Some research suggests that reaction time for an in-traffic response to a brake signal from standard brake lights can be modelled with a Normally distributed random variable with a mean of 1.25 seconds and a standard deviation of 0.46 seconds. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
+  \begin{enumerate}
+    \item The probability that a randomly selected driver has a reaction time of \textit{exactly} 1.5 seconds.
+    \item The probability that a randomly selected driver has a reaction time between 1.1 and 1.6 seconds.
+    \item The probability that a randomly selected driver has a reaction time of less than 1 second.
+  \end{enumerate}
+  
+  \clearpage
+  
+  \item Tom runs a food truck at Gourmet in the Mountains. He uses the random variable, $Y$, to model the time (in minutes) a customer may spend waiting in queue for his food truck. The mean of $Y$ is 10 minutes, and the standard deviation of $Y$ is also 10 minutes.
+  \begin{enumerate}
+    \item Tom wants to model the average time spent waiting in queue for a sample of 49 customers. State the appropriate probability distribution for the random variable, $\overline{Y}$, and its parameters to model this scenario.
+    \item Based on your answer to \textbf{Question 3(a)}, calculate the probability that the average time spent in the queue for a sample of 49 customers is less than 8 minutes \textit{or} more than 12 minutes in the queue.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Tutorial problems (not for handing in)}
+\medskip
+
+\begin{enumerate}[label=\Alph*.]
+  \item The following dataset comes from the time to breakdown of an insulating fluid between electrodes at a particular voltage. \vspace{-6pt}
+  \begin{equation*}
+    41.53, \quad 18.73, \quad 2.99, \quad 30.34, \quad 12.33
+  \end{equation*} \vspace{-18pt}
+  \begin{equation*}
+    117.52, \quad 73.02, \quad 223.63, \quad 4.00, \quad 26.78
+  \end{equation*}
+  \begin{enumerate}
+    \item Calculate the sample mean, $\bar{x}$.
+    \item Calculate the sample median, $m$.
+    \item Calculate the sample standard deviation, $s$.
+    \item Based on your answers to \textbf{Questions A(a)}\ and \textbf{A(b)}, does the data have a skewed distribution? If it does, state the direction of the skew.
+  \end{enumerate}
+  
+  \item A company that sells boxes of screws claims that a box of its screws is Normally distributed with a mean $\mu = 50$ screws and standard deviation $\sigma = 4$ screws. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
+  \begin{enumerate}
+    \item The probability that a randomly selected box of screws contains less than 48 screws.
+    \item The probability that a randomly selected box of screws contains somewhere between 46 to 53 screws.
+    \item The probability that the average number of screws is greater than 54 for a random sample of 10 boxes of screws.
+  \end{enumerate}
+  
+  \clearpage
+  
+  \item The following data comes from a random sample of 39 Peruvian Indians born in the Andes mountains, but who have since migrated to lower altitudes. A numeric variable measured was the systolic blood pressure (mm Hg) which has been visualised in \textsf{iNZight}.
+  
+<<include=FALSE>>=
+library(s20x); library(iNZightPlots)
+data(peru.df)
+pdf(file = "Peru.pdf", width = 7, height = 4.5, onefile = FALSE)
+iNZightPlot(BP, data = peru.df, box.fill = "white", main = "Distribution of Blood Pressure Measurements", xlab = "Systolic Blood Pressure (mm Hg)")
+dev.off()
+@
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Peru.pdf}
+  \end{figure}
+  
+  \begin{enumerate}
+    \item Describe \textit{at least} one feature of the systolic blood pressure measurements for this sample of Peruvian Indians.
+    \item A research question for this data was to assess the long-term effects of altitude on blood pressure. Normal systolic blood pressure is around 120 mm Hg or lower\footnote{https://www.stroke.org.nz/blood-pressure}. Based on this data, is it plausible that living at a high altitude increases blood pressure? Explain your answer.
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Exercises from Bird (2021)}
+\medskip
+
+\begin{itemize}
+  \item Practice Exercise 289:\ Questions 1--4
+  \item Practice Exercise 291:\ Questions 1--3
+  \item Practice Exercise 293:\ Questions 1--6
+  \item Practice Exercise 294:\ Questions 1, 2, 3(a), 3(b), 4, and 5
+  \item Practice Exercise 302:\ Questions 1--8
+  \item Practice Exercise 304:\ Questions 1--5
+  \item Practice Exercise 307:\ Questions 1, 3(a), 5, 6, and 7
+\end{itemize}
+
+\end{document}
