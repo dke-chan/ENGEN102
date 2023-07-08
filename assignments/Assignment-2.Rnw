@@ -75,7 +75,7 @@ Submit handwritten original pages to the ENGEN102 hand-in boxes located at groun
   
   \item Tom runs a food truck at Gourmet in the Mountains. He uses the random variable, $Y$, to model the time (in minutes) a customer may spend waiting in queue for his food truck. The mean of $Y$ is 10 minutes, and the standard deviation of $Y$ is also 10 minutes.
   \begin{enumerate}
-    \item Tom wants to model the average time spent waiting in queue for a sample of 49 customers. State the appropriate probability distribution for the random variable, $\overline{Y}$, and its parameters to model this scenario.
+    \item Tom wants to model the average time spent waiting in queue for a sample of 49 customers. State the approximate probability distribution for the random variable, $\overline{Y}$, and its parameters to model this scenario.
     \item Based on your answer to \textbf{Question 3(a)}, calculate the probability that the average time spent in the queue for a sample of 49 customers is less than 8 minutes \textit{or} more than 12 minutes in the queue.
   \end{enumerate}
 \end{enumerate}
@@ -123,8 +123,8 @@ dev.off()
   \end{figure}
   
   \begin{enumerate}
-    \item Describe \textit{at least} one feature of the systolic blood pressure measurements for this sample of Peruvian Indians.
-    \item A research question for this data was to assess the long-term effects of altitude on blood pressure. Normal systolic blood pressure is around 120 mm Hg or lower\footnote{https://www.stroke.org.nz/blood-pressure}. Based on this data, is it plausible that living at a high altitude increases blood pressure? Explain your answer.
+    \item Describe \textit{at least} two features of the systolic blood pressure measurements for this sample of Peruvian Indians.
+    \item A research question for this data was to assess the long-term effects of altitude on blood pressure. Normal systolic blood pressure is around 120 mm Hg or lower\footnote{https://www.stroke.org.nz/blood-pressure}. Based on this data, is it plausible that living at a high altitude increases systolic blood pressure? Explain your answer.
   \end{enumerate}
 \end{enumerate}
 
