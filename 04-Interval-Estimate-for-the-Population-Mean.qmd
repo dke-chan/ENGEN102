@@ -1,0 +1,174 @@
+---
+title: "Interval Estimate for the Population Mean"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+## Sampling distribution of *X&#772;* &zigrarr; One sample {.margin-bottom}
+
+In reality, we only take one sample to estimate the underlying parameters of the appropriate probability distribution
+
+However, point estimates do not consider that we took a sample, whereas proper interval estimates do
+
+Interval estimates involve quantifying the uncertainty in the point estimates in terms of standard errors. 
+
+
+## How precise is *x&#772;*?
+
+it was shown that the sample mean, x¯
+, is relatively unbiased when we take a random samples1
+Additionally, the precision of x¯
+ improved as we increased the number of observations, n
+That is, the standard deviation of the sampling distribution of x¯
+ decreases as n
+ increases
+
+## [Definition:]{style="color: darkorange;"} Confidence intervals
+
+:::: {style="width: 90%; display: block; margin: auto;"}
+> A **confidence interval** for a parameter is an interval computed from sample data by a method that will capture the parameter for a specified proportion of all samples.
+> 
+> The success rate (proportion of all samples whose intervals contain the parameter) is known as the **confidence level**.
+
+::: {style="font-size: 0.8em; text-align: right; margin-top: -1em;"}
+ --- Lock et al. (2021)
+:::
+
+::::
+
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
+:::
+
+## [Definition:]{style="color: darkorange;"} (1 - *&alpha;*)% confidence interval for *&mu;*
+
+::: {.definition style="width: 40%;"}
+$$
+\bar{x}  \pm  t^*_{1-\alpha/2}(\nu) \times \text{se}(\bar{x})
+$$
+:::
+
+. . .
+
+where:
+
+::: {.incremental style="font-size: 0.9em; margin-top: -0.25em;"}
+- $\bar{x}$ is the **sample** mean
+- $n$ is the number of observations
+- The confidence level is $(1 - \alpha)$, where $\alpha$ is a **proportion**
+- The degrees of freedom, $\nu$
+  - For a $(1 - \alpha)$ C.I. for $\mu$, we set this to $\nu = n - 1$
+- $t^*_{1-\alpha/2}(\nu)$ is the *t*-multiplier for the prescribed confidence level of $(1 - \alpha)$
+  - For example, a confidence level of 95% results in $t^*_{0.975}(\nu)$
+- $\text{se}(\bar{x})$ is the **standard error** of $\bar{x}$
+:::
+
+## *t*-multipliers
+
+se(x¯)
+  should look familiar—revisit Slide 12
+
+The critical difference is that se(x¯)
+ is quantified with a statistic, whereas the latter, σx¯
+, is defined in terms of σ
+, a ground “truth” about the spread of all possible values
+
+Thankfully, we can handle this “minute”1 difference with a different tool, the Student’s t-distribution, another kind of bell-shaped distribution
+
+In particular, the Student’s t-distribution allows us to quantify the precision of x¯
+, our best estimate of μ
+, for any sample size (with some assumptions)
+
+## [Ex 5:]{style='color: tomato;'} Student Textbook Spending
+
+A randomly selected sample of 12 students at a university was asked “How much did you spend for textbooks this semester?”1
+
+Statistic	
+x¯
+284.92
+s
+96.06
+n
+12
+
+Calculate a 95% confidence interval for the population mean spend on textbooks.
+
+Interpret
+
+  <li class="fragment" data-fragment-index=2>The confidence level</li>
+  <li class="fragment" data-fragment-index=3>That it is an estimate of the ground ["truth"]{style="color: cornflowerblue"} (parameter) of ...</li>
+  <li class="fragment" data-fragment-index=4>The lower and upper bounds of the confidence interval are quantified with units (where applicable)</li>
+  
+## Assumptions for a confidence interval for *&mu;*
+
+::: {.incremental}
+1. **Independent** observations
+2. One measure of centre can satisfactorily summarise the data
+3. Approximately symmetrical about the **sample mean**, $\bar{x}$, and there are no outliers
+:::
+
+. . .
+
+::: {style="border-bottom: 5px solid orange; width: 12.5%;"}
+More on **3.**
+:::
+
+. . .
+
+In practice: 
+
+::: {.incremental style="margin-top: -0.25em;"}
+- We must follow this assumption strictly for "[small]{style="color: tomato;"}" datasets ($n < 20$)
+- We can be lenient with this assumption for "[medium]{style="color: steelblue;"}" datasets **if** $\text{se}(\bar{x})$ is not heavily affected ($20 \leq n \leq 50$)
+- We can be **very** lenient with this assumption for "[large]{style="color: orchid;"}" datasets ($n > 50$)
+:::
+
+## [Ex 1]{style='color: tomato;'} in [iNZight]{.R}
+
+:::::: {.columns}
+::::: {.column style="width: 50%;"}
+```{r}
+#| echo: false
+#| classes: output-small-80
+library(iNZightPlots)
+davidsSample.df <- read.csv("datasets/davids-sample.csv")
+inzsummary(~ Weight, data = davidsSample.df, width = 83, summary.type = "inference", inference.type = "conf", hypothesis = NULL)
+```
+:::::
+
+::::: {.column .margin-bottom .fragment style="width: 50%;"}
+**Interpretation**  
+With 95% confidence, we estimate that the mean block weight is somewhere between 22.35 and 37.79 grams.
+
+:::: {.fragment}
+**Assumptions**  
+One measure of centre is appropriate for David's sample, and the values are approximately symmetrical about the sample mean. However, David may not have randomly selected the blocks... So the independence assumption might not be met.
+::::
+:::::
+::::::
+
+## What a confidence interval is *not*
+
+Suppose the confidence level is 95%, then:
+
+::: {.incremental style="margin-left: 1em;"}
+1. A 95% confidence interval contains 95% of the data in the population
+2. I am 95% sure that the mean of a sample will fall within a 95% confidence interval for the mean
+3. The probability (chance) that the population parameter is in this particular 95% confidence interval is 0.95
+:::
+
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
+:::
