@@ -51,7 +51,7 @@ Submit handwritten original pages to the ENGEN102 hand-in boxes located at groun
 \medskip
 
 \begin{enumerate}
-  \item A beekeeper wanted to investigate the effect of smoke in reducing their risk of getting stung. They ran an intricate smoke experiment nine times that allowed them to quantify the effectiveness of smoke as a numeric value. A positive value meant that a particular smoke experiment reduced their risk of getting stung, whereas a negative value meant that it increased their risk. \medskip \\ The values recorded for all nine smoke experiments are as follows. \vspace{-6pt}
+  \item {\small \color{Orange} \sffamily [6 marks]} A beekeeper wanted to investigate the effect of smoke in reducing their risk of getting stung. They ran an intricate smoke experiment nine times that allowed them to quantify the effectiveness of smoke as a numeric value. A positive value meant that a particular smoke experiment reduced their risk of getting stung, whereas a negative value meant that it increased their risk. \medskip \\ The values recorded for all nine smoke experiments are as follows. \vspace{-6pt}
     \begin{equation*}
       -6, \quad 0, \quad 12, \quad 18, \quad -2
     \end{equation*} \vspace{-18pt}
@@ -64,7 +64,7 @@ Submit handwritten original pages to the ENGEN102 hand-in boxes located at groun
     \item Based on your answers to \textbf{Questions 1(a)}\ and \textbf{1(b)}, are the smoke experiment values symmetrically distributed about $\bar{x}$? Explain why or why not.
   \end{enumerate}
   
-  \item The time that it takes a driver to react to the brake lights on a decelerating vehicle is critical in helping to avoid rear-end collisions. Some research suggests that reaction time for an in-traffic response to a brake signal from standard brake lights can be modelled with a Normally distributed random variable with a mean of 1.25 seconds and a standard deviation of 0.46 seconds. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
+  \item {\small \color{Orange} \sffamily [8 marks]} The time that it takes a driver to react to the brake lights on a decelerating vehicle is critical in helping to avoid rear-end collisions. Some research suggests that reaction time for an in-traffic response to a brake signal from standard brake lights can be modelled with a Normally distributed random variable with a mean of 1.25 seconds and a standard deviation of 0.46 seconds. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
   \begin{enumerate}
     \item The probability that a randomly selected driver has a reaction time of \textit{exactly} 1.5 seconds.
     \item The probability that a randomly selected driver has a reaction time between 1.1 and 1.6 seconds.
@@ -73,7 +73,7 @@ Submit handwritten original pages to the ENGEN102 hand-in boxes located at groun
   
   \clearpage
   
-  \item Tom runs a food truck at Gourmet in the Mountains. He uses the random variable, $Y$, to model the time (in minutes) a customer may spend waiting in queue for his food truck. The mean of $Y$ is 10 minutes, and the standard deviation of $Y$ is also 10 minutes.
+  \item {\small \color{Orange} \sffamily [6 marks]} Tom runs a food truck at Gourmet in the Mountains. He uses the random variable, $Y$, to model the time (in minutes) a customer may spend waiting in queue for his food truck. The mean of $Y$ is 10 minutes, and the standard deviation of $Y$ is also 10 minutes.
   \begin{enumerate}
     \item Tom wants to model the average time spent waiting in queue for a sample of 49 customers. State the approximate probability distribution for the random variable, $\overline{Y}$, and its parameters to model this scenario.
     \item Based on your answer to \textbf{Question 3(a)}, calculate the probability that the average time spent in the queue for a sample of 49 customers is less than 8 minutes \textit{or} more than 12 minutes in the queue.
