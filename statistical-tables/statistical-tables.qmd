@@ -53,7 +53,7 @@ kable(Tab71.1, align = "c", format = "html", escape = FALSE, table.attr = "id=\"
 
 :::: {.columns}
 ::: {.column width="65%"}
-Percentile values (*t*\*~[*p*]{.ch-0}~) for the Student's *t*-distribution with *&nu;* degrees of freedom. Note that the partial area is $\mathbb{P}(T < t^*_p) = p$, where $T \sim \text{Student}(\nu)$.
+Percentile values, *t*^\*^~[*p*]{.ch-0}~(*&nu;*), for the Student's *t*-distribution with *&nu;* degrees of freedom. Note that the partial area is $\mathbb{P}(T < t^*_p\,(\nu)) = p$, where $T \sim \text{Student}(\nu)$.
 :::
 ::: {.column width="35%"}
 ```{r}
@@ -86,7 +86,7 @@ Tab74.2 <- outer(nu, p, \(x, y) {
 })
 
 Tab74.2 <- cbind(paste0("<b>", c(nu[1:(length(nu)-1)], "&infin;"), "</b>"), Tab74.2)
-colnames(Tab74.2) <- c("<i>&nu;</i>", paste0("<i>t</i>*<sub><span class=\"ch-0\">", p, "</span></sub>"))
+colnames(Tab74.2) <- c("<i>&nu;</i>", paste0("<i>t</i><sup>*</sup><sub><span class=\"ch-0\">", p, "</span></sub>"))
 
 kable(Tab74.2, align = "c", format = "html", escape = FALSE, table.attr = "id=\"BirdTable\"")
 ```

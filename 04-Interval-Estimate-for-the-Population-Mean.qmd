@@ -24,9 +24,6 @@ However, point estimates do not consider that we took a sample, whereas proper i
 
 Interval estimates involve quantifying the uncertainty in the point estimates in terms of standard errors. 
 
-
-## How precise is *x&#772;*?
-
 it was shown that the sample mean, x¯
 , is relatively unbiased when we take a random samples1
 Additionally, the precision of x¯
@@ -77,39 +74,33 @@ where:
 
 ## *t*-multipliers
 
-se(x¯)
-  should look familiar—revisit Slide 12
+The t-multiplier is a culmulative function of the area under the curve of a Stufent's t distribution for any given nu
 
-The critical difference is that se(x¯)
- is quantified with a statistic, whereas the latter, σx¯
-, is defined in terms of σ
-, a ground “truth” about the spread of all possible values
+Show picture
 
-Thankfully, we can handle this “minute”1 difference with a different tool, the Student’s t-distribution, another kind of bell-shaped distribution
+If you were to prove the probability of this interval estimate method working, it turns out that we have to use the Studne'ts t-distribution rather than the Normal distribution
 
-In particular, the Student’s t-distribution allows us to quantify the precision of x¯
-, our best estimate of μ
-, for any sample size (with some assumptions)
+More on the STudnet's t next time. 
 
 ## [Ex 5:]{style='color: tomato;'} Student Textbook Spending
 
-A randomly selected sample of 12 students at a university was asked “How much did you spend for textbooks this semester?”1
+> A randomly selected sample of 16 students at a university was asked: "How much did you spend on textbooks this semester?" The amount spent by each sampled student has been numerically summarised below
+$$\bar{x} = 284.92, \quad\quad s = 96.06, \quad\quad n = 16$$
+Construct a 95% confidence interval for the underlying mean amount all students spend on textbooks. Then interpret the constructed confidence interval
 
-Statistic	
-x¯
-284.92
-s
-96.06
-n
-12
+. . .
 
-Calculate a 95% confidence interval for the population mean spend on textbooks.
+::: {style="width: 55%; margin-top: 25px;"}
+```{python}
+#| echo: true
+# A Python script to print the exact value of the t-multiplier
+from scipy.stats import t
+t.ppf(0.975, df=15)
+```
+:::
 
-Interpret
 
-  <li class="fragment" data-fragment-index=2>The confidence level</li>
-  <li class="fragment" data-fragment-index=3>That it is an estimate of the ground ["truth"]{style="color: cornflowerblue"} (parameter) of ...</li>
-  <li class="fragment" data-fragment-index=4>The lower and upper bounds of the confidence interval are quantified with units (where applicable)</li>
+[233.7681 336.0720]{style="color: ghostwhite;"}
   
 ## Assumptions for a confidence interval for *&mu;*
 
@@ -149,12 +140,12 @@ inzsummary(~ Weight, data = davidsSample.df, width = 83, summary.type = "inferen
 :::::
 
 ::::: {.column .margin-bottom .fragment style="width: 50%;"}
-**Interpretation**  
-With 95% confidence, we estimate that the mean block weight is somewhere between 22.35 and 37.79 grams.
-
-:::: {.fragment}
 **Assumptions**  
 One measure of centre is appropriate for David's sample, and the values are approximately symmetrical about the sample mean. However, David may not have randomly selected the blocks... So the independence assumption might not be met.
+
+:::: {.fragment}
+**Interpretation**  
+With 95% confidence, we estimate that the mean block weight is somewhere between 22.35 and 37.79 grams.
 ::::
 :::::
 ::::::
