@@ -1,5 +1,5 @@
 ---
-title: "Interval Estimate for the Population Mean"
+title: "An Interval Estimate for the Underlying Mean"
 author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
 format:
   revealjs: 
@@ -13,26 +13,25 @@ format:
       - reveal-extra/title-block.html
     highlight-style: ayu
     code-line-numbers: false
+    embed-resources: true
 editor: source
 ---
 
-## Sampling distribution of *X&#772;* &zigrarr; One sample {.margin-bottom}
+## [Introduction to Statistical Inference]{.fragment} {.margin-bottom}
 
-In reality, we only take one sample to estimate the underlying parameters of the appropriate probability distribution
+So far we have covered the following:
 
-However, point estimates do not consider that we took a sample, whereas proper interval estimates do
+::: {.tightList style="margin-left: 1em;"}
+1. Summarise and describe data
+2. The concept of modelling outcomes of a random process, with a focus on the Normal distribution
+3. A convenient way to model the potential sample mean from $n$ realisations of a random process^[Under some assumptions]
+:::
 
-Interval estimates involve quantifying the uncertainty in the point estimates in terms of standard errors. 
+. . .
 
-it was shown that the sample mean, x¯
-, is relatively unbiased when we take a random samples1
-Additionally, the precision of x¯
- improved as we increased the number of observations, n
-That is, the standard deviation of the sampling distribution of x¯
- decreases as n
- increases
+Points 2. and 3. allow us to develop methods to infer parameters, such as a **random variable's** underlying mean, with *only* one sample
 
-## [Definition:]{style="color: darkorange;"} Confidence intervals
+## Confidence intervals
 
 :::: {style="width: 90%; display: block; margin: auto;"}
 > A **confidence interval** for a parameter is an interval computed from sample data by a method that will capture the parameter for a specified proportion of all samples.
@@ -72,15 +71,21 @@ where:
 - $\text{se}(\bar{x})$ is the **standard error** of $\bar{x}$
 :::
 
-## *t*-multipliers
+## *t*-multipliers[...?]{.fragment} {.margin-bottom}
 
-The t-multiplier is a culmulative function of the area under the curve of a Stufent's t distribution for any given nu
+They are derived from the Student's *t*-distribution, which has one parameter $\nu$ and this parameter is often coined as the *degrees of freedom*
 
-Show picture
+. . .
 
-If you were to prove the probability of this interval estimate method working, it turns out that we have to use the Studne'ts t-distribution rather than the Normal distribution
+A *t*-multiplier, $t^*_{1-\alpha/2}(\nu)$, is a *cumulative function* takes a percentile^[That is, a percentage] and $\nu$
 
-More on the STudnet's t next time. 
+. . .
+
+It calculates the precise value where the area under the curve is equal to the percentile for a given value of $\nu$
+
+. . .
+
+**A fact we will not prove:** It turns out that the *t*-multiplier is the critical scaling factor of $\text{se}(\bar{x})$ to ensure that our interval method "works" for $(1 - \alpha)\%$ of all potential random samples
 
 ## [Ex 5:]{style='color: tomato;'} Student Textbook Spending
 
@@ -141,18 +146,18 @@ inzsummary(~ Weight, data = davidsSample.df, width = 83, summary.type = "inferen
 
 ::::: {.column .margin-bottom .fragment style="width: 50%;"}
 **Assumptions**  
-One measure of centre is appropriate for David's sample, and the values are approximately symmetrical about the sample mean. However, David may not have randomly selected the blocks... So the independence assumption might not be met.
+[One measure of centre is appropriate for David's sample, and the values are approximately symmetrical about the sample mean. However, David may not have randomly selected the blocks... So the independence assumption might not be met.]{style="font-size: 0.9em;"}
 
 :::: {.fragment}
 **Interpretation**  
-With 95% confidence, we estimate that the mean block weight is somewhere between 22.35 and 37.79 grams.
+[With 95% confidence, we estimate that the mean block weight is somewhere between 22.35 and 37.79 grams.]{style="font-size: 0.9em;"}
 ::::
 :::::
 ::::::
 
 ## What a confidence interval is *not*
 
-Suppose the confidence level is 95%, then:
+Suppose the confidence level is 95%. The following interpretations of a 95% confidence interval are [wrong]{style="color: red;"}:
 
 ::: {.incremental style="margin-left: 1em;"}
 1. A 95% confidence interval contains 95% of the data in the population
