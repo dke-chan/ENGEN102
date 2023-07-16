@@ -107,7 +107,7 @@ t.ppf(0.975, df=15)
 
 [233.7681 336.0720]{style="color: ghostwhite;"}
   
-## Assumptions for a confidence interval for *&mu;*
+## Assumptions for inference on *&mu;*
 
 ::: {.incremental}
 1. **Independent** observations

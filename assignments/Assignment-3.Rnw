@@ -51,33 +51,57 @@ Submit handwritten original pages to the ENGEN102 hand-in boxes located at groun
 \medskip
 
 \begin{enumerate}
-  \item {\small \color{Orange} \sffamily [A marks]} A beekeeper wanted to investigate the effect of smoke in reducing their risk of getting stung. They ran an intricate smoke experiment nine times that allowed them to quantify the effectiveness of smoke as a numeric value. A positive value meant that a particular smoke experiment reduced their risk of getting stung, whereas a negative value meant that it increased their risk. \medskip \\ The values recorded for all nine smoke experiments are as follows. \vspace{-6pt}
-    \begin{equation*}
-      -6, \quad 0, \quad 12, \quad 18, \quad -2
-    \end{equation*} \vspace{-18pt}
-    \begin{equation*}
-      6, \quad 2, \quad 18, \quad 60
-    \end{equation*}
-  \begin{enumerate}
-    \item Sketch a stacked dot plot of the values recorded for all nine smoke experiments.
-    \item Calculate the sample mean, $\bar{x}$.
-    \item Based on your answers to \textbf{Questions 1(a)}\ and \textbf{1(b)}, are the smoke experiment values symmetrically distributed about $\bar{x}$? Explain why or why not.
+  \item {\small \color{Orange} \sffamily [7 marks]} A U.S. real estate agent was curious whether houses sold in King County, Washington, United States, in 2014 had an underlying mean sale price different from the national average of \$345 thousand (\$345,000). They conducted a simple random sample of 21,613 houses sold in King County and visualised the sale prices in thousand of dollars in the figure below.
+
+<<include=FALSE,dpi=300,fig.height=5,fig.width=7>>=
+library(iNZightPlots)
+king.county.df <- read.csv(file = "king-county-houses.csv")
+king.county.df$price <- king.county.df$price / 1000
+
+pdf(file = "King.pdf", width = 7, height = 4.5, onefile = FALSE)
+iNZightPlot(x = price, data = king.county.df, xlab = "Sale Price ($000's)", bg = "white", main = "Distribution of the King County's house sale prices in 2014", plottype = "hist", hist.bins = 50, bar.fill = "lightblue")
+dev.off()
+@
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{King.pdf}
+  \end{figure}
+
+  \begin{enumerate}  
+    \item Recall the assumptions for inference on the underlying mean. Does the data satisfy these assumptions? Explain why or why not.
   \end{enumerate}
+  \vspace{-16pt}
+  Regardless of your answer to part \textbf{(a)}, continue as if the assumptions for inference have been met. 
+  \begin{enumerate}
+    \setcounter{enumii}{1}
+    \item Suppose the 95\% confidence interval for the underlying mean sale price had a lower limit of \$535.19 thousand and upper limit of \$544.98 thousand. Interpret this interval estimate.
+  \end{enumerate}
+  \vspace{-16pt}
 
 \end{enumerate}
+
+\clearpage
 
 You can answer \textbf{Question 2} as if the assumptions for inference were met.
 
 \begin{enumerate}
   \setcounter{enumi}{1}
-  \item {\small \color{Orange} \sffamily [B marks]} The time that it takes a driver to react to the brake lights on a decelerating vehicle is critical in helping to avoid rear-end collisions. Some research suggests that reaction time for an in-traffic response to a brake signal from standard brake lights can be modelled with a Normally distributed random variable with a mean of 1.25 seconds and a standard deviation of 0.46 seconds. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
+  \item {\small \color{Orange} \sffamily [8 marks]} A student suspects that a particular potato chip company’s snack packs do not, on average, contain 18 grams of chips. They collected a random sample of 6 packs and meticulously measured the weight of the chips in each pack (in grams). The student's data is numerically summarised below.
+  \vspace{-6pt}
+    \begin{equation*}
+      \bar{x} = 14.39 ~ \text{g}, \quad s = 0.20 ~ \text{g}, \quad n = 6
+        \vspace{-6pt}
+    \end{equation*}
+  The student decides to carry out a hypothesis test at the 5\% level to test their suspicion.
   \begin{enumerate}
-    \item The probability that a randomly selected driver has a reaction time of \textit{exactly} 1.5 seconds.
-    \item The probability that a randomly selected driver has a reaction time between 1.1 and 1.6 seconds.
-    \item The probability that a randomly selected driver has a reaction time of less than 1 second.
+    \item State the null and alternative hypothesis statements for this hypothesis test.
+    \item Based on part\ \textbf{(b)}, calculate the test statistic, $t_0$, for this hypothesis test.
+    \item Use \textbf{Table B} from \textbf{Statistical Tables} to determine the \textit{critical value} for this hypothesis test.
+    \item Interpret the outcome of this hypothesis test at the 5\% level.
   \end{enumerate}
-  
-  \item {\small \color{Orange} \sffamily [C marks]} Arsenic is a known carcinogen and poison. The standard laboratory procedures for measuring arsenic concentration ($\mu$g/L) in water are expensive.
+
+  \item {\small \color{Orange} \sffamily [5 marks]} Arsenic is a known carcinogen and poison. The standard laboratory procedures for measuring arsenic concentration ($\mu$g/L) in water are expensive.
 
 The following numeric summaries were calculated from data that compared the standard procedure to a new inexpensive field method.
 \begin{equation*}
@@ -96,48 +120,58 @@ Construct a 95\% confidence interval for $\mu_{Standard} - \mu_{New}$.
 You can answer \textbf{Questions A} and \textbf{B} as if the assumptions for inference were met.
 
 \begin{enumerate}[label=\Alph*.]
-  \item The following dataset comes from the time to breakdown of an insulating fluid between electrodes at a particular voltage. \vspace{-6pt}
-  \begin{equation*}
-    41.53, \quad 18.73, \quad 2.99, \quad 30.34, \quad 12.33
-  \end{equation*} \vspace{-18pt}
-  \begin{equation*}
-    117.52, \quad 73.02, \quad 223.63, \quad 4.00, \quad 26.78
-  \end{equation*}
+  \item A light bulb manufacturer is interested if their bulbs have a different average lifetime than the standard bulbs, which is known to be 250 hours (assuming continuous use). To test this claim, a researcher took a sample of 16 bulbs manufactured by the company and recorded how long it took for the bulb filaments to burn out once the bulbs were turned on. The observed lifetimes of the 16 bulbs can be numerically summarised with a sample mean of 262.4 hours and a sample standard deviation of 15.57 hours. \medskip \\
+  Conduct a hypothesis test at the 5\% level to answer the researcher's question by doing the following:
   \begin{enumerate}
-    \item Calculate the sample mean, $\bar{x}$.
-    \item Calculate the sample median, $m$.
-    \item Calculate the sample standard deviation, $s$.
-    \item Based on your answers to \textbf{Questions A(a)}\ and \textbf{A(b)}, does the data have a skewed distribution? If it does, state the direction of the skew.
+    \item State the null and alternative hypothesis statements for this hypothesis test.
+    \item Based on part\ \textbf{(a)}, calculate the test statistic, $t_0$, for this hypothesis test.
+    \item Use \textbf{Table B} from \textbf{Statistical Tables} to determine the \textit{critical value} for this hypothesis test.
+    \item Interpret the outcome of this hypothesis test at the 5\% level.
   \end{enumerate}
   
-  \item A company that sells boxes of screws claims that a box of its screws is Normally distributed with a mean $\mu = 50$ screws and standard deviation $\sigma = 4$ screws. \medskip \\ Use \textbf{Table A} from \textbf{Statistical Tables} to calculate:
+  \item The melting point (unitless) for 16 samples of a certain oil brand was determined, and the observed melting points can be summarised by $\bar{x} = 94.32$ and $s = 1.2$.
   \begin{enumerate}
-    \item The probability that a randomly selected box of screws contains less than 48 screws.
-    \item The probability that a randomly selected box of screws contains somewhere between 46 to 53 screws.
-    \item The probability that the average number of screws is greater than 54 for a random sample of 10 boxes of screws.
+    \item Construct a 99\% confidence interval for underlying mean melting point of this certain oil brand.
+    \item Use the interval constructed for part \textbf{(a)} to interpret the outcome of the following hypothesis test at the 1\% level.
+    \vspace{-6pt}
+    \begin{align*}
+      H_0\!: \mu &= 95\,, \\
+      H_1\!: \mu &\neq 95\,.
+    \end{align*}
+    \vspace{-24pt}
   \end{enumerate}
   
-  \clearpage
+  \item Morita et al. (2009)\footnote{Morita, H., Fukuda, T., Tsutsumi, K., \& Mamitsuka, K. (2009). Learning effect in the classroom of the tatami mat by schoolchildren. \textit{Journal of Home Economics of Japan}, \textbf{60}(4), 323--330.} examined the learning effect of tatami, which is commonly used as flooring in the Japanese style room. One facet of their research was whether, on average, the number of correct answers differed between a tatami-matted classroom and a wooden floor classroom. To collect data for this, they conducted a randomised experiment where they randomly allocated 83 primary school children to each type of classroom and gave them a standardised arithmetic test. Hence the total number of observations is 166. For each child, they measured the number of questions they answered correctly.
   
-  \item The following data comes from a random sample of 39 Peruvian Indians born in the Andes mountains, but who have since migrated to lower altitudes. A numeric variable measured was the systolic blood pressure (mm Hg) which has been visualised in \textsf{iNZight}.
-  
-<<include=FALSE>>=
-library(s20x); library(iNZightPlots)
-data(peru.df)
-pdf(file = "Peru.pdf", width = 7, height = 4.5, onefile = FALSE)
-iNZightPlot(BP, data = peru.df, box.fill = "white", main = "Distribution of Blood Pressure Measurements", xlab = "Systolic Blood Pressure (mm Hg)")
+<<include=FALSE,dpi=300,fig.height=5,fig.width=7>>=
+library(iNZightPlots)
+
+set.seed(38513)
+mu <- c(137, 116)
+sd <- c(30.1, 33.3)
+prob <- c(0.91, 0.873)
+log.odds.sd <- c(0.8180708, 0.7576373) # From deltamethod..
+n <- 83
+
+answers <- rnorm(n * 2, mean = rep(mu, each = n), sd = rep(sd, each = n)) |> 
+  round()
+group <- rep(c("Tatami", "Wooden"), each = n)
+
+correct.answers <- rbinom(n * 2, size = answers, prob = rnorm(n * 2, mean = rep(log(prob / (1 - prob)), each = n), sd = rep(log.odds.sd, each = n)) |> plogis())
+
+tatami.df <- data.frame(Correct = correct.answers, Classroom = group)
+
+pdf(file = "Tatami.pdf", width = 7, height = 4.5, onefile = FALSE)
+iNZightPlot(x = Correct, g1 = Classroom, data = tatami.df, xlab = "Number of Correct Answers", bg = "white", main = "Distribution of the students' number of correct answers by the type of classroom", plottype = "hist", hist.bins = 8, bar.fill = "lightblue", boxplot = FALSE)
 dev.off()
 @
 
   \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.7\textwidth]{Peru.pdf}
+    \includegraphics[width=0.7\textwidth]{Tatami.pdf}
   \end{figure}
   
-  \begin{enumerate}
-    \item Describe \textit{at least} two features of the systolic blood pressure measurements for this sample of Peruvian Indians.
-    \item A research question for this data was to assess the long-term effects of altitude on blood pressure. Normal systolic blood pressure is around 120 mm Hg or lower\footnote{https://www.stroke.org.nz/blood-pressure}. Based on this data, is it plausible that living at a high altitude increases systolic blood pressure? Explain your answer.
-  \end{enumerate}
+  Recall the assumptions for inference on the difference between two underlying means. Does the data satisfy these assumptions? Explain why or why not.
 \end{enumerate}
 
 \subsection{Exercises from Bird (2021)}
