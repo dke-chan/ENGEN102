@@ -1,0 +1,183 @@
+---
+title: "Inference for Comparing Two Samples"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: ayu
+    code-line-numbers: false
+editor: source
+---
+
+## New Ex
+
+insulating-paper.csv
+
+## Practical motivations for 
+
+## [Definition:]{style="color: darkorange;"} (1 - *&alpha;*)% Confidence interval for *&mu;*~1~ &minus; *&mu;*~2~
+
+::: {.definition style="width: 55%;"}
+$$
+\bar{x}_1 - \bar{x}_2  \pm  t^*_{1-\alpha/2}(\nu) \times \text{se}(\bar{x}_1 - \bar{x}_2)
+$$
+:::
+
+. . .
+
+where:
+
+::: {.incremental style="font-size: 0.9em; margin-top: -0.25em;"}
+- $\bar{x}_1$ is the **sample** mean of the first group
+- $\bar{x}_2$ is the **sample** mean of the second group
+- $n_1$ and $n_2$ are the sample sizes of the first and second groups, respectively
+- The confidence level is $(1 - \alpha)$, where $\alpha$ is a **proportion**
+- The degrees of freedom, $\nu$,
+  - For a $(1-\alpha)$ C.I. for $\mu_1 - \mu_2$, we set this to $\nu = \min(n_1-1,n_2-1)$[*]{style="color: red"}
+- $t^*_{1-\alpha/2}(\nu)$ is the *t*-multiplier for the prescribed confidence level of $(1 - \alpha)$
+  - For example, a confidence level of 90% results in $t^*_{0.95}(\nu)$
+- $\text{se}(\bar{x})$ is the **standard error** of $\bar{x}_1 - \bar{x}_2$
+:::
+
+## [Definition:]{style="color: darkorange;"} The test statistic for *&mu;*~1~ &minus; *&mu;*~2~
+
+::: {.definition style="width: 40%;"}
+$$
+t_0 = \frac{(\bar{x}_1 - \bar{x}_2)- \text{Diff}_0}{\text{se}(\bar{x}_1 - \bar{x}_2)}
+$$
+:::
+
+. . .
+
+where:
+
+::: {.incremental style="font-size: 0.9em; margin-top: -0.25em;"}
+- $t_0$ is the *T*-test statistic (for $\mu_1 - \mu_2$)
+- $\bar{x}_1$ is the **sample** mean of the first group
+- $\bar{x}_2$ is the **sample** mean of the second group
+- $\text{Diff}_0$ is the **hypothesised** difference between the *underlying* means $\mu_1 - \mu_2$
+- $\text{se}(\bar{x})$ is the **standard error** of $\bar{x}_1 - \bar{x}_2$
+:::
+
+## *Briefly:* Calculation of the *p*-value
+
+Let $T \sim \text{Student}(\nu = \min(n_1-1,n_2-1))$, where:
+
+::: {.tightList style="font-size: 0.9em;"}
+- $\nu$ is the Student’s *t*-distribution’s degrees of freedom parameter
+- $n_1$ and $n_2$ are the sample sizes of the first and second groups, respectively
+- $t_0$ is the *T*-test statistic
+:::
+
+::::: {.columns style="font-size: 0.75em;"}
+:::: {.column .fragment width="45%"}
+::: {.definition}
+If it is a two-sided test, e.g. [$H_1 \! : \mu_1 - \mu_2 \neq \text{Diff}_0$]{style="font-size: 0.9em"}
+
+$\quad p\text{-value} = 2 \times \mathbb{P}(T > |t_0|)$
+:::
+
+:::: {style="margin-top: 25px;"}
+::: {.definition-orchid .fragment}
+If it is a one-sided test and [$H_1 \! : \mu_1 - \mu_2 > \text{Diff}_0$]{style="font-size: 0.9em"}
+
+$\quad p\text{-value} = \mathbb{P}(T > t_0)$
+:::
+::::
+
+:::: {style="margin-top: 25px;"}
+::: {.definition-teal .fragment}
+If it is a one-sided test and [$H_1 \! : \mu_1 - \mu_2 < \text{Diff}_0$]{style="font-size: 0.9em"}
+
+$\quad p\text{-value} = \mathbb{P}(T < t_0)$
+:::
+::::
+::::
+:::::
+
+## Ex 7
+
+## Ex 7
+
+## Assumptions for inference on *&mu;*~1~ &minus; *&mu;*~2~
+
+::: {.incremental}
+1. **Independent** observations between *and* within groups
+2. *Within* [group]{style="color: steelblue;"}: One measure of centre can satisfactorily summarise the group
+3. *Within* [group]{style="color: steelblue;"}: Approximately symmetrical about the group's **sample mean**, $\bar{x}_i$, and there are no outliers
+:::
+
+. . .
+
+::: {style="border-bottom: 5px solid orange; width: 12.5%;"}
+More on **3.**
+:::
+
+Like the [assumptions for inference on [&mu;]{style="font-style: italic;"}]{style="color: orchid !important;"}, we are more lenient about this assumption with larger $n$
+
+## [Ex 2]{style='color: tomato;'} in [iNZight]{.R}
+
+:::::: {.columns}
+::::: {.column style="width: 50%;"}
+:::: {.r-stack}
+::: {.fragment .fade-out fragment-index=1}
+```{r}
+#| echo: false
+#| classes: output-small-80
+library(iNZightPlots)
+notes.df <- read.csv("datasets/note-taking.csv")
+inzsummary(score ~ method, data = notes.df, width = 83)
+```
+
+```{python}
+#| echo: true
+# A Python script to print the exact value of the t-multiplier
+from scipy.stats import t
+t.ppf(0.975, df=37)
+```
+
+:::
+::: {.fragment fragment-index=1}
+```{r}
+#| echo: false
+#| classes: output-small-80
+inzsummary(score ~ method, data = notes.df, width = 83, summary.type = "inference", inference.type = "conf")
+```
+:::
+::::
+:::::
+
+::::: {.column .margin-bottom style="width: 50%;"}
+Suppose that we want to test at the 5% level if the underlying test scores for each note-taking method were the same
+
+:::: {.fragment fragment-index=0}
+**Assumptions**  
+[Independence has been met for [Ex 2]{style="color: tomato;"} because the study randomly assigned students as part of the experiment. Otherwise, the other two assumptions, a single measure of centre and approximately symmetrical about  $\bar{x}$, are met *within* each group.]{style="font-size: 0.9em;"}
+::::
+
+:::: {.fragment fragment-index=2}
+**Interpretation**  
+[We reject the null that the difference between the underlying mean test scores was 0 marks, in favour of the alternative that it is not, at the 5% level]{style="font-size: 0.9em;"}
+::::
+:::::
+::::::
+
+## Linking *two-sided* tests and confidence intervals {.margin-bottom}
+
+Generally speaking, when there is a [two-sided]{.fragment .highlight-red} hypothesis test and a confidence interval (C.I.) for the *same* underlying parameter. The level, $\alpha$, determines the significance threshold for the *p*-value and the width of the confidence interval
+
+. . .
+
+**_Typically_**
+
+::: {.tightList style="font-size: 0.9em;"}
+- If you reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. does not capture the hypothesised value of the underlying parameter
+- If you fail to reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. captures the hypothesised value of the underlying parameter
+:::

@@ -308,8 +308,6 @@ t.ppf(0.975, df=249)
 ```{r}
 #| echo: false
 #| classes: output-small-80
-library(iNZightPlots)
-railway.df <- read.csv("datasets/final-crack-depth.csv")
 inzsummary(~ depth, data = railway.df, width = 83, summary.type = "inference", inference.type = "conf", hypothesis.value = 5)
 ```
 :::
@@ -326,7 +324,7 @@ We know that the engineers used railway axles with an initial crack depth of 5 m
 
 :::: {.fragment fragment-index=2}
 **Interpretation**  
-[We reject the null that the underlying mean final crack depth is 5 millimetres, in favour of the alterantive that it is not, at the 5% level]{style="font-size: 0.9em;"}
+[We reject the null that the underlying mean final crack depth is 5 millimetres, in favour of the alternative that it is not, at the 5% level]{style="font-size: 0.9em;"}
 ::::
 :::::
 ::::::
