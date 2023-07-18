@@ -25,7 +25,7 @@ Another common statistical inference method is a hypothesis test^[Also known as 
 
 This method allows us to examine whether the observed data provide evidence to refute a hypothesised value for a parameter, e.g. the underlying mean of a random variable, in favour of an "alternative"
 
-## [Definition:]{style="color: darkorange;"} The hypothesis statements
+## The hypothesis statements
 
 :::: {.columns}
 ::: {.column width="49%"}
@@ -43,6 +43,19 @@ The **alternative hypothesis**, represented by the symbol *H~1~* or *H~a~*, is a
 ::: {style="font-size: 0.8em; text-align: right; margin-top: -0.5em;" .fragment fragment-index=1}
  --- Utts & Heckard (2015)
 :::
+
+. . .
+
+For a hypothesis test on $\mu$, the set of hypothesis statements are:
+
+$$
+\begin{aligned}
+  H_0\!: \mu = \mu_0 \\
+  H_1\!: \mu \neq \mu_0
+\end{aligned}
+$$
+
+The alternative hypothesis, $H_1$, can use any of the following: $\neq$, $>$, or $<$
 
 ::: {.aside}
 Utts, J. M., & Heckard, R. F. (2015). *Mind on statistics* (5th ed.). Cengage Learning.
