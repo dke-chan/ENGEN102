@@ -10,3 +10,4 @@ figures/*
 *.aux
 *.log
 workshops/
+UNPROCESSED/
