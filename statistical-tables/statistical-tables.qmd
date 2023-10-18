@@ -1,12 +1,33 @@
 ---
 format: html
-theme: [default, "statistical-tables.scss"]
 embed-resources: true
 scrollable: false
+engine: knitr
 ---
+
+```{css, echo = FALSE}
+.BirdTable table, td, th {
+  padding: 0 0.25em 0 0.25em !important;
+  font-size: 10.5pt;
+  /*font-size: 12pt;*/
+}
+
+.BirdTable table, tbody tr:nth-child(odd) {
+  background-color: #E6E6E6;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+.ch-0 {
+  margin-left: -0.75ch;
+}
+```
 
 ```{r setup}
 #| include: false
+
 library(knitr)
 ```
 
