@@ -9,5 +9,9 @@ figures/*
 *.tex
 *.aux
 *.log
-workshops/
-UNPROCESSED/
+
+# Files that are technically owned by the University
+UoW-workshops/
+UoW-archive/
+UoW-assessment/
+UoW-assignments/
