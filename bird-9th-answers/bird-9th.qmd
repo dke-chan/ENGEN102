@@ -36,28 +36,36 @@ This is not an exhaustive list of all topics covered in the statistics component
 Some *t*-multipliers you may require that are not provided by @bird21 are:
 
 - *t*^\*^~[0.9875]{.ch-0}~(*&nu;* = 9) = 2.69
+- *t*^\*^~[0.85]{.ch-0}~(*&nu;* = 11) = 1.09
 - *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 39) = -2.43
 - *t*^\*^~[0.05]{.ch-0}~(*&nu;* = 39) = -1.68
+- *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 39) = 1.68
 - *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 39) = 2.02
+- *t*^\*^~[0.99]{.ch-0}~(*&nu;* = 39) = 2.43
+- *t*^\*^~[0.995]{.ch-0}~(*&nu;* = 39) = 2.71
+- *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 49) = -2.40
+- *t*^\*^~[0.05]{.ch-0}~(*&nu;* = 49) = -1.68
+- *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 49) = 1.68
 - *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 49) = 2.01
+- *t*^\*^~[0.99]{.ch-0}~(*&nu;* = 49) = 2.40
 - *t*^\*^~[0.995]{.ch-0}~(*&nu;* = 49) = 2.68
 - *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 59) = 2.00
 - *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 79) = 1.66
 :::
 
-<!-- ### Worked Problems -->
+### Worked Problems
 
-<!-- The following lists which worked problems from @bird21 are relevant to the statistics component of ENGEN102. -->
+The following lists which worked problems from @bird21 are relevant to the statistics component of ENGEN102.
 
-<!-- - *Mean, median, mode and standard deviation*: Problems 1, 2, 5, and 8 -->
-<!-- - *Probability*: Problems 1, 2, 3, 5, and 6(a) -->
-<!-- - *The Normal distribution*: Problems 1--4 -->
-<!-- - *Sampling and estimation theories*: Problems 3, 4, 5, 6, 7, 8, 9, 10, 11 -->
-<!-- - *Significance testing*: Problems 4--10 -->
+- *Mean, median, mode and standard deviation*: Problems 1, 2, and 5
+- *Probability*: Problems 1 and 6(a)
+- *The Normal distribution*: Problems 1--4
+- *Sampling and estimation theories*: Problems 2, 9, 11
+- *Significance testing*: Problems 5, 6, 8, 9 and 10
 
 ### Revision Test Questions
 
-The following lists which revision test questions from @bird21 are relevant to the statistics component of ENGEN102.
+The following lists which questions from the @bird21 revision tests are relevant to the statistics component of ENGEN102.
 
 - Revision Test 18: Questions 3, 6(a), and 6(c)
 - Revision Test 19: Questions 3 and 4
@@ -83,6 +91,60 @@ The following lists which questions from the @bird21 practice exercises are rele
 
 The style of these brief solutions follows the same style as @bird21. That is, only the final answer is presented without full working using the methods taught in the statistics component of ENGEN102.
 
+### Answers to Worked Problems
+
+#### *Mean, median, mode and standard deviation*
+
+<ol>
+  <li> Mean 5 &emsp; Median 4 &emsp; Mode 3
+  <li> Mean &pound;37.20 &emsp; Median &pound;37.19 &emsp; Mode N/A
+  <li value="5"> 2.61
+</ol>
+
+#### *Probability*
+
+<ol>
+  <li> (a\) 20&frasl;53 &emsp; (b\) 33&frasl;53
+  <li value="6"> (a\) 0.1
+</ol>
+
+#### *The Normal distribution*
+
+1. 492.05 &rightarrow; 492--493 people
+2. 143.85 &rightarrow; 143--144 people
+3. 1.9 &rightarrow; 1--2 people
+4. (a\) 71.25 &rightarrow; 71--72 bottles &emsp; (b\) 868.2 &rightarrow; 868--869 bottles &emsp; (c\) 19.8 &rightarrow; 19--20 bottles &emsp; (d\) 129 bottles
+
+#### *Sampling and estimation theories*
+
+<ol>
+  <li value="2"> *&mu;*~*x&#772;*~ = *&mu;* = 175 cm, *&sigma;*~*x&#772;*~ = 1.26 cm
+  <li value="9"> (a\) (1.842 cm, 1.858 cm) &emsp; (b\) (1.845 cm, 1.855 cm)
+  <li value="11"> (2.145 &Omega;m^-1^, 2.175 &Omega;m^-1^)
+</ol>
+
+#### *Significance testing*
+
+<ol>
+  <li value="5"> (a\) *t*^\*^~[0.05]{.ch-0}~(*&nu;* = 49) = -\{*t*^\*^~[0.95]{.ch-0}~(*&nu;* = 49)\} = -1.68, *t*~0~ = -2.04  
+  Hence the null hypothesis, H~0~: *&mu;* = 75 hours, is rejected in favour of the alternative, H~1~: *&mu;* < 75 hours, at the 5% significance level  
+  (b\) *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 49) = -\{*t*^\*^~[0.99]{.ch-0}~(*&nu;* = 49)\} = -2.40, *t*~0~ = -2.04  
+  Hence the null hypothesis, H~0~: *&mu;* = 75 hours, is not rejected in favour of the alternative, H~1~: *&mu;* < 75 hours, at the 1% significance level
+  <li> (a\) *t*^\*^~[0.9]{.ch-0}~(*&nu;* = 5) = 1.48, *t*~0~ = 1.45  
+  Hence the null hypothesis, H~0~: *&mu;* = 18 grams of carbon, is not rejected in favour of the alternative, H~1~: *&mu;* &ne; 18 grams of carbon, at the 20% significance level  
+  (b\) *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 5) = 2.02, *t*~0~ = 1.45  
+  Hence the null hypothesis, H~0~: *&mu;* = 18 grams of carbon, is not rejected in favour of the alternative, H~1~: *&mu;* &ne; 18 grams of carbon, at the 10% significance level
+  <li value="8"> (a\) *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 39) = 2.02, *t*~0~ = -2.49  
+  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 ohms, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0 ohms, at the 5% significance level  
+  (b\) *t*^\*^~[0.995]{.ch-0}~(*&nu;* = 39) = 2.71, *t*~0~ = -2.49  
+  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 ohms, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0 ohms, at the 1% significance level
+  <li> *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 5) = 2.02, *t*~0~ = 1.05  
+  Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0 seconds, is not rejected in favour of the alternative, H~1~: *&mu;*~A~ &minus; *&mu;*~B~ &ne; 0 seconds, at the 10% significance level
+  <li> Assume *&alpha;* = 0.05  
+  *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 5) = 2.57, *t*~0~ = -0.67  
+  Hence the null hypothesis, H~0~: *&mu;*~Analyst~ &minus; *&mu;*~Trainee~ = 0 grams, is not rejected in favour of the alternative, H~1~: *&mu;*~Analyst~ &minus; *&mu;*~Trainee~ &ne; 0 grams, at the 5% significance level
+</ol>
+
 ### Answers to Revision Test Questions
 
 #### Revision Test 18
@@ -100,7 +162,7 @@ The style of these brief solutions follows the same style as @bird21. That is, o
 #### Revision Test 20
 
 <ol>
-  <li value="2"> (a\) (3.62, 3.68) &emsp; (b\) (3.63, 3.67)
+  <li value="2"> (a\) (3.62 cm, 3.68 cm) &emsp; (b\) (3.63 cm, 3.67 cm)
   <li value="4"> (a\) *t*^\*^~[0.05]{.ch-0}~(*&nu;* = 39) = -1.68, *t*~0~ = -2.02  
   Hence the null hypothesis, H~0~: *&mu;* = 260 hours, is rejected in favour of the alternative, H~1~: *&mu;* < 260 hours, at the 5% significance level  
   (b\) *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 39) = -2.43, *t*~0~ = -2.02  
@@ -109,7 +171,7 @@ The style of these brief solutions follows the same style as @bird21. That is, o
   Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 cm, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0 cm, at the 5% significance level  
   (b\) *t*^\*^~[0.995]{.ch-0}~(*&nu;* = 49) = 2.68, *t*~0~ = -2.07  
   Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 cm, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0 cm, at the 1% significance level
-  <li> (a\) 50.246 &emsp; (b\) 0.058
+  <li> (a\) 50.246 &Omega; &emsp; (b\) 0.058 &Omega;
 </ol>
 
 ### Answers to Practice Exercises
