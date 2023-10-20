@@ -1,11 +1,18 @@
-# RStudio & qmd files
+# R & RStudio
 .Rproj.user/
+.Rhistory
+
+# Quarto
 *_files/
 *.html
 *.pdf
-.Rhistory
 figures/*
 *.rmarkdown
+
+# Retain the title page 
+!reveal-extra/title-block.html
+
+# LaTeX
 *.tex
 *.aux
 *.log

@@ -1,36 +1,116 @@
 /*-- scss:defaults --*/
 
-@import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i);
-@import url(https://fonts.cdnfonts.com/css/bradley-hand-2);
-@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:200,200i,300,300i,400,400i,700);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,600,600i,700,700i); 
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i);
 
 // fonts
-$font-family-sans-serif: "Fira Sans", sans-serif !default;
-
-// colors
-$body-bg: #f8f8ff !default;
-$body-color: #000 !default;
-$link-color: tomato !default;
-$selection-bg: #383d3d !default;
+$font-family-sans-serif: "Fira Sans", sans-serif;
+$presentation-font-size-root: 45px;
 $presentation-line-height: 1.1;
-$presentation-font-size-root: 50px;
-$code-block-bg: #fff;
-$code-block-font-size: 0.45em;
 
 // headings
-$presentation-heading-font: "Fira Sans", sans-serif !default;
-$presentation-heading-color: #000 !default;
+$presentation-heading-font: 'Roboto', sans-serif;
+$presentation-heading-color: #221F1F;
+$presentation-heading-font-weight: 700;
+
+// code
+$code-block-font-size: 36px;
+
+// colors
+$body-bg: #f8f8ff;
+$body-color: #221F1F;
+$link-color: #221F1F;
+$link-color-hover: #d22;
 
 /*-- scss:rules --*/
 
-.institute {
+//--------------------------------//
+// revealjs specific enhancements //
+//--------------------------------//
+
+.reveal .progress {
+  color: tomato;
+  height: 5px;
+}
+
+.reveal a {
+  color: #0051BA;
+}
+
+.reveal .slide-number a {
+  color: #221F1F !important;
+}
+
+.reveal blockquote {
+  font-size: 100%;
+  border-left: 0.25em solid tomato;
+  color: #4d4d4d;
+}
+
+.reveal .slide ul, .reveal .slide ol {
+  margin-bottom: 0em !important;
+  line-height: 0.9;
+}
+
+.reveal .slide li li, .reveal .slide li li {
+  font-size: 0.9em;
+  line-height: 0.8;
+  list-style-type: circle;
+}
+
+.reveal small {
   font-size: 0.7em;
 }
 
-.author {
-  color: #383d3d;
+//-------------------//
+// MathJax specifics //
+//-------------------//
+
+.MathJax-Font {
+  font-family: serif;
+  font-style: italic;
 }
 
+//---------------------//
+// pdf print specifics //
+//---------------------//
+
+html.print-pdf .reveal .slide aside {
+  bottom: 1.4em;
+}
+
+//---------//
+// colours //
+//---------//
+
+.tomato {
+  color: tomato;
+}
+
+.steelblue {
+  color: steelblue;
+}
+
+.orchid {
+  color: orchid;
+}
+
+.darkorange {
+  color: darkorange;
+}
+
+.orange {
+  color: orange;
+}
+
+.periwinkle {
+  color: #CCCCFF;
+}
+
+.teal {
+  color: teal}
+
+/* 
 .cell-output-display {
   margin-top: 13px;
   margin-bottom: 13px;
@@ -43,18 +123,6 @@ $presentation-heading-color: #000 !default;
 
 .cell-output-display img, .manual-border, .manual-border-ver2 img {
   border: thin solid #383d3d;
-}
-
-.output-small-80 .cell-output-stdout {
-  font-size: 0.8em;
-}
-
-.output-small-90 .cell-output-stdout {
-  font-size: 0.9em;
-}
-
-.font90 {
-  font-size: 0.9em;
 }
 
 html.print-pdf .reveal aside {
@@ -73,27 +141,12 @@ html.print-pdf .reveal aside {
   color: #000;
 }
 
-.reveal h2 em {
-  color: #000;
-}
-
-.reveal .progress {
-  color: tomato;
-  height: 5px;
-}
-
 .MathJax {
   font-size: 90% !important;
 }
 
 .reveal sup, .reveal .slide sup, .reveal sub, .reveal .slide sub {
   font-size: .6em;
-}
-
-.reveal blockquote {
-  padding: 0.1em 0.5em 0.1em;
-  font-size: 0.8em;
-  border-left: 0.25em solid tomato;
 }
 
 .reveal figcaption {
@@ -218,59 +271,6 @@ html.print-pdf .reveal pre code {
   color: #00478F;
 }
 
-.orchid-table table {
-  margin: 0;
-  border: none;
-  border-top: solid darkblue !important;
-  border-bottom: solid darkblue !important;
-}
-
-.orchid-table table td {
-  padding: 10px;
-  border: none;
-}
-
-.orchid-table table th {
-  color: darkblue;
-  padding: 10px;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.orchid-table table thead, .Vert-Minitab table tfoot, .Vert-Minitab table tr:nth-child(even) {
-  background: #f8f4ff;
-}
-
-.excel table {
-  margin: 0;
-  background: white;
-  border: none;
-  font-size: 0.75em;
-}
-
-.excel table td, .excel table th {
-  border: 0.05em solid black !important;
-}
-
-.excel table th {
-  font-weight: normal;
-  background: lightgray;
-  text-align: center !important;
-}
-
-.excel table td:nth-child(1) {
-  background: lightgray;
-}
-
-.excel-caption {
-  font-size: 0.5em;
-}
-
-.excel-caption code {
-  color: #4758AB;;
-}
-
-/*
 .reveal video {
   margin: auto;
   display: block;
@@ -301,10 +301,106 @@ html.print-pdf .reveal pre code {
   font-weight: bold;
   color: orange;
 }
+
+
+.reveal pre code, html.print-pdf .reveal pre code  {
+  padding: 0.4em;
+  border: 3px solid #36464f;
+  font-family: 'Inconsolata', 'Consolas', Monaco, monospace !important;
+  background-color: white;
+  max-height: 800px;
+}
+
+.img-border {
+  border: 0.5px solid #221F1F;
+}
+
+.reveal figcaption {
+  text-align: center;
+  margin-top: -8pt;
+}
+
+.reveal blockquote p {
+  margin: 0em 0.2em;
+}
+
+html.print-pdf .reveal aside {
+  bottom: 2em;
+}
+
+.reveal .definition {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2em 0.4em 0.2em;
+  border: 0.1em solid orange;
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+// Excel css 
+.excel table {
+  margin: 0;
+  background: white;
+  border: none;
+  font-size: 0.75em;
+}
+
+.excel table td, .excel table th {
+  border: 0.05em solid black !important;
+}
+
+.excel table th {
+  font-weight: normal;
+  background: lightgray;
+  text-align: center !important;
+}
+
+.excel table td:nth-child(1) {
+  background: lightgray;
+}
+
+.excel-caption {
+  font-size: 0.75em;
+}
+
+.excel-caption code {
+  color: #4758AB;;
+}
+
+// Orchid table
+.orchid-table table {
+  margin-top: -0.5em;
+  border: none;
+  border-top: solid darkblue !important;
+  border-bottom: solid darkblue !important;
+}
+
+.orchid-table table td {
+  padding: 10px;
+  border: none;
+}
+
+.orchid-table table th {
+  color: darkblue;
+  padding: 10px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.orchid-table table thead, .orchid-table table tfoot, .orchid-table table tr:nth-child(even) {
+  background: #f8f4ff;
+}
+
+// Print trick?
+
+.printOnly {
+  visibility: hidden;
+}
+
+
+html.print-pdf .reveal .printOnly {
+  margin-top: -0.8em;
+  color: blue;
+  visibility: visible;
+}
 */
-
-
-
-
-
-

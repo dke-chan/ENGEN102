@@ -61,7 +61,7 @@ The following lists which worked problems from @bird21 are relevant to the stati
 - *Mean, median, mode and standard deviation*: Problems 1, 2, and 5
 - *Probability*: Problems 1 and 6(a)
 - *The Normal distribution*: Problems 1--4
-- *Sampling and estimation theories*: Problems 2 (a), 9, 11
+- *Sampling and estimation theories*: Problems 2(a), 9, 11
 - *Significance testing*: Problems 5, 6, 8, 9 and 10
 
 ### Revision Test Questions
@@ -269,15 +269,15 @@ The style of these brief solutions follows the same style as @bird21. That is, o
 
 <ol>
   <li> *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 79) = 1.66, *t*~0~ = 1.28  
-  Hence the null hypothesis, H~0~: *&mu;*~B~ &minus; *&mu;*~A~ = 15, is not rejected in favour of the alternative, H~1~: *&mu;*~B~ &minus; *&mu;*~A~ > 15, at the 5% significance level
+  Hence the null hypothesis, H~0~: *&mu;*~B~ &minus; *&mu;*~A~ = 15 hours, is not rejected in favour of the alternative, H~1~: *&mu;*~B~ &minus; *&mu;*~A~ > 15 hours, at the 5% significance level
   <li> *t*^\*^~[0.975]{.ch-0}~(*&nu;* = 49) = 2.01, *t*~0~ = &minus;2.35  
-  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0, at the 5% significance level
+  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 minutes, is rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ &ne; 0 minutes, at the 5% significance level
   <li> *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 4) = -\{*t*^\*^~[0.99]{.ch-0}~(*&nu;* = 4)\} = -3.75, *t*~0~ = -1.32  
-  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ < 0, at the 1% significance level
+  Hence the null hypothesis, H~0~: *&mu;*~1~ &minus; *&mu;*~2~ = 0 &mu;F, is not rejected in favour of the alternative, H~1~: *&mu;*~1~ &minus; *&mu;*~2~ < 0  &mu;F, at the 1% significance level
   <li value="5"> (a\) *t*^\*^~[0.01]{.ch-0}~(*&nu;* = 11) = -\{*t*^\*^~[0.99]{.ch-0}~(*&nu;* = 11)\} = -2.72, *t*~0~ = -1.93  
-  Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0, is not rejected in favour of the alternative, H~1~: *&mu;*~A~ &minus; *&mu;*~B~ < 0, at the 1% significance level  
+  Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0 litres, is not rejected in favour of the alternative, H~1~: *&mu;*~A~ &minus; *&mu;*~B~ < 0 litres, at the 1% significance level  
   (b\) *t*^\*^~[0.05]{.ch-0}~(*&nu;* = 4) = -\{*t*^\*^~[0.95]{.ch-0}~(*&nu;* = 11)\} = -1.80, *t*~0~ = -1.93  
-  Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~A~ &minus; *&mu;*~B~ < 0, at the 5% significance level
+  Hence the null hypothesis, H~0~: *&mu;*~A~ &minus; *&mu;*~B~ = 0 litres, is rejected in favour of the alternative, H~1~: *&mu;*~A~ &minus; *&mu;*~B~ < 0 litres, at the 5% significance level
   <li> *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 4) = 2.13, *t*~0~ = 3.71  
-  Hence the null hypothesis, H~0~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ = 0, is rejected in favour of the alternative, H~1~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ > 0, at the 5% significance level
+  Hence the null hypothesis, H~0~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ = 0 kilometres, is rejected in favour of the alternative, H~1~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ > 0 kilometres, at the 5% significance level
 </ol>

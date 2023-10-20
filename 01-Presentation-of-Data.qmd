@@ -1,6 +1,6 @@
 ---
-title: "Summarising Data"
-author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+title: "Presentation of Data"
+author: "ENGEN102-23G (HAM) - Engineering Maths and Modelling 1B"
 format:
   revealjs: 
     slide-number: c/t
@@ -13,20 +13,17 @@ format:
       - reveal-extra/title-block.html
     highlight-style: ayu
     code-line-numbers: false
-    embed-resources: true
+    embed-resources: false
 editor: source
 ---
 
-## Data
+## What is Data?
 
-```{r setup}
-#| include: false
-library(iNZightPlots); library(ggplot2); library(ggthemes)
-```
+. . .
 
 > In statistical parlance, **data** is a plural word referring to a collection of numbers or other pieces of information to which meaning has been attached
 
-::: {style="font-size: 0.8em; text-align: right; margin-top: -0.5em;"}
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
  --- Utts (2014)
 :::
 
@@ -34,73 +31,98 @@ library(iNZightPlots); library(ggplot2); library(ggthemes)
 Utts, J. M. (2014). *Seeing Through Statistics* (4th ed.). Cengage Learning.
 :::
 
-## Observations, values, and variables
+## Observations[, values]{.fragment fragment-index=1}[, and variables]{.fragment fragment-index=2}
 
-An [observation]{style="color: tomato;"} is an individual that we measure *or* categorise **data** about
+An [observation]{.tomato} is an individual that we measure *or* categorise **data** about
 
-::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 0.75;"}
+<blockquote>
 - An apple
 - A hospital
-:::
+- A cantilever beam
+</blockquote>
 
-. . .
+:::: {.fragment fragment-index=1 style="margin-top: 50px;"}
+A [value]{.steelblue} is a singular piece of **data** about an [observation]{.tomato}
 
-::: {style="margin-top: 50px;"}
-A [value]{style="color: steelblue;"} is a singular piece of **data** about an [observation]{style="color: tomato;"}
-:::
+<blockquote style="border-left: 0.25em solid steelblue;">
+- The weight of an apple
+- The bed occupancy rate at Waikato Hospital
+- The load at point [x]{.MathJax-Font} of a cantilever beam
+</blockquote>
+::::
 
-::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid steelblue; color: #4d4d4d; line-height: 0.75;"}
-- The weight of an apple picked from Tree A1
-- The percent occupancy of beds at Waikato Hospital
-:::
+:::: {.fragment fragment-index=2 style="margin-top: 50px;"}
+A [variable]{.orchid} is a collection of one *type* of **data** collected on all [observations]{.tomato}
 
-. . .
+<blockquote style="border-left: 0.25em solid orchid;">
+- The weights of all apples
+- The bed occupancy rates for all New Zealand hospitals
+- The loads at point [x]{.MathJax-Font} for all cantilever beams
+</blockquote>
+::::
 
-::: {style="margin-top: 50px;"}
-A [variable]{style="color: orchid;"} is a collection of one *type* of **data** collected on all [observations]{style="color: tomato;"}
-:::
-
-::: {.tightListTwo style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid orchid; color: #4d4d4d; line-height: 0.75;"}
-- The weight for all apples picked from Tree A1
-- The percent occupancy of beds for all hospitals in the Waikato region
-:::
-
-## More on variables
-
-> ... we measure *or* categorise **data** about
+## More on values and variables
 
 ::::: {.columns}
-:::: {.column .fragment}
+:::: {.column .incremental}
 **Numeric** <small>Quantitative</small>  
-Data that can be described with numbers
+Data that can be described with "numbers"
 
-::: {.tightListTwo .incremental style="font-size: 0.9em;"}
-- [Discrete]{style="color: darkorange;"} <small>Integer</small>  
-&dash; Number of siblings  
-&dash; Age [(if measured in years)]{.fragment}
-- [Continuous]{style="color: darkorange;"} <small>Real</small>  
-&dash; Diastolic & systolic blood pressure  
-&dash; Strength of a gravitational wave
-:::
+<p>
+- [Discrete]{.darkorange} <small>Integer</small>
+  - Age (measured in years)
+  - Number of siblings
+</p>
+<p>
+- [Continuous]{.darkorange} <small>Real</small>
+  - Systolic and diastolic blood pressure
+  - ???
+</p>
 
 ::::
-:::: {.column .fragment}
+:::: {.column .fragment .incremental}
 **Categorical** <small>Qualitative, Factor</small>  
-Data that is best described with text
+Data that is best described with "text"
 
-::: {.tightListTwo .incremental style="font-size: 0.9em;"}
-- [Nominal]{style="color: darkorange;"} <small>No order</small>  
-&dash; Te Whatu Ora -- Health NZ regions   
-&dash; Eye colour
-- [Ordinal]{style="color: darkorange;"} <small>Natural order</small>  
-&dash; Number of Wordle guesses  
-&dash; Highest educational degree earned
-:::
+<p>
+- [Nominal]{.darkorange} <small>No order</small>
+  - Eye colour
+  - Te Whatu Ora -- Health New Zealand regions^[**URL:** [careers.tewhatuora.govt.nz/locations/](https://careers.tewhatuora.govt.nz/locations/)]
+</p>
+<p>
+- [Ordinal]{.darkorange} <small>Natural order</small>
+  - Highest educational degree earned
+  - Number of Wordle guesses
+</p>
 
 ::::
 :::::
 
+## Tidy data
+
+In ENGEN102, most, if not all, datasets follow *tidy data* principles
+
+::: {.incremental style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 1; margin-left: 1em;"}
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+
+:::
+
+::: {style="font-size: 0.8em; text-align: right; margin-top: -1em;"}
+ --- Wickham et al. (in press)
+:::
+
+::: {.aside}
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (in press). *R for Data Science* (2nd ed.). O'Reilly.
+:::
+
 ## [Ex 1:]{style='color: tomato;'} Chocs and Blocks
+
+```{r setup}
+#| include: false
+library(iNZightPlots); library(ggplot2); library(ggthemes)
+```
 
 > An exercise that gets you to estimate the "true" average block weight using *only* a sample of 10 blocks.
 
@@ -135,25 +157,6 @@ This is the `davids-sample.csv` data from [Moodle]{.Moodle}
 
 ::: {.aside}
 **URL:** [https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html](https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html)
-:::
-
-## Tidy data
-
-In ENGEN102, most, if not all, datasets follow *tidy data* principles
-
-::: {.incremental style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 1; margin-left: 1em;"}
-1. Each variable is a column; each column is a variable.
-2. Each observation is a row; each row is an observation.
-3. Each value is a cell; each cell is a single value.
-
-:::
-
-::: {style="font-size: 0.8em; text-align: right; margin-top: -1em;"}
- --- Wickham et al. (in press)
-:::
-
-::: {.aside}
-Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (in press). *R for Data Science* (2nd ed.). O'Reilly.
 :::
 
 ## Stacked dot plot
