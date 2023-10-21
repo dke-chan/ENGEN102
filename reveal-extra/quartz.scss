@@ -2,6 +2,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,600,600i,700,700i); 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:200,200i,300,300i,400,400i,700);
 
 // fonts
 $font-family-sans-serif: "Fira Sans", sans-serif;
@@ -62,6 +63,84 @@ $link-color-hover: #d22;
   font-size: 0.7em;
 }
 
+.reveal .columns > .column > :not(ul,ol) {
+  margin-left: 0em !important;
+  margin-right: 0em !important;
+}
+
+.reveal code {
+  font-size: 97.5%;
+  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+  color: #399ee6;
+}
+
+.cell-output-display img {
+  border: thin solid #383d3d;
+}
+
+.reveal figcaption {
+  margin-top: -8pt;
+}
+
+//---------------------------------------//
+// Table CSS in a Minitab inspired style //
+//---------------------------------------//
+
+.orchid-table table {
+  border: none;
+  border-top: solid darkblue !important;
+  border-bottom: solid darkblue !important;
+}
+
+.orchid-table table td {
+  padding: 10px;
+  border: none;
+}
+
+.orchid-table table th {
+  color: darkblue;
+  padding: 10px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.orchid-table table thead, .orchid-table table tfoot, .orchid-table table tr:nth-child(even) {
+  background: #f8f4ff;
+}
+
+//----------------------------------//
+// Table CSS in an Excel-like style //
+//----------------------------------//
+
+.excel table {
+  margin: 0;
+  background: white;
+  border: none;
+  font-size: 0.75em;
+}
+
+.excel table td, .excel table th {
+  border: 0.05em solid black !important;
+}
+
+.excel table th {
+  font-weight: normal;
+  background: lightgray;
+  text-align: center !important;
+}
+
+.excel table td:nth-child(1) {
+  background: lightgray;
+}
+
+.excel-caption {
+  font-size: 0.75em;
+}
+
+.excel-caption code {
+  color: #4758AB;
+}
+
 //-------------------//
 // MathJax specifics //
 //-------------------//
@@ -77,6 +156,19 @@ $link-color-hover: #d22;
 
 html.print-pdf .reveal .slide aside {
   bottom: 1.4em;
+}
+
+html.print-pdf .reveal .slide aside div {
+  margin-bottom: 18.3px !important;
+}
+
+html.print-pdf .reveal .slide aside .aside-footnotes {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+html.print-pdf .reveal .slides .pdf-page:last-child {
+  page-break-after: avoid;
 }
 
 //---------//
@@ -108,7 +200,12 @@ html.print-pdf .reveal .slide aside {
 }
 
 .teal {
-  color: teal}
+  color: teal;
+}
+
+.red {
+  color: red;
+}
 
 /* 
 .cell-output-display {
@@ -119,50 +216,6 @@ html.print-pdf .reveal .slide aside {
 .cell-output-stdout {
   margin-top: 13px;
   margin-bottom: 13px;
-}
-
-.cell-output-display img, .manual-border, .manual-border-ver2 img {
-  border: thin solid #383d3d;
-}
-
-html.print-pdf .reveal aside {
-  bottom: 2em;
-}
-
-.reveal .slide .footer {
-  display: block;
-}
-
-.reveal h1 {
-  text-align: center;
-}
-
-.reveal h2 strong {
-  color: #000;
-}
-
-.MathJax {
-  font-size: 90% !important;
-}
-
-.reveal sup, .reveal .slide sup, .reveal sub, .reveal .slide sub {
-  font-size: .6em;
-}
-
-.reveal figcaption {
-  margin-top: 0em;
-}
-
-.reveal figcaption strong {
-  color: #000;
-}
-
-.reveal strong {
-  color: #383d3d;
-}
-
-.reveal em {
-  color: #383d3d;
 }
 
 .reveal .definition {
@@ -200,6 +253,7 @@ html.print-pdf .reveal aside {
   border: 0.1em solid #CCCCFF;
   background-color: rgba(204, 204, 255, 0.1);
 }
+
 .reveal pre code {
   padding: 0.5em 1em 0.5em;
   border: 1px solid #36464f;
@@ -212,49 +266,6 @@ html.print-pdf .reveal pre code {
   font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace !important;
 }
 
-.reveal .dataTables_info {
-  font-size: 0.5em;
-}
-
-.reveal .dataTables_paginate {
-  font-size: 0.5em;
-}
-
-.reveal .dataTable thead th {
-  text-align: left !important;
-  color: #383d3d;
-}
-
-.margin-bottom p {
-  margin-bottom: 25px;
-}
-
-.reveal .tightList ul {
-  margin-top: -0.5em;
-}
-
-.reveal .tightList ul li:last-child, .reveal .tightListTwo ul li:last-child {
-  margin-bottom: 0em;
-}
-
-.reveal .tightList ol {
-  margin-top: -0.5em;
-}
-
-.reveal .tightList ol li:last-child, .reveal .tightListTwo ol li:last-child {
-  margin-bottom: 0em;
-}
-
-.reveal .Moodle {
-  color: darkorange; 
-  font-style: italic;
-}
-
-.reveal .R {
-  color: #18AFE3;
-  font-style: italic;
-}
-
 .reveal .hat {
   position: absolute; 
   left: 11px; 
@@ -263,132 +274,9 @@ html.print-pdf .reveal pre code {
   display: inline-block;
 }
 
-.reveal .arg code {
-  color: #399ee6;
-}
-
-.reveal .midnightblue code, .midnightblue {
-  color: #00478F;
-}
-
 .reveal video {
   margin: auto;
   display: block;
-}
-
-.reveal .slide-logo {
-  height: 66.5px !important;
-  width: 399.3px !important;
-  max-width: unset !important;
-  max-height: unset !important;
-}
-
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.reveal .iNZight {
-  font-family: Consolas, monaco, monospace;
-  color: #18AFE3;
-}
-
-.reveal .by-hand {
-  font-family: 'Bradley Hand', arial, serif;
-  font-weight: bold;
-  color: orange;
-}
-
-
-.reveal pre code, html.print-pdf .reveal pre code  {
-  padding: 0.4em;
-  border: 3px solid #36464f;
-  font-family: 'Inconsolata', 'Consolas', Monaco, monospace !important;
-  background-color: white;
-  max-height: 800px;
-}
-
-.img-border {
-  border: 0.5px solid #221F1F;
-}
-
-.reveal figcaption {
-  text-align: center;
-  margin-top: -8pt;
-}
-
-.reveal blockquote p {
-  margin: 0em 0.2em;
-}
-
-html.print-pdf .reveal aside {
-  bottom: 2em;
-}
-
-.reveal .definition {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.2em 0.4em 0.2em;
-  border: 0.1em solid orange;
-  background-color: rgba(255, 165, 0, 0.1);
-}
-
-// Excel css 
-.excel table {
-  margin: 0;
-  background: white;
-  border: none;
-  font-size: 0.75em;
-}
-
-.excel table td, .excel table th {
-  border: 0.05em solid black !important;
-}
-
-.excel table th {
-  font-weight: normal;
-  background: lightgray;
-  text-align: center !important;
-}
-
-.excel table td:nth-child(1) {
-  background: lightgray;
-}
-
-.excel-caption {
-  font-size: 0.75em;
-}
-
-.excel-caption code {
-  color: #4758AB;;
-}
-
-// Orchid table
-.orchid-table table {
-  margin-top: -0.5em;
-  border: none;
-  border-top: solid darkblue !important;
-  border-bottom: solid darkblue !important;
-}
-
-.orchid-table table td {
-  padding: 10px;
-  border: none;
-}
-
-.orchid-table table th {
-  color: darkblue;
-  padding: 10px;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.orchid-table table thead, .orchid-table table tfoot, .orchid-table table tr:nth-child(even) {
-  background: #f8f4ff;
 }
 
 // Print trick?
@@ -397,10 +285,10 @@ html.print-pdf .reveal aside {
   visibility: hidden;
 }
 
-
 html.print-pdf .reveal .printOnly {
   margin-top: -0.8em;
   color: blue;
   visibility: visible;
 }
+
 */

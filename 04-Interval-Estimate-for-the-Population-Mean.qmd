@@ -31,6 +31,43 @@ So far we have covered the following:
 
 Points 2. and 3. allow us to develop methods to infer parameters, such as a **random variable's** underlying mean, with *only* one sample
 
+## Standard error of the sample mean
+
+::::::: {.columns}
+:::::: {.column width="57.5%"}
+::::: {.margin-bottom}
+A measure that describes how precise the **sample** mean is as an estimate of the "**true**" mean (under some assumptions)
+:::::
+
+::::: {.fragment fragment-index=2}
+Let $s$ be the sample standard deviation and $n$ be the total number of observations. Then, the **standard error**^[A standard error quantifies the standard deviation of a statistic] of the sample mean is:
+
+:::: {.definition style="font-size: 0.8em; width: 50%; display: block; margin: auto;"}
+$$
+\text{se}(\bar{x}) = \frac{s}{\sqrt{n}}
+$$
+::::
+
+:::::
+
+::::::
+:::::: {.column width="42.5%" .fragment fragment-index=1}
+```{r}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+
+# plotObj +
+#   geom_dotplot(binwidth = 1) +
+#   labs(y = "") +
+#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+#   geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
+#   geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight) / sqrt(10), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight) / sqrt(10), y = -0.08, yend = -0.08, colour = "black", linewidth = 1.15, arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
+```
+::::::
+:::::::
+
 ## Confidence intervals
 
 :::: {style="width: 90%; display: block; margin: auto;"}

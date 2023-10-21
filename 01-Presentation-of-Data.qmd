@@ -17,6 +17,13 @@ format:
 editor: source
 ---
 
+```{r setup}
+#| include: false
+
+library(ggplot2)
+library(knitr)
+```
+
 ## What is Data?
 
 . . .
@@ -76,7 +83,7 @@ Data that can be described with "numbers"
 <p>
 - [Continuous]{.darkorange} <small>Real</small>
   - Systolic and diastolic blood pressure
-  - ???
+  - 100 metre sprint time
 </p>
 
 ::::
@@ -98,94 +105,87 @@ Data that is best described with "text"
 ::::
 :::::
 
-## Tidy data
+## Preparing data for presentation
 
-In ENGEN102, most, if not all, datasets follow *tidy data* principles
+Let's start by (virtually) collecting data to estimate the *average* weight of these 100 blocks by selecting **only** 10 blocks
 
-::: {.incremental style="padding: 0.1em 0.5em 0.1em; font-size: 0.8em; border-left: 0.25em solid tomato; color: #4d4d4d; line-height: 1; margin-left: 1em;"}
-1. Each variable is a column; each column is a variable.
-2. Each observation is a row; each row is an observation.
-3. Each value is a cell; each cell is a single value.
+[**URL:** [bit.ly/choc-and-blocks](https://bit.ly/choc-and-blocks)]{style="margin-left: 1em;"}
 
+::: { style="margin-top: 50px;" .fragment fragment-index=0}
+Note how the data about these 10 blocks was arranged[. Nowadays, this particular arrangement is known as the **tidy data** (Wickham et al., 2023) format]{.fragment fragment-index=1}
 :::
 
-::: {style="font-size: 0.8em; text-align: right; margin-top: -1em;"}
- --- Wickham et al. (in press)
+::: {.incremental .fragment fragment-index=1}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+1. Each [variable]{.orchid} is a column
+2. Each [observation]{.tomato} is a row
+3. Each [value]{.steelblue} is a cell
+</blockquote>
 :::
 
 ::: {.aside}
-Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (in press). *R for Data Science* (2nd ed.). O'Reilly.
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2nd ed.). O'Reilly.
 :::
 
-## [Ex 1:]{style='color: tomato;'} Chocs and Blocks
+## [Ex 1:]{.red} Compressive Strength of Al--Li Alloys
 
-```{r setup}
-#| include: false
-library(iNZightPlots); library(ggplot2); library(ggthemes)
-```
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+The `alloy.csv` file describes data about the compressive strength in 80 specimens of a new aluminium-lithium alloy undergoing evaluation as a possible material for aircraft structural elements
+</blockquote>
 
-> An exercise that gets you to estimate the "true" average block weight using *only* a sample of 10 blocks.
-
-:::::: {.columns}
-::::: {.column style="width: 45%;"}
-:::: {style="font-size: 0.75em;"}
-| [Variables]{style="color: #4758AB;"} | |
-| :-           | :------------ |
-| **Block.ID** | A numeric variable which denotes the block's identification number |
-| **Weight** | A numeric variable that denotes the weight of the block (grams) |
+::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
++:-------------+:----------------------------------------------------------------------------------------------------------------------------+
+| **strength** | A number that denotes the compressive strength of an aluminium-lithium alloy, measured in pounds per square inch (psi) 
++--------------+-----------------------------------------------------------------------------------------------------------------------------+
+:::
 ::::
-:::::
-
-::::: {.column .fragment style="width: 55%;"}
-:::: {style="width: 60%; display: block; margin: auto;"}
-```{r}
+:::: {.column width="30%" .fragment fragment-index=0}
+```{r alloy} 
 #| echo: false
 #| results: asis
 #| classes: excel
-davidsSample.df <- read.csv("datasets/davids-sample.csv")
-
-# rbind(colnames(davidsSample.df), head(davidsSample.df, n = 5), rep("...", ncol(davidsSample.df))) |>
-rbind(colnames(davidsSample.df), davidsSample.df) |>
-  knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(davidsSample.df)])
+ 
+alloy.df <- read.csv("datasets/alloy.csv")
+ 
+rbind(colnames(alloy.df), head(alloy.df, n = 14), rep("...", ncol(alloy.df))) |>
+  kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(alloy.df)])
 ```
-::: {.excel-caption}
-This is the `davids-sample.csv` data from [Moodle]{.Moodle}
-:::
 ::::
 :::::
-::::::
 
 ::: {.aside}
-**URL:** [https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html](https://mslc.pages.gitlab.unimelb.edu.au/chocs-and-blocks/activity/index.html)
+Data from Montgomery, D. C., Runger, G. C., & Hubele, N. F. (2010). *Engineering Statistics* (5th ed.). Wiley.
 :::
 
-## Stacked dot plot
+## Stacked Dot Plot
 
-::::: {.columns}
-:::: {.column style="width: 55%" .margin-bottom}
-Plot each value of the numeric variable on the number line
+A single numeric variable is plotted on a number line, where *similar* values are stacked on top of each other
 
-Stack *similar* values on top of each other
-::::
-:::: {.column style="width: 45%;"}
-```{r}
+. . .
+
+::: {style="width: 50%; margin: auto; display: block; margin-top: 50px;"}
+```{r alloy-stackeddotplot}
 #| echo: false
 #| fig-dpi: 300
-#| fig-height: 3.5
+#| fig-height: 4
 #| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
 
-plotObj <- ggplot(data = davidsSample.df, aes(x = Weight)) +
-  labs(x = "Weight (grams)", title = "Distribution of Block Weights") +
+plotObj <- ggplot(alloy.df, aes(x = strength)) +
+  labs(x = "Compressive strength (psi)", title = "Distribution of Compressive Strength Al–Li Alloys") +
   theme_bw()
-plotObj +
-  geom_dotplot(binwidth = 1) +
-  labs(y = "") +
+
+plotObj + 
+  geom_dotplot(fill = NA, stroke = 3, colour = "darkblue", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
+  labs(y = NULL) + 
   scale_y_continuous(breaks = NULL)
 ```
-::::
-:::::
+:::
 
-## Box plot^[Also known as a box and whisker plot]
+## Box Plot^[Also known as a box and whisker plot]
 
 ::::: {.columns}
 :::: {.column style="width: 55%" .margin-bottom}
@@ -202,9 +202,11 @@ Most software uses the spread of the *central* 50% of the variable to identify "
 #| fig-height: 3.5
 #| fig-width: 7
 
-plotObj +
-  geom_boxplot(fill = "lemonchiffon") +
-  scale_y_continuous(breaks = NULL, limits = c(-1, 1))
+# library(reticulate)
+# py_install("matplotlib")
+# plotObj +
+#   geom_boxplot(fill = "lemonchiffon") +
+#   scale_y_continuous(breaks = NULL, limits = c(-1, 1))
 ```
 ::::
 :::::
@@ -226,10 +228,10 @@ Most software uses an algorithm to determine the *default* number of intervals
 #| fig-height: 3.5
 #| fig-width: 7
 
-plotObj +
-  geom_histogram(fill = "lightblue", colour = "black", bins = 9) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
-  labs(y = "Frequency")
+# plotObj +
+#   geom_histogram(fill = "lightblue", colour = "black", bins = 9) +
+#   scale_y_continuous(breaks = c(0, 1, 2)) +
+#   labs(y = "Frequency")
 ```
 ::::
 :::::
@@ -260,13 +262,13 @@ $$
 #| fig-height: 3.5
 #| fig-width: 7
 
-plotObj +
-  geom_dotplot(binwidth = 1) +
-  labs(y = "") +
-  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17)
+# plotObj +
+#   geom_dotplot(binwidth = 1) +
+#   labs(y = "") +
+#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+#   geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17)
 ```
-[`r mean(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+<!-- [`mean(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
 ::::::
 :::::::
 
@@ -303,11 +305,11 @@ Let $n$ be the total number of observations. Then, the **sample** median, $m$, c
 #| fig-height: 3.5
 #| fig-width: 7
 
-plotObj +
-  geom_dotplot(binwidth = 1) +
-  labs(y = "") +
-  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-  geom_point(inherit.aes = FALSE, x = median(davidsSample.df$Weight), y = -0.15, colour = "blue", size = 6.5, pch = 17)
+# plotObj +
+#   geom_dotplot(binwidth = 1) +
+#   labs(y = "") +
+#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+#   geom_point(inherit.aes = FALSE, x = median(davidsSample.df$Weight), y = -0.15, colour = "blue", size = 6.5, pch = 17)
 ```
 
 ```{r}
@@ -317,14 +319,14 @@ plotObj +
 #| fig-width: 7
 #| classes: fragment
 
-plotObj +
-  geom_boxplot(fill = "lemonchiffon") +
-  geom_dotplot(binwidth = 1, fill = NA, colour = NA)  +
-  labs(y = "") +
-  scale_y_continuous(breaks = NULL, limits = c(-1, 1))
+# plotObj +
+#   geom_boxplot(fill = "lemonchiffon") +
+#   geom_dotplot(binwidth = 1, fill = NA, colour = NA)  +
+#   labs(y = "") +
+#   scale_y_continuous(breaks = NULL, limits = c(-1, 1))
 ```
 
-[`r median(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+<!-- [`median(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
 ::::::
 :::::::
 
@@ -359,53 +361,18 @@ $$
 #| fig-height: 3.5
 #| fig-width: 7
 
-plotObj +
-  geom_dotplot(binwidth = 1) +
-  labs(y = "") +
-  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
-  geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight), y = -0.08, yend = -0.08, colour = "red", linewidth = 1.15,  arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
+# plotObj +
+#   geom_dotplot(binwidth = 1) +
+#   labs(y = "") +
+#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
+#   geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
+#   geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight), y = -0.08, yend = -0.08, colour = "red", linewidth = 1.15,  arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
 ```
-[`r sd(davidsSample.df$Weight)`]{style="color: ghostwhite;"}
+<!-- [`sd(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
 ::::::
 :::::::
 
-## Standard error of the sample mean
 
-::::::: {.columns}
-:::::: {.column width="57.5%"}
-::::: {.margin-bottom}
-A measure that describes how precise the **sample** mean is as an estimate of the "**true**" mean (under some assumptions)
-:::::
-
-::::: {.fragment fragment-index=2}
-Let $s$ be the sample standard deviation and $n$ be the total number of observations. Then, the **standard error**^[A standard error quantifies the standard deviation of a statistic] of the sample mean is:
-
-:::: {.definition style="font-size: 0.8em; width: 50%; display: block; margin: auto;"}
-$$
-\text{se}(\bar{x}) = \frac{s}{\sqrt{n}}
-$$
-::::
-
-:::::
-
-::::::
-:::::: {.column width="42.5%" .fragment fragment-index=1}
-```{r}
-#| echo: false
-#| fig-dpi: 300
-#| fig-height: 3.5
-#| fig-width: 7
-
-plotObj +
-  geom_dotplot(binwidth = 1) +
-  labs(y = "") +
-  scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-  geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
-  geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight) / sqrt(10), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight) / sqrt(10), y = -0.08, yend = -0.08, colour = "black", linewidth = 1.15, arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
-```
-::::::
-:::::::
 
 ## [Ex 1]{style='color: tomato;'} in [iNZight]{.R}
 
@@ -417,9 +384,9 @@ plotObj +
 #| fig-height: 5
 #| fig-width: 7
 
-png(filename = "figures/davidsSample.png", width = 7, height = 5, units = "in", res = 300)
-iNZightPlot(Weight, data = davidsSample.df, xlab = "Weight (grams)", main = "Distribution of Weight", bg = "white")
-dev.off()
+# png(filename = "figures/davidsSample.png", width = 7, height = 5, units = "in", res = 300)
+# iNZightPlot(Weight, data = davidsSample.df, xlab = "Weight (grams)", main = "Distribution of Weight", bg = "white")
+# dev.off()
 ```
 ![](figures/davidsSample.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
 :::::
@@ -428,7 +395,7 @@ dev.off()
 ```{r}
 #| echo: false
 #| classes: output-small-80
-getPlotSummary(Weight, data = davidsSample.df, width = 83)
+# getPlotSummary(Weight, data = davidsSample.df, width = 83)
 ```
 :::::
 ::::::
@@ -453,11 +420,11 @@ getPlotSummary(Weight, data = davidsSample.df, width = 83)
 #| echo: false
 #| results: asis
 #| classes: excel
-noteTaking.df <- read.csv("datasets/note-taking.csv")
-
-rbind(colnames(noteTaking.df), head(noteTaking.df, n = 7), rep("...", ncol(noteTaking.df))) |>
-# rbind(colnames(davidsSample.df), davidsSample.df) |>
-  knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(noteTaking.df)])
+# noteTaking.df <- read.csv("datasets/note-taking.csv")
+# 
+# rbind(colnames(noteTaking.df), head(noteTaking.df, n = 7), rep("...", ncol(noteTaking.df))) |>
+# # rbind(colnames(davidsSample.df), davidsSample.df) |>
+#   knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(noteTaking.df)])
 ```
 ::: {.excel-caption}
 This is the `note-taking.csv` data from [Moodle]{.Moodle}
@@ -480,9 +447,9 @@ Based on research by Mueller, P. A. & Oppenheimer, D. M. (2014). The Pen Is Migh
 #| fig-height: 5
 #| fig-width: 7
 
-png(filename = "figures/noteTaking.png", width = 7, height = 5, units = "in", res = 300)
-iNZightPlot(score, method, data = noteTaking.df, xlab = "Test Score (unitless)", ylab = "Note Taking Method", main = "Distribution of Test Score by Note Taking Method", bg = "white")
-dev.off()
+# png(filename = "figures/noteTaking.png", width = 7, height = 5, units = "in", res = 300)
+# iNZightPlot(score, method, data = noteTaking.df, xlab = "Test Score (unitless)", ylab = "Note Taking Method", main = "Distribution of Test Score by Note Taking Method", bg = "white")
+# dev.off()
 ```
 ![](figures/noteTaking.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
 :::::
@@ -491,7 +458,7 @@ dev.off()
 ```{r}
 #| echo: false
 #| classes: output-small-80
-getPlotSummary(score, method, data = noteTaking.df, width = 83)
+# getPlotSummary(score, method, data = noteTaking.df, width = 83)
 ```
 :::::
 ::::::
