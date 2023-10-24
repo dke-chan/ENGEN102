@@ -178,38 +178,73 @@ plotObj <- ggplot(alloy.df, aes(x = strength)) +
   labs(x = "Compressive strength (psi)", title = "Distribution of Compressive Strength Al–Li Alloys") +
   theme_bw()
 
-plotObj + 
+dotplot <- plotObj + 
   geom_dotplot(fill = NA, stroke = 3, colour = "darkblue", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
   labs(y = NULL) + 
   scale_y_continuous(breaks = NULL)
+
+dotplot.xlims <- ggplot_build(dotplot)$layout$panel_scales_x[[1]]$range$range
+
+print(dotplot)
 ```
 :::
 
-## Box Plot^[Also known as a box and whisker plot]
+## Box Plot <small>Box-and-Whisker Plot</small>
 
-::::: {.columns}
-:::: {.column style="width: 55%" .margin-bottom}
-Summarise the values of the numeric variable with **order** statistics
+A single numeric variable is sorted and then split into **quarters**. The *central* 50% of the variable is visualised as a box and the *remainder*[\*]{.fragment fragment-index=2 .highlight-red} as lines
 
-Plot the *central* 50% of the variable as a box with two segments and *outer* 50% of the variable as lines on the number line
-
-Most software uses the spread of the *central* 50% of the variable to identify "interesting" observations
-::::
-:::: {.column style="width: 45%;"}
-```{r}
+:::: {.r-stack style="margin-top: 50px;"}
+::: {style="width: 50%; margin: auto; display: block;"}
+```{r alloy-stackeddotplot-2}
 #| echo: false
 #| fig-dpi: 300
-#| fig-height: 3.5
+#| fig-height: 4
 #| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
 
-# library(reticulate)
-# py_install("matplotlib")
-# plotObj +
-#   geom_boxplot(fill = "lemonchiffon") +
-#   scale_y_continuous(breaks = NULL, limits = c(-1, 1))
+print(dotplot)
 ```
+:::
+::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
+```{r alloy-stackeddotplot-annotated}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
+
+boxplot.stats <- ggplot_build(plotObj + geom_boxplot())$data[[1]]
+
+plotObj + 
+  geom_dotplot(fill = NA, stroke = 3, colour = "gray", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
+  labs(y = NULL) + 
+  scale_y_continuous(breaks = NULL) +
+  geom_vline(xintercept = c(boxplot.stats$xmin_final, boxplot.stats$xlower, boxplot.stats$xmiddle, boxplot.stats$xupper, boxplot.stats$xmax_final), linetype = 5, linewidth = 1, colour = "darkblue")
+```
+:::
+::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=1}
+```{r alloy-boxplot}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
+
+plotObj + 
+  geom_boxplot(fill = "lightblue", outlier.stroke = 1.5, outlier.shape = 1, outlier.size = 4.5) + 
+  labs(y = NULL) +
+  scale_y_continuous(breaks = NULL, limits = c(-1, 1)) +
+  xlim(dotplot.xlims)
+```
+:::
 ::::
-:::::
+
+::: {.fragment fragment-index=2}
+[\*]{.red}Most software uses the spread of the *central* 50% of the variable to identify "interesting" observations
+:::
 
 ## Histogram
 
