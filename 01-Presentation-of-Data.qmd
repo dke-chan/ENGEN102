@@ -179,7 +179,7 @@ plotObj <- ggplot(alloy.df, aes(x = strength)) +
   theme_bw()
 
 dotplot <- plotObj + 
-  geom_dotplot(fill = NA, stroke = 3, colour = "darkblue", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
+  geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
   labs(y = NULL) + 
   scale_y_continuous(breaks = NULL)
 
@@ -189,9 +189,9 @@ print(dotplot)
 ```
 :::
 
-## Box Plot <small>Box-and-Whisker Plot</small>
+## Box Plot <small style="font-weight: normal !important;">Box-and-Whisker Plot</small>
 
-A single numeric variable is sorted and then split into **quarters**. The *central* 50% of the variable is visualised as a box and the *remainder*[\*]{.fragment fragment-index=2 .highlight-red} as lines
+A single numeric variable is sorted into **quarters**. The *central* 50% of the values are plotted as a segmented box, and the *remainder* are plotted as lines or [points]{.fragment fragment-index=2 .highlight-red}
 
 :::: {.r-stack style="margin-top: 50px;"}
 ::: {style="width: 50%; margin: auto; display: block;"}
@@ -217,11 +217,14 @@ print(dotplot)
 
 boxplot.stats <- ggplot_build(plotObj + geom_boxplot())$data[[1]]
 
-plotObj + 
+super.dotplot <- plotObj + 
   geom_dotplot(fill = NA, stroke = 3, colour = "gray", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
   labs(y = NULL) + 
   scale_y_continuous(breaks = NULL) +
-  geom_vline(xintercept = c(boxplot.stats$xmin_final, boxplot.stats$xlower, boxplot.stats$xmiddle, boxplot.stats$xupper, boxplot.stats$xmax_final), linetype = 5, linewidth = 1, colour = "darkblue")
+  coord_cartesian(dotplot.xlims, clip = "off")
+
+super.dotplot +
+  geom_vline(xintercept = c(boxplot.stats$xmin_final, boxplot.stats$xlower, boxplot.stats$xmiddle, boxplot.stats$xupper, boxplot.stats$xmax_final), linetype = 5, linewidth = 1, colour = "black")
 ```
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=1}
@@ -234,7 +237,7 @@ plotObj +
 #| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
 
 plotObj + 
-  geom_boxplot(fill = "lightblue", outlier.stroke = 1.5, outlier.shape = 1, outlier.size = 4.5) + 
+  geom_boxplot(colour = "black", outlier.stroke = 1.5, outlier.shape = 1, outlier.size = 4.5, outlier.colour = "black", linewidth = 1, fill = "lightblue") + 
   labs(y = NULL) +
   scale_y_continuous(breaks = NULL, limits = c(-1, 1)) +
   xlim(dotplot.xlims)
@@ -243,33 +246,61 @@ plotObj +
 ::::
 
 ::: {.fragment fragment-index=2}
-[\*]{.red}Most software uses the spread of the *central* 50% of the variable to identify "interesting" observations
+The [points]{.red} are typically identified by using the *range* of the **whole** box
 :::
 
 ## Histogram
 
-::::: {.columns}
-:::: {.column style="width: 55%" .margin-bottom}
-Split the values of the numeric variable into **equally-sized** intervals
+A single numeric variable is *typically* sorted into **equally sized intervals**. Each interval is plotted as a bar, whose height is determined by the number of values *within* the interval
 
-Plot a bar for each interval, whose height is equal to the number of observations within the interval
-
-Most software uses an algorithm to determine the *default* number of intervals
-::::
-:::: {.column style="width: 45%;"}
-```{r}
+:::: {.r-stack style="margin-top: 50px;"}
+::: {style="width: 50%; margin: auto; display: block;"}
+```{r alloy-stackeddotplot-2}
 #| echo: false
 #| fig-dpi: 300
-#| fig-height: 3.5
+#| fig-height: 4
 #| fig-width: 7
-
-# plotObj +
-#   geom_histogram(fill = "lightblue", colour = "black", bins = 9) +
-#   scale_y_continuous(breaks = c(0, 1, 2)) +
-#   labs(y = "Frequency")
+#| out-width: 100%
+#| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
 ```
+:::
+::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
+```{r alloy-stackeddotplot-annotated-2}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
+
+histogram.stats <- ggplot_build(plotObj + geom_histogram(center = 0, binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 12.5))$data[[1]]
+
+super.dotplot +
+  geom_vline(xintercept = c(histogram.stats$xmin, histogram.stats$xmax[nrow(histogram.stats)]), linetype = 5, linewidth = 1, colour = "black")
+```
+:::
+::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=1}
+```{r alloy-histogram}
+#| echo: false
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
+
+plotObj + 
+  geom_histogram(center = 0, binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 12.5, colour = "black", linewidth = 1, fill = "lightblue") +
+  labs(y = NULL) +
+  scale_y_continuous(breaks = NULL) +
+  coord_cartesian(xlim = dotplot.xlims, clip = "off")
+```
+:::
 ::::
-:::::
+
+. . .
+
+- An algorithm is often used to determine the number of intervals
+- The intervals are usually right-closed and left-open
 
 ## Sample mean^[Most people implicitly refer to the (sample) mean when they talk about an **average**]
 
