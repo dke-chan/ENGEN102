@@ -15,7 +15,9 @@ $presentation-heading-color: #221F1F;
 $presentation-heading-font-weight: 700;
 
 // code
-$code-block-font-size: 36px;
+$code-block-font-size: 28px;
+$code-block-bg: white;
+$code-block-border-color: #383d3d;
 
 // colors
 $body-bg: #f8f8ff;
@@ -78,8 +80,38 @@ $link-color-hover: #d22;
   border: thin solid #383d3d;
 }
 
+.reveal pre code {
+  padding: 8px;
+  background-color: white;
+  border: thin solid #383d3d;
+  border-radius: 4px;
+}
+
+code span.co {
+  color: #8f5902;
+  font-style: italic;
+}
+
+.cell-output-stdout {
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
 .reveal figcaption {
   margin-top: -8pt;
+}
+
+//
+//
+//
+
+.reveal .definition {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2em 0.4em 0.2em;
+  border: 0.1em solid orange;
+  background-color: rgba(255, 165, 0, 0.1);
 }
 
 //---------------------------------------//
@@ -171,6 +203,19 @@ html.print-pdf .reveal .slides .pdf-page:last-child {
   page-break-after: avoid;
 }
 
+html.print-pdf .reveal pre code {
+  font-family: "Source Code Pro", "Lucida Console", Monaco, monospace !important;
+}
+
+.printOnly {
+  visibility: hidden;
+}
+
+html.print-pdf .reveal .printOnly {
+  color: blue;
+  visibility: visible;
+}
+
 //---------//
 // colours //
 //---------//
@@ -207,25 +252,11 @@ html.print-pdf .reveal .slides .pdf-page:last-child {
   color: red;
 }
 
+.cornflowerblue {
+  color: cornflowerblue;
+}
+
 /* 
-.cell-output-display {
-  margin-top: 13px;
-  margin-bottom: 13px;
-}
-
-.cell-output-stdout {
-  margin-top: 13px;
-  margin-bottom: 13px;
-}
-
-.reveal .definition {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.2em 0.4em 0.2em;
-  border: 0.1em solid orange;
-  background-color: rgba(255, 165, 0, 0.1);
-}
 
 .reveal .definition-orchid {
   display: block;
@@ -254,18 +285,6 @@ html.print-pdf .reveal .slides .pdf-page:last-child {
   background-color: rgba(204, 204, 255, 0.1);
 }
 
-.reveal pre code {
-  padding: 0.5em 1em 0.5em;
-  border: 1px solid #36464f;
-  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
-  background-color: white;
-  max-height: 800px;
-}
-
-html.print-pdf .reveal pre code {
-  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace !important;
-}
-
 .reveal .hat {
   position: absolute; 
   left: 11px; 
@@ -277,18 +296,6 @@ html.print-pdf .reveal pre code {
 .reveal video {
   margin: auto;
   display: block;
-}
-
-// Print trick?
-
-.printOnly {
-  visibility: hidden;
-}
-
-html.print-pdf .reveal .printOnly {
-  margin-top: -0.8em;
-  color: blue;
-  visibility: visible;
 }
 
 */

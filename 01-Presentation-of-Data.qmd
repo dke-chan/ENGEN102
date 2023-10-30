@@ -11,7 +11,7 @@ format:
     theme: reveal-extra/quartz.scss
     template-partials:
       - reveal-extra/title-block.html
-    highlight-style: ayu
+    highlight-style: breeze
     code-line-numbers: false
     embed-resources: false
 editor: source
@@ -143,7 +143,6 @@ The `alloy.csv` file describes data about the compressive strength in 80 specime
 ::::
 :::: {.column width="30%" .fragment fragment-index=0}
 ```{r alloy} 
-#| echo: false
 #| results: asis
 #| classes: excel
  
@@ -163,17 +162,14 @@ Data from Montgomery, D. C., Runger, G. C., & Hubele, N. F. (2010). *Engineering
 
 A single numeric variable is plotted on a number line, where *similar* values are stacked on top of each other
 
-. . .
-
-::: {style="width: 50%; margin: auto; display: block; margin-top: 50px;"}
-```{r alloy-stackeddotplot}
-#| echo: false
+:::: {.r-stack style="margin-top: 50px;"}
+::: {style="width: 50%; margin: auto; display: block;"}
+```{r alloy-dotplot}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
 #| out-width: 100%
 #| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
-
 plotObj <- ggplot(alloy.df, aes(x = strength)) +
   labs(x = "Compressive strength (psi)", title = "Distribution of Compressive Strength Al–Li Alloys") +
   theme_bw()
@@ -185,9 +181,25 @@ dotplot <- plotObj +
 
 dotplot.xlims <- ggplot_build(dotplot)$layout$panel_scales_x[[1]]$range$range
 
+plotObj + 
+  geom_point(aes(y = 0.03), size = 4.5, stroke = 1.5, colour = "black", shape = 1) + 
+  labs(y = NULL) + 
+  coord_cartesian(dotplot.xlims,  ggplot_build(dotplot)$layout$panel_scales_y[[1]]$range$range, clip = "off") +
+  scale_y_continuous(breaks = NULL)
+```
+:::
+::: {.fragment style="width: 50%; margin: auto; display: block;"}
+```{r alloy-stackeddotplot}
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "[**Figure:** Distribution of 80 aluminium-lithium alloy specimens' **Figure:** compressive strength]{style=\"visibility: hidden;\"}"
+
 print(dotplot)
 ```
 :::
+::::
 
 ## Box Plot <small style="font-weight: normal !important;">Box-and-Whisker Plot</small>
 
@@ -195,20 +207,16 @@ A single numeric variable is sorted into **quarters**. The *central* 50% of the 
 
 :::: {.r-stack style="margin-top: 50px;"}
 ::: {style="width: 50%; margin: auto; display: block;"}
-```{r alloy-stackeddotplot-2}
-#| echo: false
+```{r alloy-stackeddotplot}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
 #| out-width: 100%
 #| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
-
-print(dotplot)
 ```
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
 ```{r alloy-stackeddotplot-annotated}
-#| echo: false
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -229,7 +237,6 @@ super.dotplot +
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=1}
 ```{r alloy-boxplot}
-#| echo: false
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -246,7 +253,8 @@ plotObj +
 ::::
 
 ::: {.fragment fragment-index=2}
-The [points]{.red} are typically identified by using the *range* of the **whole** box
+
+- The [points]{.red} are typically identified by using the *range* of the **whole** box
 :::
 
 ## Histogram
@@ -255,8 +263,7 @@ A single numeric variable is *typically* sorted into **equally sized intervals**
 
 :::: {.r-stack style="margin-top: 50px;"}
 ::: {style="width: 50%; margin: auto; display: block;"}
-```{r alloy-stackeddotplot-2}
-#| echo: false
+```{r alloy-stackeddotplot}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -266,7 +273,6 @@ A single numeric variable is *typically* sorted into **equally sized intervals**
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
 ```{r alloy-stackeddotplot-annotated-2}
-#| echo: false
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -281,7 +287,6 @@ super.dotplot +
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=1}
 ```{r alloy-histogram}
-#| echo: false
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -302,112 +307,66 @@ plotObj +
 - An algorithm is often used to determine the number of intervals
 - The intervals are usually right-closed and left-open
 
-## Sample mean^[Most people implicitly refer to the (sample) mean when they talk about an **average**]
+## Sample Mean
 
-::::::: {.columns}
-:::::: {.column width="57.5%"}
-::::: {.margin-bottom}
-A measure of centre that is often coined as the balancing point of a numeric variable
-:::::
+A *measure of centre*^[Some resources define a *measure of centre* as a *measure of location* instead] that is often coined as the balancing point of a numeric variable. The word **average** in everyday use is implicitly defined as the (sample) mean
 
-::::: {.fragment fragment-index=2}
-Let $x_i$ be the $i$th value and $n$ be the total number of observations. Then, the **sample** mean is
+. . .
 
-:::: {.definition style="font-size: 0.8em; width: 80%; display: block; margin: auto;"}
+::: {.definition style="margin-top: 50px; width: 75%;"}
+Let $x_i$ be the $i$th value of a numeric variable and $n$ be the total number of values. The *sample mean*, $\bar{x}$, is calculated by
+
 $$
 \bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{\sum^n_{i=1} x_i}{n}
 $$
-::::
-:::::
 
-::::::
-:::::: {.column width="42.5%" .fragment fragment-index=1}
-```{r}
-#| echo: false
-#| fig-dpi: 300
-#| fig-height: 3.5
-#| fig-width: 7
+:::
 
-# plotObj +
-#   geom_dotplot(binwidth = 1) +
-#   labs(y = "") +
-#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-#   geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17)
-```
-<!-- [`mean(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
-::::::
-:::::::
+. . .
 
-## Sample median
+::: {.dummy style="margin-top: 50px;"}
+Calculate the *sample mean* for the following set of values:
+:::
 
-::::::: {.columns}
-:::::: {.column width="57.5%"}
-::::: {.margin-bottom}
-A measure of centre that is often coined as the middle value (50^th^ percentile) of a numeric variable
-:::::
+- 9, 9, 6, 3, 1 [&zigrarr; Sample mean = 5.6]{.printOnly}
 
-::::: {.fragment fragment-index=2}
-Let $n$ be the total number of observations. Then, the **sample** median, $m$, can be determined by
+## Sample Median
 
-:::: {.definition style="font-size: 0.8em; padding-left: 1em; display: block; margin: auto;"}
+A *measure of centre* that is often coined as the "middle" value^[More formally known as the 50th percentile] of a numeric variable. The (sample) median is one of five* values visualised by a **box plot**
+
+::: {.fragment .definition style="margin-top: 50px; width: 90%;" fragment-index=0}
+Let $x_i$ be the $i$th value of a numeric variable and $n$ be the total number of values. The **sample median**, $m$, is calculated by
 
 <ol>
-  <li> Sort the values in ascending (or descending) order </li>
-  <li class="fragment" data-fragment-index=3> <ul>
-    <li class="fragment" data-fragment-index=3> If $n$ is **odd**, then $m$ is the value of the $\frac{n + 1}{2}$^th^ observation</li>
-    <li class="fragment" data-fragment-index=4> If $n$ is **even**, then $m$ is the *sample mean* of the values from the observations "above" and "below" $\frac{n + 1}{2}$ </li>
+  <li> Sorting the values in ascending (or descending) order </li>
+  <li class="fragment" data-fragment-index=1> <ul>
+    <li class="fragment" data-fragment-index=1> If $n$ is **odd**: $m$ is the $\frac{n + 1}{2}$th sorted value</li>
+    <li class="fragment" data-fragment-index=2> If $n$ is **even**: $m$ is the **sample mean** of the sorted values "above" and "below" $\frac{n + 1}{2}$</li>
   </ul> </li>
 </ol>
+:::
 
-::::
+. . .
 
-:::::
+::: {.dummy style="margin-top: 50px;"}
+Calculate the *sample median* for the following sets of values:
+:::
 
-::::::
-:::::: {.column width="42.5%" .fragment fragment-index=1}
-```{r}
-#| echo: false
-#| fig-dpi: 300
-#| fig-height: 3.5
-#| fig-width: 7
+<ul>
+  <li> 7, 9, 3, 3, 10 [&zigrarr; Sample median = 7]{.printOnly}
+  <li class="fragment"> 10, 0, 6, 3, 10, 6 [&zigrarr; Sample median = 6]{.printOnly}
+</ul>
 
-# plotObj +
-#   geom_dotplot(binwidth = 1) +
-#   labs(y = "") +
-#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-#   geom_point(inherit.aes = FALSE, x = median(davidsSample.df$Weight), y = -0.15, colour = "blue", size = 6.5, pch = 17)
-```
 
-```{r}
-#| echo: false
-#| fig-dpi: 300
-#| fig-height: 3.5
-#| fig-width: 7
-#| classes: fragment
+## Sample Standard Deviation
 
-# plotObj +
-#   geom_boxplot(fill = "lemonchiffon") +
-#   geom_dotplot(binwidth = 1, fill = NA, colour = NA)  +
-#   labs(y = "") +
-#   scale_y_continuous(breaks = NULL, limits = c(-1, 1))
-```
+A *measure of spread* that summarises the variability of values from the **sample mean**
 
-<!-- [`median(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
-::::::
-:::::::
+. . .
 
-## Sample standard deviation
+::: {.definition style="margin-top: 50px; width: 90%;"}
+Let $x_i$ be the $i$th value of a numeric variable and $n$ be the total number of values. The **sample standard deviation**, $s$, is calculated by
 
-::::::: {.columns}
-:::::: {.column width="57.5%"}
-::::: {.margin-bottom}
-A measure of spread for a numeric variable that is mathematically associated with the **sample** mean
-:::::
-
-::::: {.fragment fragment-index=2}
-Let $x_i$ be the $i$^th^ value, $\bar{x}$ be the sample mean, and $n$ be the total number of observations. Then, the **sample** standard deviation is
-
-:::: {.definition style="font-size: 0.8em; display: block; margin: auto;"}
 $$
 \begin{aligned}
   s &= \sqrt{\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2}{n - 1}} \\
@@ -415,121 +374,58 @@ $$
     &= \sqrt{\frac{\sum^n_{i=1} (x_i)^2 - n\bar{x}^2}{n - 1}}
 \end{aligned}
 $$
-::::
 
-:::::
+:::
 
-::::::
-:::::: {.column width="42.5%" .fragment fragment-index=1}
-```{r}
-#| echo: false
+. . .
+
+::: {.dummy style="margin-top: 50px;"}
+Calculate the *sample standard deviation* for the following set of values:
+:::
+
+- 6, 8, 1, 5, 5 [&zigrarr; Sample standard deviation = 2.5495 (4 dp)]{.printOnly}
+
+## [Ex 1]{.red} Sample Statistics in [Python]{.cornflowerblue}
+
+:::: {.columns}
+::: {.column width="49%"}
+```{python Ex1-python}
+#| echo: true
+
+# Load in the pandas package
+import pandas
+
+# Read in the alloy.csv file
+alloy_df = pandas.read_csv("datasets/alloy.csv")
+
+# Calculate the sample mean
+alloy_df["strength"].mean()
+
+# Calculate the sample median
+alloy_df["strength"].median()
+
+# Calculate the sample standard deviation
+alloy_df["strength"].std()
+```
+:::
+::: {.column width="1%"}
+:::
+::: {.column}
+```{r alloy-stackeddotplot}
 #| fig-dpi: 300
-#| fig-height: 3.5
+#| fig-height: 4
 #| fig-width: 7
-
-# plotObj +
-#   geom_dotplot(binwidth = 1) +
-#   labs(y = "") +
-#   scale_y_continuous(breaks = NULL, limits = c(-0.2, 1)) +
-#   geom_point(inherit.aes = FALSE, x = mean(davidsSample.df$Weight), y = -0.15, colour = "red", size = 6.5, pch = 17) +
-#   geom_segment(inherit.aes = FALSE, x = mean(davidsSample.df$Weight) - sd(davidsSample.df$Weight), xend = mean(davidsSample.df$Weight) + sd(davidsSample.df$Weight), y = -0.08, yend = -0.08, colour = "red", linewidth = 1.15,  arrow = arrow(length = unit(0.03, "npc"), ends = "both"))
+#| out-width: 100%
+#| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength"
 ```
-<!-- [`sd(davidsSample.df$Weight)`]{style="color: ghostwhite;"} -->
-::::::
-:::::::
-
-
-
-## [Ex 1]{style='color: tomato;'} in [iNZight]{.R}
-
-:::::: {.columns}
-::::: {.column style="width: 50%;"}
-```{r}
-#| include: false
-#| fig-dpi: 300
-#| fig-height: 5
-#| fig-width: 7
-
-# png(filename = "figures/davidsSample.png", width = 7, height = 5, units = "in", res = 300)
-# iNZightPlot(Weight, data = davidsSample.df, xlab = "Weight (grams)", main = "Distribution of Weight", bg = "white")
-# dev.off()
-```
-![](figures/davidsSample.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
-:::::
-
-::::: {.column .fragment style="width: 50%;"}
-```{r}
-#| echo: false
-#| classes: output-small-80
-# getPlotSummary(Weight, data = davidsSample.df, width = 83)
-```
-:::::
-::::::
-
-## [Ex 2:]{style='color: tomato;'} Note taking
-
-> A study randomly assigned students to take notes either longhand or using a laptop. The researchers had the students take a test after they wrote their notes. Does the data provide evidence of a difference in taking notes longhand rather than on a laptop?
-
-:::::: {.columns}
-::::: {.column style="width: 45%;"}
-:::: {style="font-size: 0.75em;"}
-| [Variables]{style="color: #4758AB;"} | |
-| :-           | :------------ |
-| **score** | A numeric variable which denotes the student's test score (unitless) |
-| **method** | A categorical variable which denotes the student's note taking method, "longhand" or "laptop" |
-::::
-:::::
-
-::::: {.column .fragment style="width: 55%;"}
-:::: {style="width: 60%; display: block; margin: auto;"}
-```{r}
-#| echo: false
-#| results: asis
-#| classes: excel
-# noteTaking.df <- read.csv("datasets/note-taking.csv")
-# 
-# rbind(colnames(noteTaking.df), head(noteTaking.df, n = 7), rep("...", ncol(noteTaking.df))) |>
-# # rbind(colnames(davidsSample.df), davidsSample.df) |>
-#   knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(noteTaking.df)])
-```
-::: {.excel-caption}
-This is the `note-taking.csv` data from [Moodle]{.Moodle}
 :::
 ::::
-:::::
-::::::
 
 ::: {.aside}
-Based on research by Mueller, P. A. & Oppenheimer, D. M. (2014). The Pen Is Mightier Than the Keyboard: Advantages of Longhand Over Laptop Note Taking. *Psychological Science* **25**(6), 1159--1168.
+**Note:** [iNZight Lite](https://lite.docker.stat.auckland.ac.nz/) is a web app that can do most of the (exact) calculations *without code* for the Statistics component
 :::
 
-## [Ex 2]{style='color: tomato;'} in [iNZight]{.R}
-
-:::::: {.columns}
-::::: {.column style="width: 50%;"}
-```{r}
-#| include: false
-#| fig-dpi: 300
-#| fig-height: 5
-#| fig-width: 7
-
-# png(filename = "figures/noteTaking.png", width = 7, height = 5, units = "in", res = 300)
-# iNZightPlot(score, method, data = noteTaking.df, xlab = "Test Score (unitless)", ylab = "Note Taking Method", main = "Distribution of Test Score by Note Taking Method", bg = "white")
-# dev.off()
-```
-![](figures/noteTaking.png){style="display: block; margin: auto; border: 1px solid #26351c;"}
-:::::
-
-::::: {.column .fragment style="width: 50%;"}
-```{r}
-#| echo: false
-#| classes: output-small-80
-# getPlotSummary(score, method, data = noteTaking.df, width = 83)
-```
-:::::
-::::::
-
-## [Terminology Reference]{style="color: darkorange;"} 
+## [Terminology Reference]{.darkorange}
 
 ::::: {.columns}
 :::: {.column .margin-bottom style="font-size: 0.8em;"}
