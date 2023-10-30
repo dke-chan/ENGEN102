@@ -132,7 +132,7 @@ Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science*
 ::::: {.columns}
 :::: {.column width="70%"}
 <blockquote style="border-left: 0.25em solid #685f5f;">
-The `alloy.csv` file describes data about the compressive strength in 80 specimens of a new aluminium-lithium alloy undergoing evaluation as a possible material for aircraft structural elements
+The `alloy.xlsx` file describes data about the compressive strength in 80 specimens of a new aluminium-lithium alloy undergoing evaluation as a possible material for aircraft structural elements
 </blockquote>
 
 ::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
@@ -146,7 +146,7 @@ The `alloy.csv` file describes data about the compressive strength in 80 specime
 #| results: asis
 #| classes: excel
  
-alloy.df <- read.csv("datasets/alloy.csv")
+alloy.df <- readxl::read_excel("datasets/alloy.xlsx")
  
 rbind(colnames(alloy.df), head(alloy.df, n = 14), rep("...", ncol(alloy.df))) |>
   kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(alloy.df)])
@@ -395,8 +395,8 @@ Calculate the *sample standard deviation* for the following set of values:
 # Load in the pandas package
 import pandas
 
-# Read in the alloy.csv file
-alloy_df = pandas.read_csv("datasets/alloy.csv")
+# Read in the alloy.xlsx file
+alloy_df = pandas.read_excel("datasets/alloy.xlsx")
 
 # Calculate the sample mean
 alloy_df["strength"].mean()

@@ -17,6 +17,9 @@ figures/*
 *.aux
 *.log
 
+# Excel
+~$*.xlsx
+
 # Files that are technically owned by the University
 UoW-workshops/
 UoW-archive/
