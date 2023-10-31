@@ -101,9 +101,9 @@ code span.co {
   margin-top: -8pt;
 }
 
-//
-//
-//
+//-----------//
+// Bonus CSS //
+//-----------//
 
 .reveal .definition {
   display: block;
@@ -112,6 +112,10 @@ code span.co {
   padding: 0.2em 0.4em 0.2em;
   border: 0.1em solid orange;
   background-color: rgba(255, 165, 0, 0.1);
+}
+
+.parskip-16pt > p {
+  margin-bottom: 16pt;
 }
 
 //---------------------------------------//
@@ -254,6 +258,10 @@ html.print-pdf .reveal .printOnly {
 
 .cornflowerblue {
   color: cornflowerblue;
+}
+
+.codeColour {
+  color: #399ee6;
 }
 
 /* 
