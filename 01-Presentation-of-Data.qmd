@@ -333,7 +333,7 @@ Calculate the *sample mean* for the following set of values:
 
 ## Sample Median
 
-A *measure of centre* that is often coined as the "middle" value^[More formally known as the 50th percentile] of a numeric variable. The (sample) median is one of five values that is always visualised by a **box plot**.
+A *measure of centre* that is often coined as the "middle" value^[More formally known as the 50th percentile.] of a numeric variable. The (sample) median is one of five values that is always visualised by a **box plot**.
 
 ::: {.fragment .definition style="margin-top: 50px; width: 90%;" fragment-index=0}
 Let $x_i$ be the $i$th value of a numeric variable and $n$ be the total number of values. The **sample median**, $m$, is calculated by
