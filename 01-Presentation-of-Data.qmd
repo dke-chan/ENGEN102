@@ -48,7 +48,7 @@ An [observation]{.tomato} is an individual that we measure *or* categorise **dat
 - A cantilever beam
 </blockquote>
 
-:::: {.fragment fragment-index=1 style="margin-top: 50px;"}
+::: {.fragment fragment-index=1 style="margin-top: 50px;"}
 A [value]{.steelblue} is a singular piece of **data** about an [observation]{.tomato}.
 
 <blockquote style="border-left: 0.25em solid steelblue;">
@@ -56,9 +56,9 @@ A [value]{.steelblue} is a singular piece of **data** about an [observation]{.to
 - The bed occupancy rate at Waikato Hospital
 - The load at point [x]{.MathJax-Font} of a cantilever beam
 </blockquote>
-::::
+:::
 
-:::: {.fragment fragment-index=2 style="margin-top: 50px;"}
+::: {.fragment fragment-index=2 style="margin-top: 50px;"}
 A [variable]{.orchid} is a collection of one *type* of **data** collected on all [observations]{.tomato}.
 
 <blockquote style="border-left: 0.25em solid orchid;">
@@ -66,7 +66,7 @@ A [variable]{.orchid} is a collection of one *type* of **data** collected on all
 - The bed occupancy rates for all New Zealand hospitals
 - The loads at point [x]{.MathJax-Font} for all cantilever beams
 </blockquote>
-::::
+:::
 
 ## More on values and variables
 
@@ -341,8 +341,8 @@ Let $x_i$ be the $i$th value of a numeric variable and $n$ be the total number o
 <ol>
   <li> Sorting the values in ascending (or descending) order. </li>
   <li class="fragment" data-fragment-index=1> <ul>
-    <li class="fragment" data-fragment-index=1> If $n$ is **odd**: $m$ is the $\frac{n + 1}{2}$th sorted value</li>
-    <li class="fragment" data-fragment-index=2> If $n$ is **even**: $m$ is the **sample mean** of the sorted values "above" and "below" $\frac{n + 1}{2}$</li>
+    <li class="fragment" data-fragment-index=1> If $n$ is **odd**: $m$ is the $\frac{n + 1}{2}$th sorted value,<br>&rArr; $x_{(n+1)/2}$</li>
+    <li class="fragment" data-fragment-index=2> If $n$ is **even**: $m$ is the **sample mean** of the sorted values "above" and "below" $\frac{n + 1}{2}$,<br>&rArr; $\frac{1}{2} \times \left(x_{\lfloor(n+1)/2\rfloor} + x_{\lceil(n+1)/2\rceil}\right)$</li>
   </ul> </li>
 </ol>
 :::

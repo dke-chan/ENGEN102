@@ -1,0 +1,71 @@
+---
+title: "Probability"
+subtitle: "_**with a focus on the Normal Distribution and Central Limit Theorem**_"
+author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: breeze
+    code-line-numbers: false
+    embed-resources: false
+editor: source
+---
+
+```{r setup}
+#| include: false
+
+```
+
+## Outcomes[, events]{.fragment fragment-index=1}[, and probabilities]{.fragment fragment-index=2}
+
+::::: {.columns}
+:::: {.column width="65%"}
+An [outcome]{.tomato} is a *possible* value we can observe.
+
+<blockquote>
+The outcomes of rolling a fair six-sided dice are 1, 2, 3, 4, 5, and 6.
+</blockquote>
+
+::: {.fragment fragment-index=1 style="margin-top: 50px;"}
+An [event]{.steelblue} is a *set of distinct* [outcome(s)]{.tomato} we can observe.
+
+<blockquote style="border-left: 0.25em solid steelblue;">
+The event that I rolled an odd number with a fair six-sided dice consists of the outcomes 1, 3, and 5.
+</blockquote>
+:::
+
+::: {.fragment fragment-index=2 style="margin-top: 50px; padding-right: 4pt;"}
+A [probability]{.orchid} is a *real number*, $\mathbb{R}$, that takes a value between 0 and 1 **inclusive**, which describes the occurrence of an [event]{.steelblue} based on the "long-run" frequency of the [event]{.steelblue}.
+
+<blockquote style="border-left: 0.25em solid orchid;">
+The probability of the event that I rolled an odd number with a fair six-sided dice is 0.5.
+</blockquote>
+:::
+::::
+:::: {.column width="35%"}
+![**Figure:** Two six-sided dice from [glitch](https://openclipart.org/detail/210239/misc-dice) (CC0 1.0).](figures/misc-dice.svg)
+::::
+:::::
+
+## Random Variables
+
+In Statistics, a **random variable** summarises the [outcomes]{.tomato} (represented as numeric values) of a process by [_**chance alone**_]{.fragment .highlight-blue}.
+
+::: {.fragment style="margin-top: 50px;"}
+It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we can observe from a process, and each [outcome]{.tomato} is mapped to a *non-negative* real number, $\mathbb{R}^+$, according to the probability axioms^[See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_axioms) page on the probability axioms you are interested in what they are.]. [This is known as the **probability distribution** (that the random variable follows).]{.fragment}
+:::
+
+::: {.fragment style="margin-top: 50px;"}
+Hence, a **random variable** can be used to model the outcomes we could observe from a process.
+:::
+
+## More on Random Variables
+
+It is standard to denote a random variable with uppercase letters [X]{.MathJax-Font}, [Y]{.MathJax-Font}, etc. and its *domain* with lowercase letters [x]{.MathJax-Font}, [y]{.MathJax-Font}, etc.

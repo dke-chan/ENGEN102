@@ -6,7 +6,6 @@
 *_files/
 *.html
 *.pdf
-figures/*
 *.rmarkdown
 
 # Retain the title page 
