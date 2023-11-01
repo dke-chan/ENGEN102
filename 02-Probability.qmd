@@ -59,13 +59,49 @@ The probability of the event that I rolled an odd number with a fair six-sided d
 In Statistics, a **random variable** summarises the [outcomes]{.tomato} (represented as numeric values) of a process by [_**chance alone**_]{.fragment .highlight-blue}.
 
 ::: {.fragment style="margin-top: 50px;"}
-It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we can observe from a process, and each [outcome]{.tomato} is mapped to a *non-negative* real number, $\mathbb{R}^+$, according to the probability axioms^[See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_axioms) page on the probability axioms you are interested in what they are.]. [This is known as the **probability distribution** (that the random variable follows).]{.fragment}
+It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we can observe from a process, and each [outcome]{.tomato} is mapped to a *non-negative* real number, $\mathbb{R}^+$, according to the probability axioms^[See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_axioms) page on the probability axioms you are interested in what they are.].
 :::
 
 ::: {.fragment style="margin-top: 50px;"}
-Hence, a **random variable** can be used to model the outcomes we could observe from a process.
+This is known as the **probability distribution** (that the random variable follows). [As a result, it is standard to denote a random variable with uppercase letters [X]{.MathJax-Font}, [Y]{.MathJax-Font}, etc. and its *domain* with lowercase letters [x]{.MathJax-Font}, [y]{.MathJax-Font}, etc.]{.fragment}
 :::
 
 ## More on Random Variables
 
-It is standard to denote a random variable with uppercase letters [X]{.MathJax-Font}, [Y]{.MathJax-Font}, etc. and its *domain* with lowercase letters [x]{.MathJax-Font}, [y]{.MathJax-Font}, etc.
+A **random variable** can be used to model the [outcomes]{.tomato} we could observe from a process by _**chance alone**_. [But why do we assign a *non-negative* real number to [outcomes]{.tomato}?]{.fragment}
+
+:::::: {.fragment style="margin-top: 50px;"}
+::::: {.columns}
+:::: {.column width="55%"}
+Consider the following cases:
+
+::: {.li-line-height-1-1 style="padding-right: 24pt;"}
+1. A fair six-sided die, whose [outcomes]{.tomato} are 1, 2, 3, 4, 5, and 6.
+2. A uniform random number generator, whose [outcomes]{.tomato} are any real number between 1<br>and 6 inclusive.
+:::
+::::
+:::: {.column width="45%"}
+```{python}
+#| echo: true
+#| class: fragment
+
+# Load in the random package
+import random
+
+# One "simulated" die roll
+print(random.randint(1, 6))
+
+# One uniform random number
+print(random.uniform(1, 6))
+```
+::::
+:::::
+::::::
+
+::: {.fragment style="margin-top: 50px;"}
+*Case 1* is an example of what is known as a *discrete* random variable, whereas *Case 2* is an example of what is known as a *continuous* random variable. 
+:::
+
+::: {.fragment style="margin-top: 50px;"}
+The key takeaway is that we should _**always**_ assign [probabilities]{.orchid} to [events]{.steelblue}, *regardless* of the type of random variable.
+:::
