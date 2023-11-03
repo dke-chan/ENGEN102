@@ -114,6 +114,15 @@ code span.co {
   background-color: rgba(255, 165, 0, 0.1);
 }
 
+.reveal .definition-orchid {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2em 0.4em 0.2em;
+  border: 0.1em solid orchid;
+  background-color: rgba(218, 112, 214, 0.1);
+}
+
 .parskip-16pt > p {
   margin-bottom: 16pt;
 }
@@ -187,7 +196,14 @@ code span.co {
 
 .MathJax-Font {
   font-family: serif;
-  font-style: italic;
+}
+
+.math.inline {
+  font-size: 80% !important;
+}
+
+.math.display {
+  font-size: 80% !important;
 }
 
 //---------------------//
@@ -269,15 +285,6 @@ html.print-pdf .reveal .printOnly {
 }
 
 /* 
-
-.reveal .definition-orchid {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.2em 0.4em 0.2em;
-  border: 0.1em solid orchid;
-  background-color: rgba(218, 112, 214, 0.1);
-}
 
 .reveal .definition-teal {
   display: block;

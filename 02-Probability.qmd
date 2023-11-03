@@ -1,7 +1,7 @@
 ---
 title: "Probability"
 subtitle: "_**with a focus on the Normal Distribution and Central Limit Theorem**_"
-author: "ENGEN102-23B (HAM) & (SEC) - Engineering Maths and Modelling 1B"
+author: "ENGEN102-23G (HAM) - Engineering Maths and Modelling 1B"
 format:
   revealjs: 
     slide-number: c/t
@@ -50,7 +50,7 @@ The probability of the event that I rolled an odd number with a fair six-sided d
 :::
 ::::
 :::: {.column width="35%"}
-![**Figure:** Two six-sided dice from [glitch](https://openclipart.org/detail/210239/misc-dice) (CC0 1.0).](figures/misc-dice.svg)
+![**Figure:** Two six-sided dice by [glitch](https://openclipart.org/detail/210239/misc-dice) (CC0 1.0).](figures/misc-dice.svg)
 ::::
 :::::
 
@@ -59,7 +59,7 @@ The probability of the event that I rolled an odd number with a fair six-sided d
 In Statistics, a **random variable** summarises the [outcomes]{.tomato} (represented as numeric values) of a process by [_**chance alone**_]{.fragment .highlight-blue}.
 
 ::: {.fragment style="margin-top: 50px;"}
-It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we can observe from a process, and each [outcome]{.tomato} is mapped to a *non-negative* real number, $\mathbb{R}^+$, according to the probability axioms^[See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_axioms) page on the probability axioms you are interested in what they are.].
+It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we can observe from a process, and each [outcome]{.tomato} is mapped to a *non-negative* real number, $\mathbb{R}_{\geq0}$, according to the probability axioms^[See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_axioms) page on the probability axioms you are interested in what they are.].
 :::
 
 ::: {.fragment style="margin-top: 50px;"}
@@ -81,7 +81,7 @@ Consider the following cases:
 :::
 ::::
 :::: {.column width="45%"}
-```{python}
+```{python random-numbers}
 #| echo: true
 #| class: fragment
 
@@ -105,3 +105,251 @@ print(random.uniform(1, 6))
 ::: {.fragment style="margin-top: 50px;"}
 The key takeaway is that we should _**always**_ assign [probabilities]{.orchid} to [events]{.steelblue}, *regardless* of the type of random variable.
 :::
+
+## Normal Distribution
+
+Let $X$ be a *continuous* random variable that follows the *Normal distribution*.
+
+::: {.fragment .definition style="width: 25%;"}
+$$
+X \sim \text{Normal}(\mu, \sigma)
+$$
+:::
+
+:::: {.fragment style="margin-top: 50px;"}
+The **probability distribution** of a Normally distributed random variable is determined by
+
+::: {.definition-orchid style="width: 55%; display: block; margin: auto;"}
+$$
+f_X(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu)^2/2\sigma^2}, ~ \forall ~ x \in \mathbb{R}.
+$$
+:::
+
+::: {style="margin-top: 25px;"}
+where $\mu$ is the mean of the distribution and $\sigma$ is the standard deviation of the distribution, provided that $\mu \in \mathbb{R}$ and $\sigma \in \mathbb{R}_{>0}$.
+:::
+::::
+
+::: {.aside}
+**Note:** The *Normal distribution* is also known as the *Gaussian distribution*
+:::
+
+## [Ex 2:]{.red} Unwanted Moles
+
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+Stewart (1994) reported on data collected by a company that removed unwanted moles. It was found that the weights of the moles were approximately Normally distributed, with a mean of 150 grams and a standard deviation of 56 grams.
+</blockquote>
+
+::: {.fragment style="margin-top: 50px;"}
+What process could describe how we can observe the weights of moles by _**chance alone**_? [Ideally, a random sample.]{.printOnly}
+:::
+
+::::
+:::: {.column width="30%"}
+![**Figure:** Mole by Amethyst Studio from<br>[**Figure:**]{style="visibility: hidden;"} [Noun Project](https://thenounproject.com/browse/icons/term/mole/) (CC BY 3.0).](figures/noun-mole.svg)
+::::
+:::::
+
+::: {.aside}
+Stewart, Ian (17 September 1994). Statistical modelling. *New Scientist: Inside Science*, **74**, 14.
+:::
+
+## Events with Normal Random Variables
+
+:::::: {.columns}
+::::: {.column  width="70%"}
+For [**Ex 2**]{.red}, we let $X \sim \text{Normal}(\mu = 150, \sigma = 56)$ and note that the units are in grams.
+
+:::: {.fragment style="margin-top: 50px;" fragment-index=0}
+An [event]{.steelblue} for *any* Normal random variable involves an interval and, in rare cases, *disjoint* intervals. [For example:]{.fragment fragment-index=1}
+
+::: {.fragment fragment-index=1}
+- A mole has a weight that is between 150 to 200 grams.
+- A mole has a weight that is lower than 100 grams.
+- A mole has a weight that is 125 &pm; 0.5 grams.
+:::
+::::
+
+:::::
+::::: {.column width="30%"}
+```{r mole-norm}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 7
+#| fig-cap: "**Figure:** A Normal random variable with<br>[**Figure:**]{style=\"visibility: hidden\"} [*&mu;* = 150]{.MathJax-Font} and [*&sigma;* = 56]{.MathJax-Font}."
+
+par(mai = c(0.6, 0.65, 0, 0))
+curve(dnorm(x, 150, 56), type = "n", xlim = 150 + c(-3, 3) * 56, ylim = c(0, dnorm(150, 150, 56) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
+abline(h = 0)
+axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0))
+mtext("x", side = 1, line = 1.7, font = 2)
+axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2, cex.axis = 0.75, at = c(seq(0, 0.007, length.out = 8), 1))
+mtext("f(x; 150, 56)", side = 2, line = 2.25, font = 2)
+curve(dnorm(x, 150, 56), lwd = 2, add = TRUE, from = 150 - 4 * 56, to = 150 + 4 * 56, col = "darkblue", n = 501)
+```
+:::::
+::::::
+
+## Probability Statements with Normal Random Variables
+
+::::: {.columns}
+:::: {.column  width="70%"}
+In Statistics, we use the $\mathbb{P}(\cdot)$ notation to denote the [probability]{.orchid} of an [event]{.steelblue}.
+
+Let's assume for [**Ex 2**]{.red} that a random sample is the process observing the weights of moles:
+
+::: {.incremental .li-line-height-1-1}
+- The [probability]{.orchid} of a randomly selected mole has a weight that is between 150 to 200 grams. [&zigrarr; $\mathbb{P}(150 < X < 200)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole has a weight that is lower than 100 grams. [&zigrarr; $\mathbb{P}(X < 100)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole has a weight that is 125 &pm; 0.5 grams. [&zigrarr; $\mathbb{P}(124.5 < X < 125.5)$]{.printOnly}
+
+:::
+::::
+:::: {.column  width="30%"}
+```{r mole-norm}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-align: center
+#| fig-width: 8
+#| fig-height: 7
+#| fig-cap: "**Figure:** A Normal random variable with<br>[**Figure:**]{style=\"visibility: hidden\"} [*&mu;* = 150]{.MathJax-Font} and [*&sigma;* = 56]{.MathJax-Font}."
+```
+::::
+:::::
+
+## Calculation of Probabilities in [Python]{.cornflowerblue .fragment fragment-index=0}
+
+::::: {.columns}
+:::: {.column width="67.5%"}
+::: {style="padding-right: 24pt;"}
+For Normal random variables and *continuous* random variables in general, the $\mathbb{P}(\cdot)$ notation is a "shorthand" for a definite integral of the random variable.
+:::
+::::
+:::: {.column width="32.5%"}
+::: {.definition style="width: 100%;"}
+$$
+\mathbb{P}(a < X < b) = \int^b_a \!\! f_X(x;\boldsymbol{\theta})\, dx
+$$
+:::
+::::
+:::::
+
+:::: {.fragment fragment-index=0 style="width: 67.5%"}
+This is straightforward to implement in [Python]{.cornflowerblue}.
+
+```{python mole-calcs-1}
+#| echo: true
+
+# Load in two submodules from the scipy package, and the math package
+from scipy import integrate
+from scipy import stats
+import math
+
+# Calculate P(150 < X < 200)
+integrate.quad(stats.norm.pdf, 150, 200, args = (150, 65))[0]
+```
+
+```{python mole-calcs-2}
+#| echo: true
+#| classes: fragment
+
+# Calculate P(X < 100)
+integrate.quad(stats.norm.pdf, -math.inf, 100, args = (150, 65))[0]
+```
+
+```{python mole-calcs-3}
+#| echo: true
+#| classes: fragment
+
+# Calculate P(124.5 < X < 125.5)
+integrate.quad(stats.norm.pdf, 124.5, 125.5, args = (150, 65))[0]
+```
+::::
+
+## Calculation of Probabilities by hand
+
+To do this by hand, we standardise the random variable using a z score and use Z ~ Normal Plus Table A.
+
+## Percentiles with Normal Random Variables
+
+## Empirical Rule for Normal Distributions
+
+Let $X \sim \text{Normal}(\mu, \sigma)$.
+
+:::: {.columns}
+::: {.fragment .column width="33.33%"}
+$\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827.$
+
+```{r ER-1}
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+ER <- \(z) {
+  par(mai = c(0.6, 0.65, 0, 0))
+  z0 <- seq(-4, 4, length.out = 1000)
+  plot(0, type = "n", xlim = c(-3, 3), ylim = c(0, dnorm(0) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
+  lines(x = z0, y = dnorm(z0), col = "gray")
+  abline(h = 0)
+  axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
+  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2); mtext("f(x; μ, σ)", side = 2, line = 2.25, font = 2)
+  
+  zz <- seq(-z, z, length.out = 1000)
+  
+  polygon(x = c(zz, rev(zz)), y = c(dnorm(zz), rep(0, length(zz))), col = "yellow", lwd = 2)
+}
+
+ER(1)
+```
+:::
+::: {.fragment .column width="33.33%"}
+$\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545.$
+
+```{r ER-2}
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+ER(2)
+```
+:::
+::: {.fragment .column width="33.33%"}
+$\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973.$
+
+```{r ER-3}
+#| fig-dpi: 300
+#| out-width: 90%
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+
+ER(3)
+```
+:::
+::::
+
+## Data in terms of Random Variables
+
+## Normally Distributed Data
+
+## Properties of Random Variables
+
+## Sample Statistics as Random Variables
+
+## Central Limit Theorem
+
+## Central Limit Theorem in Action
+
+## [Ex 3:]
+
+## [Glossary]{.darkorange}
+
+## Practice Exercises {visibility="uncounted"}

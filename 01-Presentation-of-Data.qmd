@@ -54,7 +54,7 @@ A [value]{.steelblue} is a singular piece of **data** about an [observation]{.to
 <blockquote style="border-left: 0.25em solid steelblue;">
 - The weight of an apple
 - The bed occupancy rate at Waikato Hospital
-- The load at point [x]{.MathJax-Font} of a cantilever beam
+- The load at point [*x*]{.MathJax-Font} of a cantilever beam
 </blockquote>
 :::
 
@@ -64,7 +64,7 @@ A [variable]{.orchid} is a collection of one *type* of **data** collected on all
 <blockquote style="border-left: 0.25em solid orchid;">
 - The weights of all apples
 - The bed occupancy rates for all New Zealand hospitals
-- The loads at point [x]{.MathJax-Font} for all cantilever beams
+- The loads at point [*x*]{.MathJax-Font} for all cantilever beams
 </blockquote>
 :::
 

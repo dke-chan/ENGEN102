@@ -17,126 +17,6 @@ format:
 editor: source
 ---
 
-## Normal distribution^[Also known as the Gaussian distribution]
-
-:::: {style="margin-bottom: 25px;"}
-Let $X$ be a random variable that follows the Normal distribution, that is,
-
-::: {.definition style="width: 50%; display: block; margin: auto;"}
-$$
-X \sim \text{Normal}(\mu, \sigma)
-$$
-:::
-::::
-
-. . . 
-
-The function a Normally distributed random variable uses is
-
-::: {.definition-orchid style="width: 70%; display: block; margin: auto;"}
-$$
-f_X(x; \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu)^2/2\sigma^2}, \forall ~ x \in \mathbb{R}
-$$
-:::
-
-where
-
-::: {.incremental .tightList style="font-size: 0.9em; margin-left: 0.5em;"}
-- $\mu$ is the underlying mean
-- $\sigma$ is the underlying standard deviation
-- and $\mu \in \mathbb{R}$ and $\sigma > 0$
-:::
-
-## [Ex 3:]{style="color: tomato"} Axles under stress
-
-> A group of engineers investigated the final crack depth of railway axles after 10^6^ loading cycles to quantify the durability of the material used for railway axles. In particular, whether the Normal distribution is a suitable model for describing the observed distribution of final crack depths.
-
-:::::: {.columns}
-::::: {.column style="width: 45%;"}
-:::: {style="font-size: 0.75em;"}
-| [Variables]{style="color: #4758AB;"} | |
-| :-           | :------------ |
-| **axle.id** | A numeric variable which denotes the railway axle's identification number |
-| **depth** | A numeric variable which denotes the final crack depth of the railway axle (millimetres) |
-::::
-:::::
-
-::::: {.column .fragment style="width: 55%;"}
-:::: {style="width: 60%; display: block; margin: auto;"}
-```{r}
-#| eval: false
-#| results: asis
-#| classes: excel
-depth.df <- read.csv("datasets/final-crack-depth.csv")
-
-rbind(colnames(depth.df), head(depth.df, n = 7), rep("...", ncol(depth.df))) |>
-# rbind(colnames(davidsSample.df), davidsSample.df) |>
-  knitr::kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(depth.df)])
-```
-::: {.excel-caption}
-This is the `final-crack-depth.csv` data from [Moodle]{.Moodle}
-:::
-::::
-:::::
-::::::
-
-::: {.aside}
-Based on Figure 10 from Yasniy, O., Lapusta, Y., Pyndus, Y., Sorochak, A., & Yasniy, V. (2013). Assessment of lifetime of railway axle. *International Journal of Fatigue* **50**, 40--46.
-:::
-
-## Fitting the Normal distribution to data
-
-:::::: {.columns}
-::::: {.column style="width: 55%" .margin-bottom}
-A numeric variable with a symmetric and bell-shaped distribution tends to be modelled well by a Normal distribution
-
-:::: {.fragment}
-If you **assume** that your data is $X \sim \text{Normal}(\mu, \sigma)$:
-
-::: {.tightList .incremental style="font-size: 0.8em; margin-left: 0.25em;"}
-- The sample mean, $\bar{x}$, is the best estimate of the underlying mean $\mu$
-- The sample standard deviation, $s$, is the best estimate of the underlying standard deviation $\sigma$
-:::
-
-::::
-
-:::: {.fragment}
-[iNZight]{.R} calculates that $\bar{x} = 5.49 ~ (2 ~\text{dp})$ and $s = 0.06 ~ (2 ~\text{dp})$ for [Ex 3]{style="color: tomato;"}
-::::
-
-:::::
-::::: {.column style="width: 45%;"}
-:::: {.r-stack}
-::: {.fragment .fade-out fragment-index=1}
-```{r}
-#| eval: false
-#| fig-dpi: 300
-#| fig-height: 7
-#| fig-width: 7
-plotObj <- ggplot(data = depth.df, aes(x = depth, y = after_stat(density))) +
-  geom_histogram(fill = "lightblue", colour = "black", bins = 7) +
-  labs(x = "Final Crack Depth (mm)", title = "Distribution of Railway Axles' Final Crack Depths", y = "Density") +
-  theme_bw() +
-  geom_function(inherit.aes = FALSE, fun = dnorm, args = list(mean = mean(depth.df$depth), sd = sd(depth.df$depth)), xlim = mean(depth.df$depth) + 4 * c(-1, 1) *  sd(depth.df$depth), colour = NA, linewidth = 1.25)
-plotObj
-```
-:::
-
-::: {.fragment fragment-index=1}
-```{r}
-#| eval: false
-#| fig-dpi: 300
-#| fig-height: 7
-#| fig-width: 7
-plotObj +
-  geom_function(inherit.aes = FALSE, fun = dnorm, args = list(mean = mean(depth.df$depth), sd = sd(depth.df$depth)), xlim = mean(depth.df$depth) + 4 * c(-1, 1) *  sd(depth.df$depth), colour = "black", linewidth = 1.25)
-
-```
-:::
-::::
-:::::
-::::::
-
 ## Events with the Normal distribution {.margin-bottom}
 
 Since a random variable that is Normally distributed assigns $f_X(x) ~ \forall ~ x$, we call it a **continuous** random variable. So for any $X \sim \text{Normal}(\mu, \sigma)$:
@@ -312,28 +192,6 @@ polygon(x = c(zz, rev(zz)), y = c(dnorm(zz), rep(0, length(zz))), col = "yellow"
 :::::
 ::::::
 
-## Calculating probabilities by hand {.margin-bottom}
-
-For **continuous** random variables, we integrate the function specified by the **probability distribution**, that is,
-
-. . .
-
-::: {.definition style="width: 55%; display: block; margin: auto;"}
-$$
-\mathbb{P}(a < X < b) = \int^b_a f_X(x;\theta)\, dx
-$$
-:::
-
-. . .
-
-::: {style="margin-top: 25px;"}
-However, integrating the function specified by a Normal distribution is not trivial^[Sean is better equipped to answer this question]
-:::
-
-. . .
-
-So calculating probabilities for $X \sim \text{Normal}(\mu, \sigma)$ by hand involves **Statistical Tables** that are available on [Moodle]{.Moodle}
-
 ## Change of variable from *X* to *Z* {.margin-bottom}
 
 **Table A** presents $\mathbb{P}(0 < Z < z)$ to four decimal places, where $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$^[A Normal distribution with these parameters is more commonly known as the Standard Normal distribution]
@@ -357,14 +215,6 @@ For example, if $\mathbb{P}(a < X < b)$, the equivalent probability statement in
 :::
 
 [$~~ \mathbb{P}\!\left(\frac{a - \mu}{\sigma} < Z < \frac{b - \mu}{\sigma}\right)$]{.fragment}
-
-## Calculating probabilities by hand [(cont'd)]{style="font-size: 0.5em;"}
-
-::: {.incremental}
-1. Let $A \sim \text{Normal}(\mu = 4, \sigma = 2)$. Calculate $\mathbb{P}(A < 3)$
-2. Let $B \sim \text{Normal}(\mu = 3, \sigma = 1.5)$. Calculate $\mathbb{P}(1.5 < B < 4.5)$
-3. Let $C \sim \text{Normal}(\mu = 7, \sigma = 3.5)$. Calculate $\mathbb{P}(7 < C < 14)$
-:::
 
 ## Empirical rule for the Normal distribution
 
@@ -471,47 +321,6 @@ polygon(x = c(zz, rev(zz)), y = c(dnorm(zz), rep(0, length(zz))), col = "yellow"
 ::::
 :::::
 ::::::
-
-## Calculating probabilities with software
-
-::: {style="width: 55%"}
-```{python}
-#| eval: false
-# A Python script to calculate the exact probabilities on Slide 12
-from scipy import integrate
-from scipy.stats import norm
-import math
-```
-:::
-
-1. Let $A \sim \text{Normal}(\mu = 4, \sigma = 2)$. Calculate $\mathbb{P}(A < 3)$
-
-::: {style="width: 55%"}
-```{python}
-#| eval: false
-integrate.quad(norm.pdf, -math.inf, 3, args=(4, 2))
-```
-:::
-
-2. Let $B \sim \text{Normal}(\mu = 3, \sigma = 1.5)$. Calculate $\mathbb{P}(1.5 < B < 4.5)$
-
-::: {style="width: 55%"}
-```{python}
-#| eval: false
-integrate.quad(norm.pdf, 1.5, 4.5, args=(3, 1.5))
-```
-:::
-
-3. Let $C \sim \text{Normal}(\mu = 7, \sigma = 3.5)$. Calculate $\mathbb{P}(7 < C < 14)$
-
-::: {style="width: 55%"}
-```{python}
-#| eval: false
-integrate.quad(norm.pdf, 7, 14, args=(7, 3.5))
-```
-:::
-
-
 
 ## Properties of a random variable {.margin-bottom}
 
