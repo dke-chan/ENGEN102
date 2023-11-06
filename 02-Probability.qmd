@@ -431,6 +431,24 @@ Properties of Random Variables
 
 ## [Glossary]{.darkorange}
 
+::: {.parskip-16pt style="font-size: 0.8em; width: 90%;"}
+Let $X$ be a *continuous* random variable that follows the Normal distribution with mean $\mu$ and standard deviation $\sigma$.
+
+$\mathbb{P}(a < X < b) > 0$ as long as $b > a$.
+
+$\mathbb{P}(a < X < b) = \mathbb{P}(a \leq X < b) = \mathbb{P}(a < X \leq b) = \mathbb{P}(a \leq X \leq b)$ holds because the endpoints of intervals do not affect the probability calculations of *continuous* random variables.
+
+$\mathbb{P}(X = x) = 0$ by definition of a *continuous* random variable.
+
+$\mathbb{P}(X < x) = 1 - \mathbb{P}(X > x)$ expresses the probability of an event in terms of its **complement** event. This statement holds because of a *probability axiom*.
+
+$\mathbb{P}(X < \mu) = \mathbb{P}(X > \mu) = 0.5$ because the 50th percentile (median) of a Normal random variable equals its mean.
+
+$\mathbb{P}(-|b| < X < -|a|) = \mathbb{P} (a < X < b)$ holds because the Normal distribution is symmetrically distributed.
+
+$\mathbb{P}(a < X < b) + \mathbb{P}(c < X < d)$ holds if and only if the intervals $(a, b)$ and $(c, d)$ do not overlap.
+:::
+
 ## Practice Exercises {visibility="uncounted"}
 
 <ol style="line-height: 1.1; font-size: 0.8em;">
