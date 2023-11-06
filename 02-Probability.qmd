@@ -63,7 +63,7 @@ It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we 
 :::
 
 ::: {.fragment style="margin-top: 50px;"}
-This is known as the **probability distribution** (that the random variable follows). [As a result, it is standard to denote a random variable with uppercase letters [X]{.MathJax-Font}, [Y]{.MathJax-Font}, etc. and its *domain* with lowercase letters [x]{.MathJax-Font}, [y]{.MathJax-Font}, etc.]{.fragment}
+This is known as the **probability distribution** (that the random variable follows). [As a result, it is standard to denote a random variable with uppercase letters [*X*]{.MathJax-Font}, [*Y*]{.MathJax-Font}, etc. and its *domain* with lowercase letters [*x*]{.MathJax-Font}, [*y*]{.MathJax-Font}, etc.]{.fragment}
 :::
 
 ## More on Random Variables
@@ -166,7 +166,7 @@ For [**Ex 2**]{.red}, we let $X \sim \text{Normal}(\mu = 150, \sigma = 56)$ and 
 An [event]{.steelblue} for *any* Normal random variable involves an interval and, in rare cases, *disjoint* intervals. [For example:]{.fragment fragment-index=1}
 
 ::: {.fragment fragment-index=1}
-- A mole has a weight that is between 150 to 200 grams.
+- A mole has a weight that is between 150 to 206 grams.
 - A mole has a weight that is lower than 100 grams.
 - A mole has a weight that is 125 &pm; 0.5 grams.
 :::
@@ -203,7 +203,7 @@ In Statistics, we use the $\mathbb{P}(\cdot)$ notation to denote the [probabilit
 Let's assume for [**Ex 2**]{.red} that a random sample is the process observing the weights of moles:
 
 ::: {.incremental .li-line-height-1-1}
-- The [probability]{.orchid} of a randomly selected mole has a weight that is between 150 to 200 grams. [&zigrarr; $\mathbb{P}(150 < X < 200)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole has a weight that is between 150 to 206 grams. [&zigrarr; $\mathbb{P}(150 < X < 206)$]{.printOnly}
 - The [probability]{.orchid} of a randomly selected mole has a weight that is lower than 100 grams. [&zigrarr; $\mathbb{P}(X < 100)$]{.printOnly}
 - The [probability]{.orchid} of a randomly selected mole has a weight that is 125 &pm; 0.5 grams. [&zigrarr; $\mathbb{P}(124.5 < X < 125.5)$]{.printOnly}
 
@@ -249,8 +249,8 @@ from scipy import integrate
 from scipy import stats
 import math
 
-# Calculate P(150 < X < 200)
-integrate.quad(stats.norm.pdf, 150, 200, args = (150, 65))[0]
+# Calculate P(150 < X < 206)
+integrate.quad(stats.norm.pdf, 150, 206, args = (150, 56))[0]
 ```
 
 ```{python mole-calcs-2}
@@ -258,7 +258,7 @@ integrate.quad(stats.norm.pdf, 150, 200, args = (150, 65))[0]
 #| classes: fragment
 
 # Calculate P(X < 100)
-integrate.quad(stats.norm.pdf, -math.inf, 100, args = (150, 65))[0]
+integrate.quad(stats.norm.pdf, -math.inf, 100, args = (150, 56))[0]
 ```
 
 ```{python mole-calcs-3}
@@ -266,30 +266,111 @@ integrate.quad(stats.norm.pdf, -math.inf, 100, args = (150, 65))[0]
 #| classes: fragment
 
 # Calculate P(124.5 < X < 125.5)
-integrate.quad(stats.norm.pdf, 124.5, 125.5, args = (150, 65))[0]
+integrate.quad(stats.norm.pdf, 124.5, 125.5, args = (150, 56))[0]
 ```
 ::::
 
 ## Calculation of Probabilities by hand
 
-To do this by hand, we standardise the random variable using a z score and use Z ~ Normal Plus Table A.
+:::::: {.columns}
+::::: {.column width="87.5%"}
+We use **Table A** instead of directly integrating the Normal random variable, which presents $\mathbb{P}(0 < Z < z)$ to four decimal places, where $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$^a^.
+
+:::: {.fragment style="margin-top: 50px;"}
+A formal method shows that the following statement is true when we express the *endpoints* of an [event]{.steelblue} in terms of [*z*]{.MathJax-Font}-scores^b^ for Normal random variables.
+
+::: {.definition-orchid style="width: 50%;"}
+$$
+\mathbb{P}(a < X < b) = \mathbb{P}\!\left(\frac{a - \mu}{\sigma} < Z < \frac{b - \mu}{\sigma}\right)
+$$
+
+:::
+::::
+
+::: {.fragment style="margin-top: 50px;"}
+Recall for [**Ex 2**]{.red} that we let $X \sim \text{Normal}(\mu = 150, \sigma = 56)$. Hence, calculate by hand:
+
+- $\mathbb{P}(150 < X < 206)$ [&zigrarr; $\mathbb{P}(0 < Z < 1) \approx 0.3413$]{.printOnly}
+- $\mathbb{P}(X < 100)$ [&zigrarr; $\mathbb{P}(Z < -0.89) = \ldots \approx 0.1867$]{.printOnly}
+- $\mathbb{P}(124.5 < X < 125.5)$ [&zigrarr; $\mathbb{P}(-0.46 < Z < -0.44) = \ldots \approx 0.0072$]{.printOnly}
+:::
+:::::
+::::: {.column width="12.5%"}
+:::: {style="padding-left: 24pt;"}
+::: {.definition style="width: 100%;"}
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+:::
+::::
+:::::
+::::::
+
+::: {.aside}
+a. This choice of parameter values for a Normal random variable is known as the Standard Normal random variable.
+b. A *z*-score expresses an [outcome]{.tomato} of a Normal random variable in *standard deviation* units.
+:::
 
 ## Percentiles with Normal Random Variables
 
+:::::: {.columns}
+::::: {.column width="87.5%"}
+The [outcome]{.tomato} associated with a Normal random variable's *percentile*, $p$, can be determined with the following probability statement^[Where $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$.].
+
+:::: {.dummy}
+::: {.definition-orchid style="width: 40%;"}
+$$
+\mathbb{P}(X < x) = \mathbb{P}\!\left(Z < \frac{x - \mu}{\sigma}\right) = p
+$$
+:::
+::::
+
+::: {.fragment style="margin-top: 50px;"}
+Recall for [**Ex 2**]{.red} that we let $X \sim \text{Normal}(\mu = 150, \sigma = 56)$. Hence, determine the [outcome]{.tomato} associated with the 86th percentile. [&zigrarr; $\mathbb{P}(X < x) = 0.86 \Rightarrow x \approx 210.48$]{.printOnly}
+:::
+
+::: {.fragment style="margin-top: 50px;"}
+[Python]{.cornflowerblue} can determine the "exact" [outcome]{.tomato} associated with the 86th percentile.
+
+```{python mole-percentile}
+#| echo: true
+
+# Load in the stats submodule from the scipy package
+from scipy import stats
+
+# Determine the "exact" outcome associated with the 86th percentile
+stats.norm.ppf(0.86, 150, 56)
+```
+:::
+:::::
+::::: {.column width="12.5%"}
+:::: {style="padding-left: 24pt;"}
+::: {.definition style="width: 100%;"}
+$$
+x = \mu + z \sigma
+$$
+:::
+::::
+:::::
+::::::
+
 ## Empirical Rule for Normal Distributions
 
-Let $X \sim \text{Normal}(\mu, \sigma)$.
+::::: {.columns}
+:::: {.column}
+You may have noticed that the Normal distribution is symmetrically distributed about its mean.
 
-:::: {.columns}
-::: {.fragment .column width="33.33%"}
-$\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827.$
-
+::: {.fragment fragment-index=0 style="margin-top: 50px;"}
+This allows us to easily calculate the probability of observing an event centred on its mean in terms of standard deviations.
+:::
+::::
+:::: {.fragment fragment-index=0 .column}
 ```{r ER-1}
 #| fig-dpi: 300
-#| out-width: 90%
-#| fig-align: center
-#| fig-width: 7
-#| fig-height: 5
+#| out-width: 80%
+#| fig-height: 3.5
+#| fig-width: 6.5
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827$.
 
 ER <- \(z) {
   par(mai = c(0.6, 0.65, 0, 0))
@@ -307,49 +388,82 @@ ER <- \(z) {
 
 ER(1)
 ```
-:::
-::: {.fragment .column width="33.33%"}
-$\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545.$
-
+::::
+:::: {.fragment fragment-index=1 .column}
 ```{r ER-2}
 #| fig-dpi: 300
-#| out-width: 90%
-#| fig-align: center
-#| fig-width: 7
-#| fig-height: 5
+#| out-width: 80%
+#| fig-height: 3.5
+#| fig-width: 6.5
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545$.
 
 ER(2)
 ```
-:::
-::: {.fragment .column width="33.33%"}
-$\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973.$
-
+::::
+:::: {.fragment fragment-index=2 .column}
 ```{r ER-3}
 #| fig-dpi: 300
-#| out-width: 90%
-#| fig-align: center
-#| fig-width: 7
-#| fig-height: 5
+#| out-width: 80%
+#| fig-height: 3.5
+#| fig-width: 6.5
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973$.
 
 ER(3)
 ```
-:::
 ::::
+:::::
+
+## [Ex 3:]{.red}
 
 ## Data in terms of Random Variables
 
 ## Normally Distributed Data
 
-## Properties of Random Variables
-
 ## Sample Statistics as Random Variables
 
 ## Central Limit Theorem
 
+Properties of Random Variables
+
 ## Central Limit Theorem in Action
 
-## [Ex 3:]
+## [Ex 4:]{.red}
 
 ## [Glossary]{.darkorange}
 
 ## Practice Exercises {visibility="uncounted"}
+
+<ol style="line-height: 1.1; font-size: 0.8em;">
+  <li style="margin-bottom: 50pt;">
+  The diameter of individual rolling pins produced in a factory can be modelled by a Normal random variable, with a mean of 22.5 mm and a standard deviation of 0.5 mm.
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Calculate the probability that the next rolling pin produced has a diameter smaller than 23.26 mm.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Calculate the probability that the next rolling pin produced has a diameter greater than 23.26 mm.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Suppose that 5000 rolling pins were produced. Pins acceptable for sale must have a diameter between 21.5 and 23.5 mm. How many pins are likely to be acceptable for sale (according to a Normal distribution)?
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      The largest 2% of rolling pins need to be reworked to reduce their size. What is the value of the diameter that just 2% of the rolling pins produced would exceed (according to a Normal distribution)?
+      </li>
+    </ol>
+  </li>
+  
+  <li>
+  Suppose beer is sold in 330 ml bottles, and each bottle is supposed to contain 330 ml of beer. Due to variations in the manufacturing process, the real amount of beer is approximately Normally distributed with a mean of 328 ml and a standard deviation of 3 ml.
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Calculate the probability that a randomly selected bottle contains less than 330 ml.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Calculate the probability that the *average* volume of bottles of beer in a randomly selected crate of 24 bottles contains more than 330 ml.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Explain which theorem you used in part b. to calculate the requested probability and whether the conditions to use the theorem were met.
+      </li>
+    </ol>
+  </li>
+</ol>
