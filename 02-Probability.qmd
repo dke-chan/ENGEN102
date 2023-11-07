@@ -20,7 +20,8 @@ editor: source
 
 ```{r setup}
 #| include: false
-
+library(knitr)
+library(ggplot2)
 ```
 
 ## Outcomes[, events]{.fragment fragment-index=1}[, and probabilities]{.fragment fragment-index=2}
@@ -126,7 +127,7 @@ $$
 :::
 
 ::: {style="margin-top: 25px;"}
-where $\mu$ is the mean of the distribution and $\sigma$ is the standard deviation of the distribution, provided that $\mu \in \mathbb{R}$ and $\sigma \in \mathbb{R}_{>0}$.
+where its parameters are the mean of the distribution, [$\mu$]{.blue}, and the standard deviation of the distribution, [$\sigma$]{.blue}, provided that $\mu \in \mathbb{R}$ and $\sigma \in \mathbb{R}_{>0}$.
 :::
 ::::
 
@@ -356,20 +357,15 @@ $$
 
 ## Empirical Rule for Normal Distributions
 
-::::: {.columns}
-:::: {.column}
-You may have noticed that the Normal distribution is symmetrically distributed about its mean.
+You may have noticed that the Normal distribution is *symmetrically* distributed. This fact allows us to calculate the [probability]{.orchid} of an [event]{.steelblue} centred on the mean.
 
-::: {.fragment fragment-index=0 style="margin-top: 50px;"}
-This allows us to easily calculate the probability of observing an event centred on its mean in terms of standard deviations.
-:::
-::::
-:::: {.fragment fragment-index=0 .column}
+:::: {.columns}
+::: {.fragment .column width="33.33%"}
 ```{r ER-1}
 #| fig-dpi: 300
-#| out-width: 80%
-#| fig-height: 3.5
-#| fig-width: 6.5
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
 #| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827$.
 
 ER <- \(z) {
@@ -379,7 +375,7 @@ ER <- \(z) {
   lines(x = z0, y = dnorm(z0), col = "gray")
   abline(h = 0)
   axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
-  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2); mtext("f(x; μ, σ)", side = 2, line = 2.25, font = 2)
+  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2, at = c(0, 0.1, 0.2, 0.3, 0.4, 1.0)); mtext("f(x; μ, σ)", side = 2, line = 2.25, font = 2)
   
   zz <- seq(-z, z, length.out = 1000)
   
@@ -388,38 +384,122 @@ ER <- \(z) {
 
 ER(1)
 ```
-::::
-:::: {.fragment fragment-index=1 .column}
+:::
+::: {.fragment width="33.33%" .column}
 ```{r ER-2}
 #| fig-dpi: 300
-#| out-width: 80%
-#| fig-height: 3.5
-#| fig-width: 6.5
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
 #| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545$.
 
 ER(2)
 ```
-::::
-:::: {.fragment fragment-index=2 .column}
+:::
+::: {.fragment width="33.33%" .column}
 ```{r ER-3}
 #| fig-dpi: 300
-#| out-width: 80%
-#| fig-height: 3.5
-#| fig-width: 6.5
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
 #| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973$.
 
 ER(3)
 ```
+:::
+::::
+
+## [Ex 3:]{.red} Dielectric Breakdown Voltages
+
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+The `breakdown.csv` file describes a subset of data about the dielectric breakdown voltage of 20 epoxy resin test pieces in an experimental setting. A dielectric breakdown occurs when a material suddenly becomes a conductor.
+</blockquote>
+
+::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
++:------------+:-----------------------------------------------------------------------------------------------+
+| **Item**    | A number that denotes the identifier of a test piece.
++-------------+------------------------------------------------------------------------------------------------+
+| **Case**    | A number that denotes which experimental setting was tested.
++-------------+------------------------------------------------------------------------------------------------+
+| **Voltage** | A number that denotes the dielectric breakdown voltage of a test piece, measured in volts (V).
++-------------+------------------------------------------------------------------------------------------------+
+:::
+::::
+:::: {.column width="30%" .fragment fragment-index=0}
+```{r alloy} 
+#| results: asis
+#| classes: excel
+
+breakdown.df <- read.csv("datasets/breakdown.csv")
+ 
+rbind(colnames(breakdown.df), head(breakdown.df, n = 13), rep("...", ncol(breakdown.df))) |>
+  kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(breakdown.df)])
+```
 ::::
 :::::
 
-## [Ex 3:]{.red}
+::: {.aside}
+Data from Hirose, H. (1996). Maximum Likelihood Estimation in the 3-parameter Weibull Distribution. A look through the generalized extreme-value distribution. *IEEE Transactions on Dielectrics and Electrical Insulation*, **3**(1), 43--55.
+:::
 
 ## Data in terms of Random Variables
 
-## Normally Distributed Data
+::::: {.columns}
+:::: {.column width="65%"}
+Data can be described as the realisations of $n$ identical **random variables**, $X_1, X_2, \ldots, X_n$.
+
+::: {.fragment fragment-index=1 style="margin-top: 50px;"}
+When we describe data as being (approximately) Normally distributed, we imply that the $n$ identical **random variables** follow the Normal distribution.
+:::
+
+::: {.fragment fragment-index=2 style="margin-top: 50px;"}
+If we assume independence^[That is, the [outcome]{.tomato} of each **random variable** has no influence on the [outcomes]{.tomato} of all other **random variables**.], the sample mean and sample standard deviation, $\bar{x}$ and $s$, are the best estimates of the Normal distribution's $\mu$ and $\sigma$ parameters, respectively.
+:::
+
+::::
+:::: {.column .fragment fragment-index=0 width="35%"}
+```{r Ex4}
+#| fig-dpi: 300
+#| fig-height: 4
+#| fig-width: 7
+#| out-width: 100%
+#| fig-cap: "**Figure:** Distribution of 20 epoxy resin test [**Figure:**]{style=\"visibility: hidden;\"} pieces' dielectric voltages."
+ggplot(breakdown.df, aes(x = Voltage)) +
+  labs(x = "Dielectric voltage (V)", title = " Distribution of 20 epoxy resin test pieces") +
+  theme_bw() + 
+  geom_histogram(center = 0, binwidth = (max(breakdown.df$Voltage) - min(breakdown.df$Voltage)) / 10, colour = "black", fill = "lightblue") + 
+  labs(y = NULL) + 
+  scale_y_continuous(breaks = NULL)
+```
+::::
+:::::
 
 ## Sample Statistics as Random Variables
+
+A convenient consequence of the previous slide is that numeric summaries, such as the sample mean, can also be considered **random variables**.
+
+::::: {.columns}
+:::: {.column .fragment}
+::: {.definition style="width: 40%; margin-left: auto !important; margin-right: auto !important;"}
+$$
+\bar{X} = \frac{\sum^n_{i=1} X_i}{n}
+$$
+:::
+::::
+:::: {.column .fragment}
+::: {.definition-orchid style="width: 60%; margin-left: auto !important; margin-right: auto !important;"}
+$$
+S = \sqrt{\frac{\sum^n_{i=1} (X_i)^2 - n\bar{X}^2}{n - 1}}
+$$
+:::
+::::
+:::::
+
+::: {.fragment style="margin-top: 50px;"}
+But which probability distribution do these **random variables** follow?
+:::
 
 ## Central Limit Theorem
 
@@ -427,27 +507,27 @@ Properties of Random Variables
 
 ## Central Limit Theorem in Action
 
-## [Ex 4:]{.red}
-
 ## [Glossary]{.darkorange}
 
-::: {.parskip-16pt style="font-size: 0.8em; width: 90%;"}
+:::: {style="font-size: 0.8em;"}
 Let $X$ be a *continuous* random variable that follows the Normal distribution with mean $\mu$ and standard deviation $\sigma$.
 
-$\mathbb{P}(a < X < b) > 0$ as long as $b > a$.
-
-$\mathbb{P}(a < X < b) = \mathbb{P}(a \leq X < b) = \mathbb{P}(a < X \leq b) = \mathbb{P}(a \leq X \leq b)$ holds because the endpoints of intervals do not affect the probability calculations of *continuous* random variables.
-
-$\mathbb{P}(X = x) = 0$ by definition of a *continuous* random variable.
-
-$\mathbb{P}(X < x) = 1 - \mathbb{P}(X > x)$ expresses the probability of an event in terms of its **complement** event. This statement holds because of a *probability axiom*.
-
-$\mathbb{P}(X < \mu) = \mathbb{P}(X > \mu) = 0.5$ because the 50th percentile (median) of a Normal random variable equals its mean.
-
-$\mathbb{P}(-|b| < X < -|a|) = \mathbb{P} (a < X < b)$ holds because the Normal distribution is symmetrically distributed.
-
-$\mathbb{P}(a < X < b) + \mathbb{P}(c < X < d)$ holds if and only if the intervals $(a, b)$ and $(c, d)$ do not overlap.
+::: {.parskip-16pt style="margin-top: -0.5em;"}
+- [$\mathbb{P}(a < X < b) > 0$]{.blue} when $b > a$.
+- [$\mathbb{P}(X = x) = 0$]{.blue} for *continuous* random variables because $\int_x^x \! f_X(x; \boldsymbol{\theta}) dx = 0$.
+- [$\mathbb{P}(a < X < b) = \mathbb{P}(a \leq X < b) = \mathbb{P}(a < X \leq b) = \mathbb{P}(a \leq X \leq b)$]{.blue} as a consequence of $\mathbb{P}(X = x) = 0$.
+- [$\mathbb{P}(X < x) = 1 - \mathbb{P}(X > x)$]{.blue} expresses the probability of an [event]{.orchid} in terms of the probability of its [complement event]{.teal}.
+- [$\mathbb{P}(a < X < b) + \mathbb{P}(c < X < d)$]{.blue} is valid _**if and only if**_ the intervals $(a, b)$ and $(c, d)$ do *not* overlap.
 :::
+
+For the Normal distribution in particular:
+
+::: {.parskip-16pt style="margin-top: -0.5em;"}
+- [$\mathbb{P}(-|b| < X < -|a|) = \mathbb{P} (a < X < b)$]{.blue} as the Normal distribution is *symmetrically* distributed.
+- [$\mathbb{P}(X < \mu) = \mathbb{P}(X > \mu) = 0.5$]{.blue} as the 50th percentile (the median) of the Normal distribution is its mean.
+:::
+
+::::
 
 ## Practice Exercises {visibility="uncounted"}
 

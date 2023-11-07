@@ -123,8 +123,8 @@ code span.co {
   background-color: rgba(218, 112, 214, 0.1);
 }
 
-.parskip-16pt > p {
-  margin-bottom: 16pt;
+.parskip-16pt > p, .parskip-16pt ul li {
+  margin-bottom: 16pt !important;
 }
 
 .li-line-height-1-1 ol li, .li-line-height-1-1 ul li {
@@ -252,6 +252,10 @@ html.print-pdf .reveal .printOnly {
   color: steelblue;
 }
 
+.darkblue {
+  color: darkblue;
+}
+
 .orchid {
   color: orchid;
 }
@@ -274,6 +278,10 @@ html.print-pdf .reveal .printOnly {
 
 .red {
   color: red;
+}
+
+.blue {
+  color: blue;
 }
 
 .cornflowerblue {

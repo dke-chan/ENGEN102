@@ -19,7 +19,6 @@ editor: source
 
 ```{r setup}
 #| include: false
-
 library(ggplot2)
 library(knitr)
 ```
@@ -526,7 +525,5 @@ ggplot(fairy.df, aes(x = Length)) +
 ::::
 
 ::: {.aside}
-Benjamin, E. D., Hillman, J. R., Handley, S. J., Toone, T. A., & Jeffs, A. (2022). The Effectiveness
-of Providing Shell Substrate for the Restoration of Adult Mussel Reefs. *Sustainability*, **14**(23),
-15746.
+Benjamin, E. D., Hillman, J. R., Handley, S. J., Toone, T. A., & Jeffs, A. (2022). The Effectiveness of Providing Shell Substrate for the Restoration of Adult Mussel Reefs. *Sustainability*, **14**(23), 15746.
 :::
