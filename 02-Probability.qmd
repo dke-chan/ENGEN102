@@ -503,9 +503,350 @@ But which probability distribution do these **random variables** follow?
 
 ## Central Limit Theorem
 
-Properties of Random Variables
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with finite mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}.
+
+:::: {.fragment fragment-index=0 style="margin-top: 50px;"}
+Let the **random variable** $S_n = X_1 + X_2 + \cdots + X_n$[, then *Central Limit Theorem* states that]{.fragment fragment-index=1}
+
+::: {.definition style="width: 50%;" .fragment fragment-index=1}
+$$
+S_n \rightarrow_D \text{Normal} \! \left(\mu = n\mu_X, \sigma = \sqrt{n}\,\sigma_X\right).
+$$
+:::
+::::
+
+::: {.fragment style="margin-top: 50px;"}
+How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$? [$n \geq 30$ for the majority of **probability distributions** with finite [$\mu_X$]{.blue} and [$\sigma_X$]{.blue}.]{.fragment}
+:::
+
+::: {.aside}
+$\rightarrow_D$ means converges in distribution.
+:::
 
 ## Central Limit Theorem in Action
+
+:::::: {.panel-tabset}
+
+### "Bathtub"
+
+::::: {.columns}
+:::: {.column}
+```{r Bathtub-CLT}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dbeta, xlim = c(-1, 2), geom = "polygon", fill = "darkblue", alpha = 0.2, args = list(shape1 = 0.6, shape2 = 0.6), n = 5000) +
+  geom_function(fun = dbeta, xlim = c(-1, 2), linewidth = 1, colour = "darkblue", args = list(shape1 = 0.6, shape2 = 0.6), n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(0, 1))
+
+plotr <- \(nval) {
+  ggplot(data = subset(test.data, n == nval), aes(x = x)) + 
+    geom_histogram(aes(y = after_stat(density)), position = "identity", colour = "tomato", fill = rgb(255, 99, 71, 50, maxColorValue = 255), breaks = hist(subset(test.data, n == nval)$x, plot = FALSE)$breaks) +
+    theme_bw() +
+    labs(x = bquote("s"[.(nval)]), y = "Density")
+}
+
+n <- c(2, 3, 10, 50)
+reps <- 10000
+test.data <- data.frame(x = numeric(), n = numeric())
+
+for (i in n) {
+  test.data <- rbind(
+    test.data,
+    data.frame(x = matrix(data = rbeta(reps * i, shape1 = 0.6, shape2 = 0.6), nrow = reps, ncol = i) |>
+                 rowSums(),
+               n = i))
+}
+```
+::::
+:::: {.column}
+::: {.panel-tabset}
+#### n = `r n[1]`
+```{r Bathtub-CLT-2A}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[1])
+```
+
+#### n = `r n[2]`
+```{r Bathtub-CLT-2B}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[2])
+```
+
+#### n = `r n[3]`
+```{r Bathtub-CLT-2C}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[3])
+```
+
+#### n = `r n[4]`
+```{r Bathtub-CLT-2D}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[4])
+```
+:::
+::::
+:::::
+
+### Normal
+
+::::: {.columns}
+:::: {.column}
+```{r Normal-CLT}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dnorm, xlim = c(-4, 4), geom = "polygon", fill = "darkblue", alpha = 0.2) +
+  geom_function(fun = dnorm, xlim = c(-4, 4), linewidth = 1, colour = "darkblue") +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-3, 3))
+
+n <- c(2, 3, 10, 50)
+reps <- 10000
+test.data <- data.frame(x = numeric(), n = numeric())
+
+for (i in n) {
+  test.data <- rbind(
+    test.data,
+    data.frame(x = matrix(data = rnorm(reps * i, mean = 0, sd = 1), nrow = reps, ncol = i) |>
+                 rowSums(),
+               n = i))
+}
+```
+::::
+:::: {.column}
+::: {.panel-tabset}
+#### n = `r n[1]`
+```{r Normal-CLT-2A}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[1])
+```
+
+#### n = `r n[2]`
+```{r Normal-CLT-2B}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[2])
+```
+
+#### n = `r n[3]`
+```{r Normal-CLT-2C}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[3])
+```
+
+#### n = `r n[4]`
+```{r Normal-CLT-2D}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[4])
+```
+:::
+::::
+:::::
+
+### Uniform
+
+::::: {.columns}
+:::: {.column}
+```{r Uniform-CLT}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dunif, xlim = c(-2, 3), geom = "polygon", fill = "darkblue", alpha = 0.2, n = 5000) +
+  geom_function(fun = dunif, xlim = c(-4, 4), linewidth = 1, colour = "darkblue", n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-1, 2))
+
+n <- c(2, 3, 10, 50)
+reps <- 10000
+test.data <- data.frame(x = numeric(), n = numeric())
+
+for (i in n) {
+  test.data <- rbind(
+    test.data,
+    data.frame(x = matrix(data = runif(reps * i, min = 0, max = 1), nrow = reps, ncol = i) |>
+                 rowSums(),
+               n = i))
+}
+```
+::::
+:::: {.column}
+::: {.panel-tabset}
+#### n = `r n[1]`
+```{r Uniform-CLT-2A}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[1])
+```
+
+#### n = `r n[2]`
+```{r Uniform-CLT-2B}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[2])
+```
+
+#### n = `r n[3]`
+```{r Uniform-CLT-2C}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[3])
+```
+
+#### n = `r n[4]`
+```{r Uniform-CLT-2D}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[4])
+```
+:::
+::::
+:::::
+
+### Six-Sided Dice
+
+::::: {.columns}
+:::: {.column}
+```{r Dice-CLT}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  geom_segment(aes(x = 1:6, xend = 1:6, y = 0, yend = 1/6), linewidth = 1, colour = "darkblue") +
+  geom_hline(aes(yintercept = 0), linewidth = 1, colour = "darkblue") +
+  geom_point(aes(x = 1:6, y = 1/6), size = 4, colour = "darkblue") +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(0, 7))
+
+n <- c(2, 3, 10, 50)
+reps <- 10000
+test.data <- data.frame(x = numeric(), n = numeric())
+
+for (i in n) {
+  test.data <- rbind(
+    test.data,
+    data.frame(x = matrix(data = sample(1:6, size = reps * i, replace = TRUE), nrow = reps, ncol = i) |>
+                 rowSums(),
+               n = i))
+}
+```
+::::
+:::: {.column}
+::: {.panel-tabset}
+#### n = `r n[1]`
+```{r Dice-CLT-2A}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[1])
+```
+
+#### n = `r n[2]`
+```{r Dice-CLT-2B}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[2])
+```
+
+#### n = `r n[3]`
+```{r Dice-CLT-2C}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[3])
+```
+
+#### n = `r n[4]`
+```{r Dice-CLT-2D}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 4.45
+
+plotr(n[4])
+```
+:::
+::::
+:::::
+::::::
+
+
+##
+
+
+## asdf
+
+. . .
+
+Suppose that $\overline{X} = \frac{X_1 \, + X_2 \, + \, \cdots \, + \, X_n}{n}$, then **Central Limit Theorem** states that
+
+. . .
+
+::: {.definition style="width: 70%;"}
+$$
+\bar{X} \rightarrow_D \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)
+$$
+:::
+
+
+
+How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$? 
+
+. . .
+
+$n \geq 30$ for the majority of **probability distributions** with finite $\mu_X$ and $\sigma_X$
+
+Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$: [$\overline{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$]{.fragment}
 
 ## [Glossary]{.darkorange}
 
