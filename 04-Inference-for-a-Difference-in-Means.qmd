@@ -1,0 +1,60 @@
+---
+title: "Inference for a Difference in Means"
+author: "ENGEN102-23G (HAM) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: breeze
+    code-line-numbers: false
+    embed-resources: false
+editor: source
+---
+  
+```{r setup}
+#| include: false
+library(knitr)
+library(ggplot2)
+```
+
+## Motivation
+
+## Sampling Distribution of the Difference in Sample Means
+
+## Standard Error of *x&#772;*~1~ &minus; *x&#772;*~2~
+
+## [Ex ?:]{.red} Handedness and Earnings
+
+::: {.aside}
+Ruebeck, C. S., Harrington Jr, J. E., & Moffitt, R. (2007). Handedness and earnings. *Laterality*, **12**(2), 101--120.
+:::
+
+## Estimation of the Difference in Means
+
+## Interpretation of the Confidence Interval
+
+## Test for the Difference in Means
+
+## Using Student's *t*-distribution to Calculate the *p*-value
+
+## Interpretation of the Hypothesis Test
+
+## [Ex ?:]{.red} Jet Noise
+
+
+
+::: {.aside}
+Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Course in Data Analysis and Inference*. Wiley.
+:::
+
+##
+
+## Assumptions for Inference on the Difference in Means
+
+## Practice Exercises {visibility="uncounted"}
