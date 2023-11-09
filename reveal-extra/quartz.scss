@@ -198,11 +198,7 @@ code span.co {
   font-family: serif;
 }
 
-.reveal .math.inline {
-  font-size: 80% !important;
-}
-
-.reveal .math.display {
+.math.inline, .math.display {
   font-size: 80% !important;
 }
 

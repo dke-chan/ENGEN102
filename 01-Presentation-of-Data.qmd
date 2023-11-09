@@ -13,7 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: breeze
     code-line-numbers: false
-    embed-resources: false
+    embed-resources: true
 editor: source
 ---
 

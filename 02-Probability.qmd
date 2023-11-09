@@ -14,7 +14,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: breeze
     code-line-numbers: false
-    embed-resources: false
+    embed-resources: true
 editor: source
 ---
 
@@ -64,7 +64,7 @@ It is a function whose *domain* is all possible distinct [outcomes]{.tomato} we 
 :::
 
 ::: {.fragment style="margin-top: 50px;"}
-This is known as the **probability distribution** (that the random variable follows). [As a result, it is standard to denote a random variable with uppercase letters [*X*]{.MathJax-Font}, [*Y*]{.MathJax-Font}, etc. and its *domain* with lowercase letters [*x*]{.MathJax-Font}, [*y*]{.MathJax-Font}, etc.]{.fragment}
+This function is known as the **probability distribution** (that the random variable follows). [As a result, it is standard to denote a random variable with uppercase letters [*X*]{.MathJax-Font}, [*Y*]{.MathJax-Font}, etc. and its [outcomes]{.tomato} with lowercase letters [*x*]{.MathJax-Font}, [*y*]{.MathJax-Font}, etc.]{.fragment}
 :::
 
 ## More on Random Variables
@@ -100,7 +100,7 @@ print(random.uniform(1, 6))
 ::::::
 
 ::: {.fragment style="margin-top: 50px;"}
-*Case 1* is an example of what is known as a *discrete* random variable, whereas *Case 2* is an example of what is known as a *continuous* random variable. 
+*Case 1* is an example of a *discrete* random variable, whereas *Case 2* is an example of a *continuous* random variable. 
 :::
 
 ::: {.fragment style="margin-top: 50px;"}
@@ -111,7 +111,7 @@ The key takeaway is that we should _**always**_ assign [probabilities]{.orchid} 
 
 Let $X$ be a *continuous* random variable that follows the *Normal distribution*.
 
-::: {.fragment .definition style="width: 25%;"}
+::: {.fragment .definition style="width: 25%; margin-top: 50px;"}
 $$
 X \sim \text{Normal}(\mu, \sigma)
 $$
@@ -127,7 +127,7 @@ $$
 :::
 
 ::: {style="margin-top: 25px;"}
-where its parameters are the mean of the distribution, [$\mu$]{.blue}, and the standard deviation of the distribution, [$\sigma$]{.blue}, provided that $\mu \in \mathbb{R}$ and $\sigma \in \mathbb{R}_{>0}$.
+where its *parameters* are the mean of the Normal distribution, [$\mu$]{.blue}, and the standard deviation of the Normal distribution, [$\sigma$]{.blue}, provided that $\mu \in \mathbb{R}$ and $\sigma \in \mathbb{R}_{>0}$.
 :::
 ::::
 
@@ -204,9 +204,9 @@ In Statistics, we use the $\mathbb{P}(\cdot)$ notation to denote the [probabilit
 Let's assume for [**Ex 2**]{.red} that a random sample is the process observing the weights of moles:
 
 ::: {.incremental .li-line-height-1-1}
-- The [probability]{.orchid} of a randomly selected mole has a weight that is between 150 to 206 grams. [&zigrarr; $\mathbb{P}(150 < X < 206)$]{.printOnly}
-- The [probability]{.orchid} of a randomly selected mole has a weight that is lower than 100 grams. [&zigrarr; $\mathbb{P}(X < 100)$]{.printOnly}
-- The [probability]{.orchid} of a randomly selected mole has a weight that is 125 &pm; 0.5 grams. [&zigrarr; $\mathbb{P}(124.5 < X < 125.5)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole weighs somewhere between 150 to 206 grams. [&zigrarr; $\mathbb{P}(150 < X < 206)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole has a weight lower than 100 grams. [&zigrarr; $\mathbb{P}(X < 100)$]{.printOnly}
+- The [probability]{.orchid} of a randomly selected mole weighs 125 &pm; 0.5 grams. [&zigrarr; $\mathbb{P}(124.5 < X < 125.5)$]{.printOnly}
 
 :::
 ::::
@@ -280,7 +280,7 @@ We use **Table A** instead of directly integrating the Normal random variable, w
 :::: {.fragment style="margin-top: 50px;"}
 A formal method shows that the following statement is true when we express the *endpoints* of an [event]{.steelblue} in terms of [*z*]{.MathJax-Font}-scores^b^ for Normal random variables.
 
-::: {.definition-orchid style="width: 50%;"}
+::: {.definition-orchid style="width: 50%; margin-top: 50px;"}
 $$
 \mathbb{P}(a < X < b) = \mathbb{P}\!\left(\frac{a - \mu}{\sigma} < Z < \frac{b - \mu}{\sigma}\right)
 $$
@@ -319,7 +319,7 @@ b. A *z*-score expresses an [outcome]{.tomato} of a Normal random variable in *s
 The [outcome]{.tomato} associated with a Normal random variable's *percentile*, $p$, can be determined with the following probability statement^[Where $Z \sim \text{Normal}(\mu = 0, \sigma = 1)$.].
 
 :::: {.dummy}
-::: {.definition-orchid style="width: 40%;"}
+::: {.definition-orchid style="width: 40%; margin-top: 50px;"}
 $$
 \mathbb{P}(X < x) = \mathbb{P}\!\left(Z < \frac{x - \mu}{\sigma}\right) = p
 $$
@@ -455,7 +455,7 @@ When we describe data as being (approximately) Normally distributed, we imply th
 :::
 
 ::: {.fragment fragment-index=2 style="margin-top: 50px;"}
-If we assume independence^[That is, the [outcome]{.tomato} of each **random variable** has no influence on the [outcomes]{.tomato} of all other **random variables**.], the sample mean and sample standard deviation, $\bar{x}$ and $s$, are the best estimates of the Normal distribution's $\mu$ and $\sigma$ parameters, respectively.
+If we _**assume**_ independence^[That is, the [outcome]{.tomato} of each **random variable** has no influence on the [outcomes]{.tomato} of all other **random variables**.], the sample mean and sample standard deviation, $\bar{x}$ and $s$, are the best estimates of the Normal distribution's $\mu$ and $\sigma$ parameters, respectively.
 :::
 
 ::::
@@ -478,18 +478,18 @@ ggplot(breakdown.df, aes(x = Voltage)) +
 
 ## Sample Statistics as Random Variables
 
-A convenient consequence of the previous slide is that numeric summaries, such as the sample mean, can also be considered **random variables**.
+A convenient consequence of the previous slide is that numeric summaries, such as the sample mean and standard deviation, can also be considered **random variables**.
 
 ::::: {.columns}
 :::: {.column .fragment}
-::: {.definition style="width: 40%; margin-left: auto !important; margin-right: auto !important;"}
+::: {.definition style="width: 40%; margin-left: auto !important; margin-right: auto !important; margin-top: 50px;"}
 $$
 \bar{X} = \frac{\sum^n_{i=1} X_i}{n}
 $$
 :::
 ::::
 :::: {.column .fragment}
-::: {.definition-orchid style="width: 60%; margin-left: auto !important; margin-right: auto !important;"}
+::: {.definition-orchid style="width: 60%; margin-left: auto !important; margin-right: auto !important; margin-top: 50px;"}
 $$
 S = \sqrt{\frac{\sum^n_{i=1} (X_i)^2 - n\bar{X}^2}{n - 1}}
 $$
@@ -503,21 +503,25 @@ But which probability distribution do these **random variables** follow?
 
 ## Central Limit Theorem
 
-Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with finite mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}.
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with *finite* mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}.
 
 :::: {.fragment fragment-index=0 style="margin-top: 50px;"}
 Let the **random variable** $S_n = X_1 + X_2 + \cdots + X_n$[, then *Central Limit Theorem* states that]{.fragment fragment-index=1}
 
-::: {.definition style="width: 50%;" .fragment fragment-index=1}
+::: {.definition style="width: 50%; margin-top: 50px;" .fragment fragment-index=1}
 $$
 S_n \rightarrow_D \text{Normal} \! \left(\mu = n\mu_X, \sigma = \sqrt{n}\,\sigma_X\right).
 $$
 :::
 ::::
 
-::: {.fragment style="margin-top: 50px;"}
-How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$? [$n \geq 30$ for the majority of **probability distributions** with finite [$\mu_X$]{.blue} and [$\sigma_X$]{.blue}.]{.fragment}
+:::: {.incremental .fragment style="margin-top: 50px;"}
+How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$?
+
+::: {style="margin-top: -25px;"}
+- $n \geq 30$ for the majority of **probability distributions** with finite [$\mu_X$]{.blue} and [$\sigma_X$]{.blue}.
 :::
+::::
 
 ::: {.aside}
 $\rightarrow_D$ means converges in distribution.
@@ -821,32 +825,56 @@ plotr(n[4])
 ::::::
 
 
-##
+## Sampling Distribution of the Sample Mean
 
-
-## asdf
-
-. . .
-
-Suppose that $\overline{X} = \frac{X_1 \, + X_2 \, + \, \cdots \, + \, X_n}{n}$, then **Central Limit Theorem** states that
+One outcome of the *Central Limit Theorem* is the **sampling distribution of the sample mean**.
 
 . . .
 
-::: {.definition style="width: 70%;"}
+::: {.definition style="margin-top: 50px; width: 90%;"}
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with *finite* mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}. If we let $\bar{X} = \frac{\sum^n_{i=1} X_i}{n}$, then
+
 $$
 \bar{X} \rightarrow_D \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)
 $$
 :::
 
-
-
-How large does $n$ has to be to ensure the convergence is good enough to use a Normally distributed **random variable** to model $S_n$? 
-
 . . .
 
-$n \geq 30$ for the majority of **probability distributions** with finite $\mu_X$ and $\sigma_X$
+::: {style="margin-top: 50px;"}
+Similarly, $n \geq 30$ is "good enough" to use a Normally distributed **random variable** to model $\bar{X}$. Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$, then $\bar{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$.
+:::
 
-Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$: [$\overline{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$]{.fragment}
+## [Ex 2:]{.red} Unwanted Moles [(revisited)]{style="font-size: 0.7em;"}
+
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+Stewart (1994) reported on data collected by a company that removed unwanted moles. It was found that the weights of the moles were approximately Normally distributed, with a mean of 150 grams and a standard deviation of 56 grams.
+</blockquote>
+
+::: {.incremental style="margin-top: 50px;"}
+Suppose we are modelling the mean weight for a random sample of 16 moles. 
+
+<ol>
+  <li style="line-height: 1.1;"> What is the [probability]{.orchid} of observing a sample mean weight greater than 200 grams? [&zigrarr; 0.0002]{.printOnly}</li>
+  <li style="line-height: 1.1;"> What is the 50th percentile of the sample mean weight according to an *appropriate* probability distribution? [&zigrarr; 150 g]{.printOnly}</li>
+  <li style="line-height: 1.1;"> What is the interval associated with the [probability]{.orchid} of observing a sample mean weight that is within one standard deviation of the mean? [&zigrarr; [136 g, 164 g]]{.printOnly}</li>
+</ol>
+:::
+
+::::
+:::: {.column width="30%"}
+![**Figure:** Mole by Amethyst Studio from<br>[**Figure:**]{style="visibility: hidden;"} [Noun Project](https://thenounproject.com/browse/icons/term/mole/) (CC BY 3.0).](figures/noun-mole.svg)
+::::
+:::::
+
+::: {.aside}
+Stewart, Ian (17 September 1994). Statistical modelling. *New Scientist: Inside Science*, **74**, 14.
+:::
+
+
+
 
 ## [Glossary]{.darkorange}
 
