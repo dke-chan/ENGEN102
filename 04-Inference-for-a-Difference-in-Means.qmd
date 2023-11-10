@@ -80,6 +80,10 @@ Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Cou
 
 ##
 
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind
+
 ## Assumptions for Inference on the Difference in Means
 
 ## Practice Exercises {visibility="uncounted"}
+
+<!-- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp -->

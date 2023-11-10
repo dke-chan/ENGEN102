@@ -150,6 +150,17 @@ alloy.df <- read_excel("datasets/alloy.xlsx")
  
 rbind(colnames(alloy.df), head(alloy.df, n = 14), rep("...", ncol(alloy.df))) |>
   kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(alloy.df)])
+
+plotObj <- ggplot(alloy.df, aes(x = strength)) +
+  labs(x = "Compressive strength (psi)", title = "Distribution of Compressive Strength Al–Li Alloys") +
+  theme_bw()
+
+dotplot <- plotObj + 
+  geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
+  labs(y = NULL) + 
+  scale_y_continuous(breaks = NULL)
+
+dotplot.xlims <- ggplot_build(dotplot)$layout$panel_scales_x[[1]]$range$range
 ```
 ::::
 :::::
@@ -170,17 +181,6 @@ A single numeric variable is plotted on a number line, where *similar* values ar
 #| fig-width: 7
 #| out-width: 100%
 #| fig-cap: "**Figure:** Distribution of 80 aluminium-lithium alloy specimens' [**Figure:**]{style=\"visibility: hidden;\"} compressive strength."
-plotObj <- ggplot(alloy.df, aes(x = strength)) +
-  labs(x = "Compressive strength (psi)", title = "Distribution of Compressive Strength Al–Li Alloys") +
-  theme_bw()
-
-dotplot <- plotObj + 
-  geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
-  labs(y = NULL) + 
-  scale_y_continuous(breaks = NULL)
-
-dotplot.xlims <- ggplot_build(dotplot)$layout$panel_scales_x[[1]]$range$range
-
 plotObj + 
   geom_point(aes(y = 0.03), size = 4.5, stroke = 1.5, colour = "black", shape = 1) + 
   labs(y = NULL) + 
@@ -207,7 +207,7 @@ A single numeric variable is sorted into **quarters**. The *central* 50% of the 
 
 :::: {.r-stack style="margin-top: 50px;"}
 ::: {style="width: 50%; margin: auto; display: block;"}
-```{r alloy-stackeddotplot}
+```{r alloy-dotplot}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -216,7 +216,7 @@ A single numeric variable is sorted into **quarters**. The *central* 50% of the 
 ```
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
-```{r alloy-stackeddotplot-annotated}
+```{r alloy-dotplot-annotated}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -226,10 +226,10 @@ A single numeric variable is sorted into **quarters**. The *central* 50% of the 
 boxplot.stats <- ggplot_build(plotObj + geom_boxplot())$data[[1]]
 
 super.dotplot <- plotObj + 
-  geom_dotplot(fill = NA, stroke = 3, colour = "gray", binwidth = (max(alloy.df$strength) - min(alloy.df$strength)) / 25, dotsize = 0.7) + 
+  geom_point(aes(y = 0.03), size = 4.5, stroke = 1.5, colour = "gray", shape = 1) + 
   labs(y = NULL) + 
-  scale_y_continuous(breaks = NULL) +
-  coord_cartesian(dotplot.xlims, clip = "off")
+  coord_cartesian(dotplot.xlims,  ggplot_build(dotplot)$layout$panel_scales_y[[1]]$range$range, clip = "off") +
+  scale_y_continuous(breaks = NULL)
 
 super.dotplot +
   geom_vline(xintercept = c(boxplot.stats$xmin_final, boxplot.stats$xlower, boxplot.stats$xmiddle, boxplot.stats$xupper, boxplot.stats$xmax_final), linetype = 5, linewidth = 1, colour = "black")
@@ -263,7 +263,7 @@ A single numeric variable is *typically* sorted into **equally sized intervals**
 
 :::: {.r-stack style="margin-top: 50px;"}
 ::: {style="width: 50%; margin: auto; display: block;"}
-```{r alloy-stackeddotplot}
+```{r alloy-dotplot}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
@@ -272,7 +272,7 @@ A single numeric variable is *typically* sorted into **equally sized intervals**
 ```
 :::
 ::: {.fragment style="width: 50%; margin: auto; display: block;" fragment-index=0}
-```{r alloy-stackeddotplot-annotated-2}
+```{r alloy-dotplot-annotated-2}
 #| fig-dpi: 300
 #| fig-height: 4
 #| fig-width: 7
