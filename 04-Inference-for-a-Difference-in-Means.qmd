@@ -47,7 +47,32 @@ Ruebeck, C. S., Harrington Jr, J. E., & Moffitt, R. (2007). Handedness and earni
 
 ## [Ex ?:]{.red} Jet Noise
 
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+The `jet-noise.csv` file describes a study investigated the noise levels of a random sample of wide-bodied jets, and narrow-bodied jets were measured immediately after their wheels left the ground at an international airport. Why noise levels? The researchers thought it may influence the frequency of birds being hit by aircraft (as it is regarded as a safety hazard).
+</blockquote>
 
+::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
++:----------+:----------------------------------------------------------------------------------------------------------------------------+
+| **noise** | A number that denotes the compressive strength of an aluminium-lithium alloy, measured in decibels (dB). 
++-----------+-----------------------------------------------------------------------------------------------------------------------------+
+| **body**  | A number that denotes the compressive strength of an aluminium-lithium alloy, measured in decibels (dB). 
++-----------+-----------------------------------------------------------------------------------------------------------------------------+
+:::
+::::
+:::: {.column width="30%" .fragment fragment-index=0}
+```{r alloy} 
+#| results: asis
+#| classes: excel
+
+noise.df <- read.csv("datasets/jet-noise.csv")
+ 
+rbind(colnames(noise.df), head(noise.df, n = 14), rep("...", ncol(noise.df))) |>
+  kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(noise.df)])
+```
+::::
+:::::
 
 ::: {.aside}
 Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Course in Data Analysis and Inference*. Wiley.
