@@ -21,6 +21,8 @@ editor: source
 
 So far we have covered the following:
 
+where $t^*_p(\nu)$ is the *t*-multiplier for the $p$th percentile of a Student's *t*-distribution with $\nu$ degrees of freedom
+
 ::: {.tightList style="margin-left: 1em;"}
 1. Summarise and describe data
 2. The concept of modelling outcomes of a random process, with a focus on the Normal distribution
@@ -204,4 +206,18 @@ Suppose the confidence level is 95%. The following interpretations of a 95% conf
 
 ::: {.aside}
 Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
+:::
+
+
+## Linking *two-sided* tests and confidence intervals {.margin-bottom}
+
+Generally speaking, when there is a [two-sided]{.fragment .highlight-red} hypothesis test and a confidence interval (C.I.) for the *same* underlying parameter. The level, $\alpha$, determines the significance threshold for the *p*-value and the width of the confidence interval
+
+. . .
+
+**_Typically_**
+
+::: {.tightList style="font-size: 0.9em;"}
+- If you reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. does not capture the hypothesised value of the underlying parameter
+- If you fail to reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. captures the hypothesised value of the underlying parameter
 :::

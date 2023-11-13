@@ -76,6 +76,10 @@ $link-color-hover: #d22;
   color: #399ee6;
 }
 
+.reveal pre.sourceCode code {
+  max-height: 800px;
+}
+
 .cell-output-display img {
   border: thin solid #383d3d;
 }

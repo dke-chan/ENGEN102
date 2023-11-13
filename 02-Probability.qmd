@@ -245,7 +245,7 @@ This is straightforward to implement in [Python]{.cornflowerblue}.
 ```{python mole-calcs-1}
 #| echo: true
 
-# Load in two submodules from the scipy package, and the math package
+# Load in two submodules from the scipy package and the math package
 from scipy import integrate
 from scipy import stats
 import math

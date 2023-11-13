@@ -27,9 +27,49 @@ library(ggplot2)
 
 ## Sampling Distribution of the Difference in Sample Means
 
+
+
 ## Standard Error of *x&#772;*~1~ &minus; *x&#772;*~2~
 
-## [Ex ?:]{.red} Handedness and Earnings
+The *estimate* of the sampling distribution's *spread* given the **observed data**.
+
+. . .
+
+::: {.definition style="margin-top: 50px; width: 90%;"}
+Let:
+
+- $\bar{x}_1$ and $\bar{x}_2$ be the *sample means* of each group,
+- $s_1$ and $s_2$ be the *sample standard deviations* of each group,
+- and $n_1$ and $n_2$ be the *sample sizes* of each group.
+
+Hence, the standard error of $\bar{x}_1 - \bar{x}_2$ is defined as
+
+$$
+\text{se}(\bar{x}_1 - \bar{x}_2) = \sqrt{\frac{(s_1)^2}{n_1} + \frac{(s_2)^2}{n_2}}
+$$
+:::
+
+. . .
+
+::: {.dummy style="margin-top: 50px;"}
+This definition of $\text{se}(\bar{x}_1 - \bar{x}_2)$ *does not* assume that the underlying standard deviations of each group are the same.
+:::
+
+::: {.aside}
+**Note:** $\bar{x}_1 - \bar{x}_2$ is the *estimate* of the sampling distribution's *centre* given the **observed data**.
+:::
+
+
+## [Ex 6:]{.red} Handedness and Earnings
+
+<blockquote style="border-left: 0.25em solid #685f5f;">
+Could handedness be a factor that explains differences in the average hourly earnings? Ruebeck et al. (2007) randomly sampled 2295 American men and numerically summarised the recorded hourly earnings (measured in USD) by handedness below.
+</blockquote>
+
+$$
+\bar{x}_\text{Left} = \$13.40, \quad s_\text{Left} = \$7.9, \quad n_\text{Left} = 268 \\
+\bar{x}_\text{Right} = \$13.10, \quad s_\text{Right} = \$7.9, \quad n_\text{Right} = 2027
+$$
 
 ::: {.aside}
 Ruebeck, C. S., Harrington Jr, J. E., & Moffitt, R. (2007). Handedness and earnings. *Laterality*, **12**(2), 101--120.
@@ -37,7 +77,70 @@ Ruebeck, C. S., Harrington Jr, J. E., & Moffitt, R. (2007). Handedness and earni
 
 ## Estimation of the Difference in Means
 
+:::::: {.columns}
+::::: {.column}
+**Point Estimate**
+
+::: {.definition style="width: 15%; margin-left: 0;"}
+$\bar{x}_1 - \bar{x}_2$
+:::
+
+:::: {.fragment}
+::: {style="margin-top: 50px;"}
+**Interval Estimate^[By constructing a *[confidence interval]{.tomato}* for the differnece in the "true" means.]**
+:::
+
+::: {.definition-orchid style="width: 58%; margin-left: 0;"}
+ $\bar{x}_1 - \bar{x}_2 \pm t^*_p(\nu) \times \text{se}(\bar{x}_1 - \bar{x}_2)$
+:::
+::::
+
+:::: {.fragment .incremental style="margin-left: 25px;"}
+where $t^*_p(\nu)$ is the *t*-multiplier such that:
+
+::: {style="margin-top: -15px;"}
+- $p = 1 - \text{Conf. Level}/2$ 
+- $\nu = \text{min}(n_1 - 1, n_2 - 1)$ [*by hand*]{.fragment .highlight-blue}^[Statistically inclined software like [Python]{.cornflowerblue} use Satterthwaite's approximation to determine $\nu$.]
+:::
+::::
+:::::
+::::: {.fragment .column}
+Recall for [**Ex 6:**]{.red}
+<blockquote style="border-left: 0.25em solid #685f5f; margin-bottom: 50px;">
+$$
+\bar{x}_\text{Left} = \$13.40, \quad s_\text{Left} = \$7.9, \quad n_\text{Left} = 268 \\
+\bar{x}_\text{Right} = \$13.10, \quad s_\text{Right} = \$7.9, \quad n_\text{Right} = 2027
+$$
+</blockquote>
+
+```{python noise-multiplier}
+#| echo: true
+#| classes: fragment
+
+# Load in the stats submodule from the scipy package
+from scipy import stats
+
+# Determine the t-multiplier for a 95% C.I.
+stats.t.ppf(0.975, 267)
+```
+:::::
+::::::
+
 ## Interpretation of the Confidence Interval
+
+[**Ex 6:**]{.red} The 95% C.I. for $\mu_\text{Left} - \mu_\text{Right}$ is $(-0.7711021 , 1.3711021)$
+
+. . .
+
+<ul style="margin-top: 25px;">
+  <li style="line-height: 1.1;">A [positive]{.tomato} number means that the true mean of the *first* group was estimated to be **greater than** that of the *second* group.</li>
+  <li class="fragment" style="line-height: 1.1;">A [negative]{.steelblue} number means that the true mean of the *first* group was estimated to be **lower than** that of the *second* group.</li>
+  <li class="fragment" style="line-height: 1.1;">You can "invert" the signs of the C.I. to interpret it the other way around. Hence, the 95% C.I. for $\mu_\text{Right} - \mu_\text{Left}$ is? [$(-1.3711021, 0.7711021)$]{.printOnly}</li>
+</ul>
+
+::: {.printOnly style="margin-top: 50px;"}
+With 95% confidence, we estimate that the true mean hourly earnings of left-handed American men were somewhere between \$0.77 per hour lower and \$1.37 per hour higher than that of right-handed American men.
+:::
 
 ## Test for the Difference in Means
 
@@ -45,7 +148,7 @@ Ruebeck, C. S., Harrington Jr, J. E., & Moffitt, R. (2007). Handedness and earni
 
 ## Interpretation of the Hypothesis Test
 
-## [Ex ?:]{.red} Jet Noise
+## [Ex 7:]{.red} Jet Noise
 
 ::::: {.columns}
 :::: {.column width="70%"}
@@ -55,9 +158,9 @@ The `jet-noise.csv` file describes a study investigated the noise levels of a ra
 
 ::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
 +:----------+:----------------------------------------------------------------------------------------------------------------------------+
-| **noise** | A number that denotes the compressive strength of an aluminium-lithium alloy, measured in decibels (dB). 
+| **noise** | A number that denotes the noise level after the jet "took off", measured in decibels (dB). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
-| **body**  | A number that denotes the compressive strength of an aluminium-lithium alloy, measured in decibels (dB). 
+| **body**  | A string that denotes the body type of the jet, either `wide` (for wide-bodied) or `narrow` (for narrow-bodied). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
 :::
 ::::
@@ -78,11 +181,48 @@ rbind(colnames(noise.df), head(noise.df, n = 14), rep("...", ncol(noise.df))) |>
 Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Course in Data Analysis and Inference*. Wiley.
 :::
 
-##
+## [Ex 7]{.red} Inferential Statistics in [Python]{.cornflowerblue}
 
-https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind
+::: {style="width: 85%;"}
+```{python Ex-7}
+#| echo: true
+
+# Load in one submodule from the scipy package and the pandas package
+from scipy import stats
+import pandas
+
+# Read in the jet-noise.csv file
+noise_df = pandas.read_csv("datasets/jet-noise.csv")
+
+# Group the data by body
+noise_grouped = noise_df.groupby(["body"])
+
+# Calculate the inferential statistics
+noise_ttest = stats.ttest_ind(
+  a = noise_grouped.get_group("wide")["noise"], 
+  b = noise_grouped.get_group("narrow")["noise"], 
+  equal_var = False, alternative = "two-sided"
+)
+
+# Print the constructed 95% confidence interval
+noise_ttest.confidence_interval(confidence_level = 0.95)
+
+# Print the result of the hypothesis test, whose alternative hypothesis was specified above
+noise_ttest
+```
+:::
+
+::: {.aside}
+**Documentation**: [docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind)
+:::
 
 ## Assumptions for Inference on the Difference in Means
+
+::: {.incremental}
+1. **Independent** observations between *and* within groups
+2. *Within* [group]{style="color: steelblue;"}: One measure of centre can satisfactorily summarise the group
+3. *Within* [group]{style="color: steelblue;"}: Approximately symmetrical about the group's **sample mean**, $\bar{x}_i$, and there are no outliers
+:::
 
 ## Practice Exercises {visibility="uncounted"}
 
