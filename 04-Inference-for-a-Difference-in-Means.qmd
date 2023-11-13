@@ -227,3 +227,14 @@ noise_ttest
 ## Practice Exercises {visibility="uncounted"}
 
 <!-- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp -->
+
+
+<!--  company producing batteries wishes to test if there is any difference between the -->
+<!-- life of two recently developed battery prototypes (battery A and battery B). -->
+<!-- A sample of 15 battery A, and 12 battery B’s were tested. The sample statistics are -->
+<!-- shown in the table below: -->
+<!-- Perform a two-sample t-test to test whether a mean difference exists between the -->
+<!-- two batteries, at a significance level of 5% -->
+<!-- Battery Sample mean Sample Stdev Sample Size -->
+<!-- A 145 18 15 -->
+<!-- B 162 12 12 -->
