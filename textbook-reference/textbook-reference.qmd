@@ -1,5 +1,5 @@
 ---
-title: "@bird21 Textbook"
+title: "Textbook Reference"
 format: html
 bibliography: references.bib
 embed-resources: true
@@ -18,13 +18,23 @@ engine: knitr
 
 ## Preface
 
-The following topics from @bird21 **Section M:** Statistics and probability are covered as part of the statistics component of ENGEN102.
+The following topics from @bird21 _**Section M:** Statistics and probability_ are covered as part of the statistics component of ENGEN102.
 
-- *Mean, median, mode and standard deviation* (pg. 743--750).
+- *Mean, median, mode and standard deviation* (pg. 743--750)
 - *Probability* (pg. 751--763)
-- *The Normal distribution* (pg. 771--779).
-- *Sampling and estimation theories* (pg. 792--804).
-- *Significance testing* (pg. 805--821).
+- *The Normal distribution* (pg. 771--779)
+- *Sampling and estimation theories* (pg. 792--804)
+- *Significance testing* (pg. 805--821)
+
+The following topics from @stroud13 are covered as part of the statistics component of ENGEN102.
+
+- *Data handling and statistics* (pg. 1045--1075)
+- *Probability* (pg. 1076--1116)
+
+The following topics from @lock21 _**Unit C:** Inference with Normal and t-Distributions_ are covered as part of the statistics component of ENGEN102.
+
+- *Inference for a Mean* (pg. 448--469)
+- *Inference for a Difference in Means* (pg. 485--501)
 
 ::: {.callout-warning appearance="simple"}
 This is not an exhaustive list of all topics covered in the statistics component of ENGEN102.
@@ -56,7 +66,7 @@ Some *t*-multipliers you may require that are not provided by @bird21 are:
 
 ### Worked Problems
 
-The following lists which worked problems from @bird21 are relevant to the statistics component of ENGEN102.
+The following lists which worked problems from @bird21 that are relevant to the statistics component of ENGEN102.
 
 - *Mean, median, mode and standard deviation*: Problems 1, 2, and 5
 - *Probability*: Problems 1 and 6(a)
@@ -66,7 +76,7 @@ The following lists which worked problems from @bird21 are relevant to the stati
 
 ### Revision Test Questions
 
-The following lists which questions from the @bird21 revision tests are relevant to the statistics component of ENGEN102.
+The following lists which questions from the @bird21 revision tests that are relevant to the statistics component of ENGEN102.
 
 - Revision Test 18: Questions 3, 6(a), and 6(c)
 - Revision Test 19: Questions 3 and 4
@@ -74,7 +84,7 @@ The following lists which questions from the @bird21 revision tests are relevant
 
 ### Practice Exercises
 
-The following lists which questions from the @bird21 practice exercises are relevant to the statistics component of ENGEN102.
+The following lists which questions from the @bird21 practice exercises that are relevant to the statistics component of ENGEN102.
 
 - Practice Exercise 289: Questions 1--4
 - Practice Exercise 291: Questions 1--3
@@ -87,6 +97,46 @@ The following lists which questions from the @bird21 practice exercises are rele
 - Practice Exercise 309: Questions 1--3  
 - Practice Exercise 311: Questions 2, 4, 5, and 6
 - Practice Exercise 312: Questions 1, 2, 3, 5, and 6
+
+## Relevant Practice from @stroud13
+
+<!-- Frames have not been processed -->
+
+The following lists which questions from the @stroud13 test exercises and further problems that are relevant to the statistics component of ENGEN102.
+
+- Further Problems 28: Questions 1(b) (i), 1(b) (ii), 2(c), 4, 5, 6(a), 7(b), 8(a), 8(b) (ii), 9(a), and 9(b) (ii)
+- Test Exercise 29: Question 6
+- Further Problems 29: Questions 17--24
+
+<!-- ## Relevant Practice from @lock21 -->
+
+<!-- Answers and t-multipliers missing from Table B have not been processed -->
+
+<!-- The following lists which questions from the @lock21 exercises that are relevant to the statistics component of ENGEN102 *and* do not require the use of software. -->
+
+<!-- - *6.2-D*: -->
+<!--   - Exercises 6.65--6.72 -->
+<!--   - Exercises 6.77--6.88 -->
+<!-- - *6.2-CI*: -->
+<!--   - Exercises 6.89--6.94 -->
+<!--   - Exercises 6.99--6.110 -->
+<!--   - Exercise 6.117: (a) and (b) -->
+<!--   - Exercise 6.119: (a) and (b) -->
+<!--   - Exercise 6.120: (a) and (b) -->
+<!-- - *6.2-HT*: -->
+<!--   - Exercises 6.126--6.140 -->
+<!-- - *6.4-D*: -->
+<!--   - Exercises 6.198--6.203 -->
+<!-- - *6.4-CI*: -->
+<!--   - Exercises 6.206--6.212 -->
+<!--   - Exercise 6.213: (b) and (c) -->
+<!--   - Exercises 6.214--6.220 -->
+<!--   - Exercises 6.223 and 6.224 -->
+<!-- - *6.4-HT*: -->
+<!--   - Exercises 6.227--6.240 -->
+<!--   - Exercise 6.241: (a), (b), (c), (e), and (f) -->
+<!--   - Exercises 6.242--6.244 -->
+<!--   - Exercises 6.246--6.252 -->
 
 ## Answers to Relevant Practice from @bird21
 
@@ -111,10 +161,10 @@ The style of these brief solutions follows the same style as @bird21. That is, o
 
 #### *The Normal distribution*
 
-1. 492.05 &rightarrow; 492--493 people
-2. 143.85 &rightarrow; 143--144 people
-3. 1.9 &rightarrow; 1--2 people
-4. (a\) 71.25 &rightarrow; 71--72 bottles &emsp; (b\) 868.2 &rightarrow; 868--869 bottles &emsp; (c\) 19.8 &rightarrow; 19--20 bottles &emsp; (d\) 129 bottles
+1. 492.05 &rightarrow; 492 people
+2. 143.85 &rightarrow; 144 people
+3. 1.9 &rightarrow; 2 people
+4. (a\) 71.25 &rightarrow; 71 bottles &emsp; (b\) 868.2 &rightarrow; 868 bottles &emsp; (c\) 19.8 &rightarrow; 20 bottles &emsp; (d\) 129 bottles
 
 #### *Sampling and estimation theories*
 
@@ -281,3 +331,37 @@ The style of these brief solutions follows the same style as @bird21. That is, o
   <li> *t*^\*^~[0.95]{.ch-0}~(*&nu;* = 4) = 2.13, *t*~0~ = 3.71  
   Hence the null hypothesis, H~0~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ = 0 kilometres, is rejected in favour of the alternative, H~1~: *&mu;*~Unleaded~ &minus; *&mu;*~LPG~ > 0 kilometres, at the 5% significance level
 </ol>
+
+## Answers to Relevant Practice from @stroud13
+
+### Further Problems 28
+
+<ol>
+  <li> (b\) (i\) 76.65 components &emsp; (ii\) 7.748 components
+  <li> (c\) (i\) 16.773 mm &emsp; (ii\) 1.360 mm
+  <li value="4"> (a\) 2.382 M&ohm; &emsp; (b\) 0.016 M&ohm; &emsp; (c\) 2.38 M&ohm; &emsp; (d\) 2.38 M&ohm;
+  <li> (a\) 31.06 kN &emsp; (b\) 0.241 kN &emsp; (c\) 31 kN &emsp; (d\) 31 kN
+  <li> (a\) (i\) 11.538 min &emsp; (ii\) 9.728 min &emsp; (iii\) 11.5 min &emsp; (iv\) 11.5 min
+  <li> (b\) 1964.4 &rightarrow; 1964 acceptable components
+  <li> (a\) (i\) 7.556 kg &emsp; (ii\) 0.127 kg  
+  (b\) (ii\) 0.127 kg
+  <li> (a\) (i\) 29.638 mm &emsp; (ii\) 0.123 mm  
+  (b\) (ii\) 2078.76 &rightarrow; 2079 blocks
+</ol>
+
+### Test Exercise 29
+
+<ol>
+  <li value="6"> 211.98 &rightarrow; 212 rods
+</ol>
+
+### Further Problems 29
+
+17. 0.1271
+18. (a\) 0.0078 &emsp; (b\) 0.9028
+19. (a\) 0.7492 &emsp; (b\) 0
+20. 333.24 &rightarrow; 333 washers
+21. (a\) 0.0618 &emsp; (b\) 0.2206
+22. (a\) 7.44 &rightarrow; 7 bearings &emsp; (b\) 126.72 &rightarrow; 127 bearings
+23. (a\) 0.4835 &emsp; (b\) 0.0146 
+24. (a\) 214.8  &rightarrow; 215 bulbs &emsp; (b\) 89.26 % &emsp; (c\) 0
