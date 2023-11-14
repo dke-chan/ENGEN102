@@ -270,7 +270,7 @@ from scipy.stats import t
 t.ppf(0.975, df=19)
 ```
 :::
-
+<!-- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp -->
 
 [-0.9646]{style="color: ghostwhite;"}
 

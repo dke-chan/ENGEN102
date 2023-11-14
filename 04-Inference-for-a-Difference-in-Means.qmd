@@ -25,9 +25,31 @@ library(ggplot2)
 
 ## Motivation
 
+One numeric + one categorical
+
 ## Sampling Distribution of the Difference in Sample Means
 
+Another outcome of the *Central Limit Theorem* is the **sampling distribution of the difference in sample means**.
 
+. . .
+
+::: {.definition style="margin-top: 50px; width: 90%;"}
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with *finite* mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}.
+
+Furthermore, let $Y_1, Y_2, \cdots, Y_n$ be $n$ independent and identically distributed **random variables** with *finite* mean, [$\mu_Y$]{.blue}, and standard deviation, [$\sigma_Y$]{.blue}.
+
+If we let $\bar{X} = \frac{\sum^n_{i=1} X_i}{n_X}$ and $\bar{Y} = \frac{\sum^n_{i=1} Y_i}{n_Y}$, then
+
+$$
+\bar{X} - \bar{Y} \rightarrow_D \text{Normal} \! \left(\mu = \mu_X - \mu_Y, \sigma = \sqrt{\frac{(\sigma_X)^2}{n_X} + \frac{(\sigma_Y)^2}{n_Y}}\right)
+$$
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+Like the *sampling distribution of the sample mean*, $n_1 + n_2 \geq 30$ is "good enough" to use a Normally distributed **random variable** to model $\bar{X} - \bar{Y}$.
+:::
 
 ## Standard Error of *x&#772;*~1~ &minus; *x&#772;*~2~
 
@@ -158,7 +180,7 @@ The `jet-noise.csv` file describes a study investigated the noise levels of a ra
 
 ::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
 +:----------+:----------------------------------------------------------------------------------------------------------------------------+
-| **noise** | A number that denotes the noise level after the jet "took off", measured in decibels (dB). 
+| **noise** | A number that denotes the noise level after the jet "takes off", measured in decibels (dB). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
 | **body**  | A string that denotes the body type of the jet, either `wide` (for wide-bodied) or `narrow` (for narrow-bodied). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
@@ -180,6 +202,29 @@ rbind(colnames(noise.df), head(noise.df, n = 14), rep("...", ncol(noise.df))) |>
 ::: {.aside}
 Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Course in Data Analysis and Inference*. Wiley.
 :::
+
+## Assumptions for Inference on the Difference in Means
+
+```{r noise-dotplot}
+#| fig-dpi: 300
+#| fig-height: 4.5
+#| fig-width: 7
+#| out-width: 40%
+
+ggplot(noise.df, aes(x = noise)) +
+  geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(noise.df$noise) - min(noise.df$noise)) / 25, dotsize = 0.7) + 
+  facet_wrap(~ body, nrow = 2) +
+  scale_y_continuous(breaks = NULL) +
+  labs(y = NULL, x = "Noise Level after \"Takeoff\" (dB)", title = "Distribution of Noise Levels after \"Takeoff\" by Body Type") +
+  theme_bw()
+```
+
+::: {.incremental}
+1. **Independent** observations between *and* within groups
+2. *Within* [group]{style="color: steelblue;"}: One measure of centre can satisfactorily summarise the group
+3. *Within* [group]{style="color: steelblue;"}: Approximately symmetrical about the group's **sample mean**, $\bar{x}_i$, and there are no outliers
+:::
+
 
 ## [Ex 7]{.red} Inferential Statistics in [Python]{.cornflowerblue}
 
@@ -216,25 +261,48 @@ noise_ttest
 **Documentation**: [docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html#scipy.stats.ttest_ind)
 :::
 
-## Assumptions for Inference on the Difference in Means
-
-::: {.incremental}
-1. **Independent** observations between *and* within groups
-2. *Within* [group]{style="color: steelblue;"}: One measure of centre can satisfactorily summarise the group
-3. *Within* [group]{style="color: steelblue;"}: Approximately symmetrical about the group's **sample mean**, $\bar{x}_i$, and there are no outliers
-:::
-
 ## Practice Exercises {visibility="uncounted"}
 
-<!-- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp -->
+<ol style="line-height: 1.1; font-size: 0.8em;">
+  <li style="margin-bottom: 50pt;">
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
+      Interpret the 95% confidence interval constructed for [**Ex 7**]{.red}.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
+      Interpret the outcome of the hypothesis test conducted for [**Ex 7**]{.red} at the 5% level.
+      </li>
+    </ol>
+  </li>
+  
+  <li style="margin-bottom: 50pt;">
+  Suppose we plotted data typically analysed when conducting inference for a difference in means setting. Which assumptions for inference can be checked with the plot?
+  </li>
+  
+  <li>
+  A company producing batteries wishes to see if there is any difference between the lifetime of two recently developed battery prototypes, battery A and battery B. Quality assurance tested a random sample of 15 battery As, and 12 battery Bs, and the results of the test are numerically summarised below.
+$$
+\bar{x}_\text{A} = 145 ~ \text{days}, \quad s_\text{A} = 18 ~ \text{days}, \quad n_\text{A} = 15 \\
+\bar{x}_\text{B} = 162 ~ \text{days}, \quad s_\text{B} = 12 ~ \text{days}, \quad n_\text{B} = 12
+$$
+  You can answer the following questions as if the assumptions for inference have been met.
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Construct a 95% confidence interval for the difference in mean lifetimes.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Interpret the 95% confidence interval.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      State the null *and* alternative hypothesis statements that can be used to answer the company's question.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Based on your hypotheses, calculate the test statistic *and* the critical value.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Interpret the outcome of the hypothesis test conducted at the 5% level.
+      </li>
+    </ol>
 
-
-<!--  company producing batteries wishes to test if there is any difference between the -->
-<!-- life of two recently developed battery prototypes (battery A and battery B). -->
-<!-- A sample of 15 battery A, and 12 battery B’s were tested. The sample statistics are -->
-<!-- shown in the table below: -->
-<!-- Perform a two-sample t-test to test whether a mean difference exists between the -->
-<!-- two batteries, at a significance level of 5% -->
-<!-- Battery Sample mean Sample Stdev Sample Size -->
-<!-- A 145 18 15 -->
-<!-- B 162 12 12 -->
+  </li>
+</ol>
