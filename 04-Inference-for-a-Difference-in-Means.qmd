@@ -13,7 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: breeze
     code-line-numbers: false
-    embed-resources: false
+    embed-resources: true
 editor: source
 ---
   
@@ -25,7 +25,21 @@ library(ggplot2)
 
 ## Motivation
 
-One numeric + one categorical
+::: {style="margin-bottom: 50px;"}
+The kind of data we typically analyse when we measure one numeric variable and one categorical variable on each observation. Often, we collect this data to *detect a difference* between two groups.
+:::
+
+. . .
+
+> Do women who smoke during pregnancy have babies with lower average birth weight than women who don't smoke during pregnancy? If so, what is the difference?
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
+ --- Utts and Heckard (2015)
+:::
+
+::: {.aside}
+Utts, J. M. & Heckard, R. F. (2015). *Mind on Statistics* (5th ed.). Cengage.
+:::
 
 ## Sampling Distribution of the Difference in Sample Means
 
@@ -109,7 +123,7 @@ $\bar{x}_1 - \bar{x}_2$
 
 :::: {.fragment}
 ::: {style="margin-top: 50px;"}
-**Interval Estimate^[By constructing a *[confidence interval]{.tomato}* for the differnece in the "true" means.]**
+**Interval Estimate^[By constructing a *[confidence interval]{.tomato}* for the difference in the "true" means.]**
 :::
 
 ::: {.definition-orchid style="width: 58%; margin-left: 0;"}
@@ -117,7 +131,7 @@ $\bar{x}_1 - \bar{x}_2$
 :::
 ::::
 
-:::: {.fragment .incremental style="margin-left: 25px;"}
+:::: {.fragment .incremental}
 where $t^*_p(\nu)$ is the *t*-multiplier such that:
 
 ::: {style="margin-top: -15px;"}
@@ -164,11 +178,110 @@ stats.t.ppf(0.975, 267)
 With 95% confidence, we estimate that the true mean hourly earnings of left-handed American men were somewhere between \$0.77 per hour lower and \$1.37 per hour higher than that of right-handed American men.
 :::
 
-## Test for the Difference in Means
+## Test for the Difference in Means<small>1</small>
+
+:::::: {.columns}
+::::: {.column}
+**Hypothesis Statements^2^**
+
+::: {.definition style="width: 35%; margin-left: 0;"}
+$H_0\!: \mu_1 - \mu_2 = h_d$  
+$H_1\!: \mu_1 - \mu_2 \neq h_d$
+:::
+
+::: {.fragment}
+where $h_d$ is the hypothesised difference in <br> the "true" means.
+:::
+
+:::: {.fragment}
+::: {style="margin-top: 50px;"}
+**Test Statistic**
+:::
+
+::: {.definition-orchid style="width: 40%; margin-left: 0;"}
+$t_0 = \displaystyle \frac{(\bar{x}_1 - \bar{x}_2) - h_d}{ \text{se}(\bar{x}_1 - \bar{x}_2)}$
+:::
+::::
+:::::
+::::: {.fragment .column}
+Recall for [**Ex 6:**]{.red}
+<blockquote style="border-left: 0.25em solid #685f5f; margin-bottom: 50px;">
+$$
+\bar{x}_\text{Left} = \$13.40, \quad s_\text{Left} = \$7.9, \quad n_\text{Left} = 268 \\
+\bar{x}_\text{Right} = \$13.10, \quad s_\text{Right} = \$7.9, \quad n_\text{Right} = 2027
+$$
+</blockquote>
+:::::
+::::::
+
+::: {.aside}
+1. By conducting a two sample *t*-test, that is, a [*hypothesis test*]{.steelblue} for the difference in the "true" means.
+2. By default, we conduct two-sided hypothesis tests ($\neq$). A one-sided test can be conducted instead by changing the sign of the *alternative* hypothesis to $<$ or $>$.
+:::
 
 ## Using Student's *t*-distribution to Calculate the *p*-value
 
-## Interpretation of the Hypothesis Test
+[**Ex 6:**]{.red} $t_0 = 0.584$ for $H_0\!: \mu_\text{Left} - \mu_\text{Right} = 0$ versus $H_1\!: \mu_\text{Left} - \mu_\text{Right} \neq 0$.
+
+. . .
+
+::: {style="margin-bottom: 50px;"}
+Under the *null*, $T \rightarrow_D \text{Student}(\nu)$, where $\nu = \text{min}(n_1 - 1, n_2 - 1)$ [*by hand*]{.highlight-blue-revealjs}^[Statistically inclined software like [Python]{.cornflowerblue} use Satterthwaite's approximation to determine $\nu$.].
+:::
+
+::::: {.columns style="font-size: 0.9em;"}
+:::: {.column .fragment}
+::: {.definition style="width: 85%; margin-left: 0;"}
+If it is a two-sided test, e.g. $H_1 \! : \mu_1 - \mu_2 \neq h_d$
+
+$\quad p\text{-value} = 2 \times \mathbb{P}(T > |t_0|)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T > |t|) = \alpha/2$
+:::
+
+::: {.definition-orchid .fragment style="margin-top: 25px; width: 85%; margin-left: 0;"}
+If it is a one-sided test and $H_1 \! : \mu_1 - \mu_2 > h_d$
+
+$\quad p\text{-value} = \mathbb{P}(T > t_0)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T > t) = \alpha$
+:::
+
+::: {.definition-teal .fragment style="margin-top: 25px; width: 85%; margin-left: 0;"}
+If it is a one-sided test and $H_1 \! : \mu_1 - \mu_2 < h_d$
+
+$\quad p\text{-value} = \mathbb{P}(T < t_0)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T < t) = \alpha$
+:::
+::::
+:::: {.column}
+```{python noise-pvalue}
+#| echo: true
+#| classes: fragment
+
+# Load in the stats submodule from the scipy package
+from scipy import stats
+
+# Calculate the p-value using the CDF
+2 * (1 - stats.t.cdf(abs(0.584), 274))
+
+# Determine the critical value at the 5% level
+stats.t.ppf(0.975, 274)
+```
+::::
+:::::
+
+## Interpretation of the Outcome of the Hypothesis Test
+
+[**Ex 6:**]{.red} $t_0 = 0.584$ for $H_0\!: \mu_\text{Left} - \mu_\text{Right} = 0$ versus $H_1\!: \mu_\text{Left} - \mu_\text{Right} \neq 0$.
+
+The *p*-value was 0.5597 and the critical value was 1.969.
+
+::: {.printOnly style="margin-top: 50px;"}
+We do not reject the null that the true average hourly earnings of left-handed American men were the same as that of right-handed American men in favour of the alternative that they are not at the 5% level (p-value = 0.5597). 
+:::
+
 
 ## [Ex 7:]{.red} Jet Noise
 
@@ -180,7 +293,7 @@ The `jet-noise.csv` file describes a study investigated the noise levels of a ra
 
 ::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
 +:----------+:----------------------------------------------------------------------------------------------------------------------------+
-| **noise** | A number that denotes the noise level after the jet "takes off", measured in decibels (dB). 
+| **noise** | A number that denotes the noise level after the jet takes off, measured in decibels (dB). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
 | **body**  | A string that denotes the body type of the jet, either `wide` (for wide-bodied) or `narrow` (for narrow-bodied). 
 +-----------+-----------------------------------------------------------------------------------------------------------------------------+
@@ -205,26 +318,37 @@ Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Cou
 
 ## Assumptions for Inference on the Difference in Means
 
+::: {style="text-align: center;"}
 ```{r noise-dotplot}
 #| fig-dpi: 300
 #| fig-height: 4.5
 #| fig-width: 7
 #| out-width: 40%
+#| fig-align: center
+#| fig-cap: "**Figure:** Distribution of 35 jet noise levels after takeoff."
 
 ggplot(noise.df, aes(x = noise)) +
   geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(noise.df$noise) - min(noise.df$noise)) / 25, dotsize = 0.7) + 
-  facet_wrap(~ body, nrow = 2) +
+  facet_wrap(~ body, nrow = 2, labeller = as_labeller(c(`narrow` = "Narrow-bodied Jets", `wide` = "Wide-bodied Jets"))) +
   scale_y_continuous(breaks = NULL) +
-  labs(y = NULL, x = "Noise Level after \"Takeoff\" (dB)", title = "Distribution of Noise Levels after \"Takeoff\" by Body Type") +
+  labs(y = NULL, x = "Noise Level After Takeoff (dB)", title = "Distribution of Noise Levels After Takeoff by Body Type") +
   theme_bw()
 ```
-
-::: {.incremental}
-1. **Independent** observations between *and* within groups
-2. *Within* [group]{style="color: steelblue;"}: One measure of centre can satisfactorily summarise the group
-3. *Within* [group]{style="color: steelblue;"}: Approximately symmetrical about the group's **sample mean**, $\bar{x}_i$, and there are no outliers
 :::
 
+<ol style="margin-top: -25px;">
+  <li class="fragment" data-fragment-index=0> The two groups are independent.
+  <li class="fragment" data-fragment-index=1> *Within* group: <ol style="list-style-type: lower-alpha;">
+    <li class="fragment" data-fragment-index=1> Observations are independent.
+    <li class="fragment" data-fragment-index=2> One measure of centre is an appropriate summary of the data.
+    <li class="fragment" data-fragment-index=3> The data is approximately symmetrical about its sample mean.
+    <li class="fragment" data-fragment-index=4> No outliers.
+  </ol>
+</ol>
+
+. . .
+
+Like _**Inference on the Mean**_, we are more lenient with the final two assumptions with *large* sample sizes.
 
 ## [Ex 7]{.red} Inferential Statistics in [Python]{.cornflowerblue}
 
@@ -297,7 +421,7 @@ $$
       State the null *and* alternative hypothesis statements that can be used to answer the company's question.
       </li>
       <li style="list-style-type: lower-alpha; line-height: 1.1;">
-      Based on your hypotheses, calculate the test statistic *and* the critical value.
+      Based on your hypotheses, calculate the test statistic *and* determine the critical value.
       </li>
       <li style="list-style-type: lower-alpha; line-height: 1.1;">
       Interpret the outcome of the hypothesis test conducted at the 5% level.

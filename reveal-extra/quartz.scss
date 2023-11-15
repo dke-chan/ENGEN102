@@ -55,9 +55,12 @@ $link-color-hover: #d22;
   line-height: 0.9;
 }
 
-.reveal .slide li li, .reveal .slide li li {
+.reveal .slide li li {
   font-size: 0.9em;
   line-height: 0.8;
+}
+
+.reveal .slide ul li li {
   list-style-type: circle;
 }
 
@@ -125,6 +128,15 @@ code span.co {
   padding: 0.2em 0.4em 0.2em;
   border: 0.1em solid orchid;
   background-color: rgba(218, 112, 214, 0.1);
+}
+
+.reveal .definition-teal {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.2em 0.4em 0.2em;
+  border: 0.1em solid teal;
+  background-color: rgba(0, 128, 128, 0.1);
 }
 
 .parskip-16pt > p, .parskip-16pt ul li {
@@ -292,17 +304,11 @@ html.print-pdf .reveal .printOnly {
   color: #399ee6;
 }
 
-/* 
-
-.reveal .definition-teal {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.2em 0.4em 0.2em;
-  border: 0.1em solid teal;
-  background-color: rgba(0, 128, 128, 0.1);
+.highlight-blue-revealjs {
+  color: #1b91ff;
 }
 
+/* 
 .reveal .definition-periwinkle {
   display: block;
   margin-left: auto;

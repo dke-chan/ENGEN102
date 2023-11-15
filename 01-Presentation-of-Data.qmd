@@ -30,11 +30,11 @@ library(knitr)
 > In statistical parlance, **data** is a plural word referring to a collection of numbers or other pieces of information to which meaning has been attached.
 
 ::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
- --- Utts (2014)
+ --- Utts (2015)
 :::
 
 ::: {.aside}
-Utts, J. M. (2014). *Seeing Through Statistics* (4th ed.). Cengage Learning.
+Utts, J. M. (2015). *Seeing Through Statistics* (4th ed.). Cengage.
 :::
 
 ## Observations[, values]{.fragment fragment-index=1}[, and variables]{.fragment fragment-index=2}
