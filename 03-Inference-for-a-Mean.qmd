@@ -1,0 +1,25 @@
+---
+title: "Inference for a Mean"
+author: "ENGEN102-23G (HAM) - Engineering Maths and Modelling 1B"
+format:
+  revealjs: 
+    slide-number: c/t
+    progress: true
+    auto-stretch: false
+    height: 1080
+    width: 1920
+    theme: reveal-extra/quartz.scss
+    template-partials:
+      - reveal-extra/title-block.html
+    highlight-style: breeze
+    code-line-numbers: false
+    embed-resources: false
+editor: source
+---
+
+```{r setup}
+#| include: false
+library(knitr)
+library(ggplot2)
+```
+
