@@ -23,3 +23,250 @@ library(knitr)
 library(ggplot2)
 ```
 
+## Motivation
+
+::: {style="margin-bottom: 50px;"}
+The kind of data we typically analyse when we measure one numeric variable on each observation. We often collect this data to *infer* the true mean or *test* sample data to see whether they follow regulations.
+:::
+
+. . .
+
+> Sometimes engineers work with problems for which there is no simple or well-understood mechanistic model that explains the phenomenon.
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
+ --- Montgomery et al. (2010)
+:::
+
+::: {.aside}
+Montgomery, D. C., Runger, G. C., & Hubele, N. F. (2010). *Engineering Statistics* (5th ed.). Wiley.
+:::
+
+## Statistical Inference
+
+> Statistical inference is the process of drawing conclusions about the entire population based on the information in a sample.
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
+ --- Lock et al. (2021)
+:::
+
+:::: {.r-stack}
+![](figures\StepOne.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+::: {.fragment}
+![](figures\StepTwo.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+:::
+::: {.fragment}
+![](figures\StepThree.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+:::
+::: {.fragment}
+![](figures\StepFour.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+:::
+::: {.fragment}
+![](figures\StepFive.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+:::
+::::
+
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data*. Wiley.
+:::
+
+## Sampling Distribution of the Sample Mean [(revisited)]{style="font-size: 0.7em;"}
+
+One outcome of the *Central Limit Theorem* is the **sampling distribution of the sample mean**.
+
+. . .
+
+::: {.definition style="margin-top: 50px; width: 90%;"}
+Let $X_1, X_2, \cdots, X_n$ be $n$ independent and identically distributed **random variables** with *finite* mean, [$\mu_X$]{.blue}, and standard deviation, [$\sigma_X$]{.blue}. If we let $\bar{X} = \frac{\sum^n_{i=1} X_i}{n}$, then
+
+$$
+\bar{X} \rightarrow_D \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)
+$$
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+Similarly, $n \geq 30$ is "good enough" to use a Normally distributed **random variable** to model $\bar{X}$. Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$, then $\bar{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$.
+:::
+
+## Standard Error of *x&#772;*
+
+The *estimate* of the sampling distribution's *spread* given the **observed data**.
+
+. . .
+
+::: {.definition style="margin-top: 50px; width: 47.5%;"}
+Let:
+
+- $\bar{x}$ be the *sample mean*,
+- $s$ be the *sample standard deviation*,
+- and $n$ be the *sample size*.
+
+Hence, the standard error of $\bar{x}$ is defined as
+
+$$
+\text{se}(\bar{x}) = \frac{s}{\sqrt{n}}
+$$
+:::
+
+::: {.aside}
+**Note:** $\bar{x}$ is the *estimate* of the sampling distribution's *centre* given the **observed data**.
+:::
+
+## [Ex 4:]{.red}
+
+## Estimation of the Mean
+
+## Student's *t*-distribution
+
+## Interpretation of the Confidence Interval
+
+## What a Confidence Interval is *Not*
+
+## Test for the Mean
+
+## Hypotheses
+
+## Using Student's *t*-distribution to Calculate the *p*-value
+
+## Rejection Regions
+
+## Interpretation of the Outcome of the Hypothesis Test
+
+## [Ex 5:]{.red} Cholesterol Levels
+
+::::: {.columns}
+:::: {.column width="70%"}
+<blockquote style="border-left: 0.25em solid #685f5f;">
+The `cholest.xlsx` file describes a random sample of patients used to estimate the average cholesterol level, which is expected to be 200 mg/dL. This is because these patients are being assessed to be part of a control group for a study on heart attacks.
+</blockquote>
+
+::: {.fragment fragment-index=1 .orchid-table style="font-size: 0.9em; margin-top: 50px; width: 90%;"}
++:----------+:----------------------------------------------------------------------------------------------------------------------------+
+| **level** | A number that denotes the cholesterol level of a patient, measured in milligrams per decilitre (mg/dL). 
++-----------+-----------------------------------------------------------------------------------------------------------------------------+
+:::
+::::
+:::: {.column width="30%" .fragment fragment-index=0}
+```{r cholest} 
+#| results: asis
+#| classes: excel
+
+library(readxl)
+cholest.df <- read_excel("datasets/cholest.xlsx")
+ 
+rbind(colnames(cholest.df), head(cholest.df, n = 14), rep("...", ncol(cholest.df))) |>
+  kable(format = "html", row.names = TRUE, col.names = LETTERS[1:ncol(cholest.df)])
+```
+::::
+:::::
+
+::: {.aside}
+Data from Utts, J. M. & Heckard, R. F. (2015). *Mind on Statistics* (5th ed.). Cengage.
+:::
+
+## Assumption for Inference on the Mean
+
+::: {style="text-align: center;"}
+```{r cholest-dotplot}
+#| fig-dpi: 300
+#| fig-height: 3.5
+#| fig-width: 7
+#| out-width: 40%
+#| fig-align: center
+#| fig-cap: "**Figure:** Distribution of 30 participants' cholesterol levels."
+
+ggplot(cholest.df, aes(x = level)) +
+  geom_dotplot(fill = NA, stroke = 3, colour = "black", binwidth = (max(cholest.df$level) - min(cholest.df$level)) / 25, dotsize = 0.7) + 
+  scale_y_continuous(breaks = NULL) +
+  labs(y = NULL, x = "Cholesterol Level (mg/dL)", title = "Distribution of Cholesterol Levels") +
+  theme_bw()
+```
+:::
+
+<ol style="margin-top: -25px;">
+  <li class="fragment" data-fragment-index=0> Observations are independent.
+  <li class="fragment" data-fragment-index=1> One measure of centre is an appropriate summary of the data.
+  <li class="fragment" data-fragment-index=2> The data is approximately symmetrical about its sample mean.
+  <li class="fragment" data-fragment-index=3> No outliers.
+</ol>
+
+. . .
+
+::: {style="border-bottom: 5px solid orange; width: 50%;"}
+3. and 4. in practice: 
+:::
+
+::: {.incremental style="margin-top: -0.25em;"}
+- We must follow this assumption strictly for "[small]{style="color: tomato;"}" datasets ($n < 20$)
+- We can be lenient with this assumption for "[medium]{style="color: steelblue;"}" datasets **if** $\text{se}(\bar{x})$ is not heavily affected ($20 \leq n \leq 50$)
+- We can be **very** lenient with this assumption for "[large]{style="color: orchid;"}" datasets ($n > 50$)
+:::
+
+## [Ex 5]{.red} Inferential Statistics in [Python]{.cornflowerblue}
+
+::: {style="width: 85%;"}
+```{python Ex-5}
+#| echo: true
+
+# Load in one submodule from the scipy package and the pandas package
+from scipy import stats
+import pandas
+
+# Read in the cholest.xlsx file
+cholest_df = pandas.read_excel("datasets/cholest.xlsx")
+
+# Calculate the inferential statistics
+cholest_ttest = stats.ttest_1samp(
+  a = cholest_df["level"],
+  popmean = 200,            # The hypothesised value for the true mean
+  alternative = "two-sided" # Other values this argument can take are "less" and "greater"
+)
+
+# Print the constructed 95% confidence interval
+cholest_ttest.confidence_interval(confidence_level = 0.95)
+
+# Print the result of the hypothesis test, whose alternative hypothesis was specified above
+cholest_ttest
+```
+:::
+
+::: {.aside}
+**Documentation**: [https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp)
+:::
+
+## Linking *two-sided* tests and confidence intervals
+
+## Practice Exercises {visibility="uncounted"}
+
+<ol style="line-height: 1.1; font-size: 0.8em;">
+  <li style="margin-bottom: 50pt;">
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
+      Interpret the 95% confidence interval constructed for [**Ex 5**]{.red}.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
+      Interpret the outcome of the hypothesis test conducted for [**Ex 5**]{.red} at the 5% level.
+      </li>
+    </ol>
+  </li>
+  
+  <li style="margin-bottom: 50pt;">
+  Suppose we plotted data typically analysed when conducting inference for a mean setting. Which assumptions for inference can be checked with the plot?
+  </li>
+  
+  <li>
+  
+  </li>
+</ol>
+
+<!-- A chemist has developed a new polymer for creating high-tensile strength string. -->
+<!-- He wants to test whether the average weight that can be suspended by this new -->
+<!-- string before the string breaks is different from the breaking strength of the -->
+<!-- previous string used for a particular application. -->
+<!-- 10 measurements are made of the weight (in kilograms) the new string can bear -->
+<!-- before it snaps: -->
+<!-- 5.73, 6.21, 5.85, 5.92, 5.97, 6.15, 6.05, 5.87, 5.91, 5.88 -->
+<!-- The string in current use has a mean breaking strength of 5.8 kg. Based on these -->
+<!-- trials, is there any evidence to suggest the new string has a different average -->
+<!-- breaking strength than the old string? Test at the 5% significance level. -->

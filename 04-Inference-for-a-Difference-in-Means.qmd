@@ -300,7 +300,7 @@ The `jet-noise.csv` file describes a study investigated the noise levels of a ra
 :::
 ::::
 :::: {.column width="30%" .fragment fragment-index=0}
-```{r alloy} 
+```{r noise} 
 #| results: asis
 #| classes: excel
 
@@ -400,7 +400,7 @@ noise_ttest
   </li>
   
   <li style="margin-bottom: 50pt;">
-  Suppose we plotted data typically analysed when conducting inference for a difference in means setting. Which assumptions for inference can be checked with the plot?
+  Suppose we plotted data typically analysed when conducting inference for a difference in means. Which assumptions for inference can be checked with the plot?
   </li>
   
   <li>

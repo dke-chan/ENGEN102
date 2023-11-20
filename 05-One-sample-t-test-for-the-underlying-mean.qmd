@@ -270,30 +270,9 @@ from scipy.stats import t
 t.ppf(0.975, df=19)
 ```
 :::
-<!-- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp -->
+<!--  -->
 
 [-0.9646]{style="color: ghostwhite;"}
-
-## Assumptions for inference on *&mu;*
-
-1. **Independent** observations
-2. One measure of centre can satisfactorily summarise the data
-3. Approximately symmetrical about the **sample mean**, $\bar{x}$, and there are no outliers
-
-. . .
-
-::: {style="border-bottom: 5px solid orange; width: 12.5%;"}
-More on **1.**
-:::
-
-. . .
-
-In practice, this is typically met when we...
-
-::: {.incremental style="margin-top: -0.25em;"}
-- ... take a *random* sample from a population
-- ... carry out an experiment that uses *randomisation* to eliminate potential biases<br>[...&nbsp;]{style="visibility: hidden;"}in the data collection
-:::
 
 ## [Ex 3]{style='color: tomato;'} in [iNZight]{.R}
 
