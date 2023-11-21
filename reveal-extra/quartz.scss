@@ -243,6 +243,10 @@ html.print-pdf .reveal pre code {
   font-family: "Source Code Pro", "Lucida Console", Monaco, monospace !important;
 }
 
+html.print-pdf .fragment.fade-in-then-semi-out {
+  opacity: 1 !important;
+}
+
 .printOnly {
   visibility: hidden;
 }

@@ -272,7 +272,7 @@ stats.t.ppf(0.975, 274)
 ::::
 :::::
 
-## Interpretation of the Outcome of the Hypothesis Test
+## Explanation of the Outcome of the Hypothesis Test
 
 [**Ex 6:**]{.red} $t_0 = 0.584$ for $H_0\!: \mu_\text{Left} - \mu_\text{Right} = 0$ versus $H_1\!: \mu_\text{Left} - \mu_\text{Right} \neq 0$.
 
@@ -318,12 +318,13 @@ Data from Wild, C. J., & Seber, G. A. F. (2000). *Chance Encounters: A First Cou
 
 ## Assumptions for Inference on the Difference in Means
 
-::: {style="text-align: center;"}
+::::: {.columns}
+:::: {.column width="45%"}
 ```{r noise-dotplot}
 #| fig-dpi: 300
 #| fig-height: 4.5
 #| fig-width: 7
-#| out-width: 40%
+#| out-width: 90%
 #| fig-align: center
 #| fig-cap: "**Figure:** Distribution of 35 jet noise levels after takeoff."
 
@@ -334,21 +335,23 @@ ggplot(noise.df, aes(x = noise)) +
   labs(y = NULL, x = "Noise Level After Takeoff (dB)", title = "Distribution of Noise Levels After Takeoff by Body Type") +
   theme_bw()
 ```
-:::
-
-<ol style="margin-top: -25px;">
-  <li class="fragment" data-fragment-index=0> The two groups are independent.
-  <li class="fragment" data-fragment-index=1> *Within* group: <ol style="list-style-type: lower-alpha;">
-    <li class="fragment" data-fragment-index=1> Observations are independent.
-    <li class="fragment" data-fragment-index=2> One measure of centre is an appropriate summary of the data.
-    <li class="fragment" data-fragment-index=3> The data is approximately symmetrical about its sample mean.
-    <li class="fragment" data-fragment-index=4> No outliers.
-  </ol>
+::::
+:::: {.column width="55%"}
+<ol>
+  <li class="fragment" data-fragment-index=0> The two groups are independent.</li>
+  <li class="fragment" data-fragment-index=1> *Within* group: <ol style="list-style-type: lower-alpha; ">
+    <li class="fragment" data-fragment-index=1 style="line-height: 1.1;"> Observations are independent.</li>
+    <li class="fragment" data-fragment-index=2 style="line-height: 1.1;"> One measure of centre is an appropriate summary of the data.</li>
+    <li class="fragment" data-fragment-index=3 style="line-height: 1.1;"> The data is approximately symmetrical about its sample mean.</li>
+    <li class="fragment" data-fragment-index=4 style="line-height: 1.1;"> No outliers.</li>
+  </ol></li>
 </ol>
 
-. . .
-
-Like _**Inference on the Mean**_, we are more lenient with the final two assumptions with *large* sample sizes.
+::: {.fragment fragment-index=5 style="margin-top: 50px;"}
+Like _**Inference on the Mean**_, we are more lenient with the final two *within* group assumptions for *large* sample sizes.
+:::
+::::
+:::::
 
 ## [Ex 7]{.red} Inferential Statistics in [Python]{.cornflowerblue}
 
@@ -394,7 +397,7 @@ noise_ttest
       Interpret the 95% confidence interval constructed for [**Ex 7**]{.red}.
       </li>
       <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
-      Interpret the outcome of the hypothesis test conducted for [**Ex 7**]{.red} at the 5% level.
+      Explain the outcome of the hypothesis test conducted for [**Ex 7**]{.red} at the 5% level.
       </li>
     </ol>
   </li>
@@ -424,7 +427,10 @@ $$
       Based on your hypotheses, calculate the test statistic *and* determine the critical value.
       </li>
       <li style="list-style-type: lower-alpha; line-height: 1.1;">
-      Interpret the outcome of the hypothesis test conducted at the 5% level.
+      Explain the outcome of the hypothesis test conducted at the 5% level.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Based on your answers above, make a conclusion on whether there is a difference between the lifetime of the two battery prototypes.
       </li>
     </ol>
 

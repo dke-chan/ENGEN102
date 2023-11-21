@@ -131,7 +131,7 @@ $$
 
 ## Rejection Regions
 
-## Interpretation of the Outcome of the Hypothesis Test
+## Explanation of the Outcome of the Hypothesis Test
 
 ## [Ex 5:]{.red} Cholesterol Levels
 
@@ -167,12 +167,13 @@ Data from Utts, J. M. & Heckard, R. F. (2015). *Mind on Statistics* (5th ed.). C
 
 ## Assumption for Inference on the Mean
 
-::: {style="text-align: center;"}
+:::::: {.columns}
+::::: {.column width="45%"}
 ```{r cholest-dotplot}
 #| fig-dpi: 300
 #| fig-height: 3.5
 #| fig-width: 7
-#| out-width: 40%
+#| out-width: 90%
 #| fig-align: center
 #| fig-cap: "**Figure:** Distribution of 30 participants' cholesterol levels."
 
@@ -182,26 +183,28 @@ ggplot(cholest.df, aes(x = level)) +
   labs(y = NULL, x = "Cholesterol Level (mg/dL)", title = "Distribution of Cholesterol Levels") +
   theme_bw()
 ```
-:::
-
-<ol style="margin-top: -25px;">
-  <li class="fragment" data-fragment-index=0> Observations are independent.
-  <li class="fragment" data-fragment-index=1> One measure of centre is an appropriate summary of the data.
-  <li class="fragment" data-fragment-index=2> The data is approximately symmetrical about its sample mean.
-  <li class="fragment" data-fragment-index=3> No outliers.
+:::::
+::::: {.column width="55%"}
+<ol>
+  <li class="fragment" style="line-height: 1.1;"> Observations are independent.</li>
+  <li class="fragment" style="line-height: 1.1;"> One measure of centre is an appropriate summary of the data.</li>
+  <li class="fragment" style="line-height: 1.1;"> The data is approximately symmetrical about its sample mean.</li>
+  <li class="fragment" style="line-height: 1.1;"> No outliers.</li>
 </ol>
 
-. . .
-
-::: {style="border-bottom: 5px solid orange; width: 50%;"}
+:::: {.fragment}
+::: {style="margin-top: 50px; border-bottom: 5px solid orange; width: 40%;"}
 3. and 4. in practice: 
 :::
 
-::: {.incremental style="margin-top: -0.25em;"}
-- We must follow this assumption strictly for "[small]{style="color: tomato;"}" datasets ($n < 20$)
-- We can be lenient with this assumption for "[medium]{style="color: steelblue;"}" datasets **if** $\text{se}(\bar{x})$ is not heavily affected ($20 \leq n \leq 50$)
-- We can be **very** lenient with this assumption for "[large]{style="color: orchid;"}" datasets ($n > 50$)
-:::
+<ul>
+  <li class="fragment" style="line-height: 1.1;"> Follow strictly for "[small]{.tomato}" datasets (*n* < *20*).</li>
+  <li class="fragment" style="line-height: 1.1;"> Lenient **if and only if** se(*x&#772;*) is not heavily affected for "[medium]{.steelblue}" datasets (*20* &leq; *n* &leq; *50*).</li>
+  <li class="fragment" style="line-height: 1.1;"> **Incredibly** lenient for "[large]{.orchid}" datasets (*n* > *50*).</li>
+</ul>
+::::
+:::::
+::::::
 
 ## [Ex 5]{.red} Inferential Statistics in [Python]{.cornflowerblue}
 
@@ -235,7 +238,52 @@ cholest_ttest
 **Documentation**: [https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html#scipy.stats.ttest_1samp)
 :::
 
-## Linking *two-sided* tests and confidence intervals
+## Linking *Two-sided* Tests and Confidence Intervals
+
+Commonly, a two-sided hypothesis test for a parameter at the [*&alpha;*%]{.tomato} level *and* a [(1 &minus; *&alpha;*)%]{.steelblue} confidence interval for the same parameter will lead to similar conclusions (based on the observed data).
+
+. . .
+
+::: {style="margin-top: 50px"}
+Recall for [**Ex 5**]{.red} that we are tested $H_0\!: \mu = 200$ versus $H_1\!: \mu \neq 200$, and the *p*-value was [0.1024]{.blue}.
+:::
+
+:::: {.fragment .fade-in-then-semi-out style="margin-left: 25px; font-size: 0.9em;"}
+Suppose we explained the outcome of the hypothesis test at the 20% level. [&zigrarr; Do reject...]{.printOnly}
+
+::: {style="width: 65%;"}
+``` {python Ex-5a}
+#| echo: true
+cholest_ttest.confidence_interval(confidence_level = 0.80)
+```
+:::
+::::
+
+:::: {.fragment .fade-in-then-semi-out style="margin-left: 25px; margin-top: 25px; font-size: 0.9em;"}
+Suppose we explained the outcome of the hypothesis test at the 5% level. [&zigrarr; Fail to reject...]{.printOnly}
+
+::: {style="width: 65%;"}
+``` {python Ex-5b}
+#| echo: true
+cholest_ttest.confidence_interval(confidence_level = 0.95)
+```
+:::
+::::
+
+:::: {.fragment style="margin-left: 25px; margin-top: 25px; font-size: 0.9em;"}
+Suppose we explained the outcome of the hypothesis test at the 1% level. [&zigrarr; Fail to reject...]{.printOnly}
+
+::: {style="width: 65%;"}
+``` {python Ex-5c}
+#| echo: true
+cholest_ttest.confidence_interval(confidence_level = 0.99)
+```
+:::
+::::
+
+::: {.aside}
+**Note:** A one-sided hypothesis test for a parameter at the [*&alpha;*%]{.tomato} level *does not* have an equivalent  relationship with [(1 &minus; *&alpha;*)%]{.steelblue} confidence<br>[**Note:**]{style="visibility: hidden;"} interval for the same parameter due to the nature of a one-sided test's rejection region.
+:::
 
 ## Practice Exercises {visibility="uncounted"}
 
@@ -246,7 +294,7 @@ cholest_ttest
       Interpret the 95% confidence interval constructed for [**Ex 5**]{.red}.
       </li>
       <li style="list-style-type: lower-alpha; line-height: 1.1; font-size: 1em;">
-      Interpret the outcome of the hypothesis test conducted for [**Ex 5**]{.red} at the 5% level.
+      Explain the outcome of the hypothesis test conducted for [**Ex 5**]{.red} at the 5% level.
       </li>
     </ol>
   </li>
@@ -256,17 +304,35 @@ cholest_ttest
   </li>
   
   <li>
+  A chemist has developed a new polymer for creating a high-tensile strength string. He wants to test whether the average weight that this new string can suspend before the string breaks (breaking strength) is different from the breaking strength of the current string used for a particular application, in which the current string has a mean breaking strength of 5.8 kilograms. 
   
+  He made ten string samples, recorded the breaking strength (measured in kilograms) and presented them below.
+$$
+5.73, \quad 6.21, \quad 5.85, \quad  5.92, \quad  5.97, \quad 6.15, \quad  6.05, \quad  5.87, \quad  5.91, \quad  5.88
+$$
+  You can answer the following questions as if the assumptions for inference have been met.
+    <ol>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Construct a 95% confidence interval for the mean breaking strength.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Interpret the 95% confidence interval.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      State the null *and* alternative hypothesis statements that can be used to answer the chemist's question.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Based on your hypotheses, calculate the test statistic *and* determine the critical value.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Explain the outcome of the hypothesis test conducted at the 5% level.
+      </li>
+      <li style="list-style-type: lower-alpha; line-height: 1.1;">
+      Based on your answers above, make a conclusion on whether the breaking strength of the new high-tensile strength string is different from the current string.
+      </li>
+    </ol>
   </li>
 </ol>
 
-<!-- A chemist has developed a new polymer for creating high-tensile strength string. -->
-<!-- He wants to test whether the average weight that can be suspended by this new -->
-<!-- string before the string breaks is different from the breaking strength of the -->
-<!-- previous string used for a particular application. -->
-<!-- 10 measurements are made of the weight (in kilograms) the new string can bear -->
-<!-- before it snaps: -->
-<!-- 5.73, 6.21, 5.85, 5.92, 5.97, 6.15, 6.05, 5.87, 5.91, 5.88 -->
-<!-- The string in current use has a mean breaking strength of 5.8 kg. Based on these -->
-<!-- trials, is there any evidence to suggest the new string has a different average -->
-<!-- breaking strength than the old string? Test at the 5% significance level. -->
+
+

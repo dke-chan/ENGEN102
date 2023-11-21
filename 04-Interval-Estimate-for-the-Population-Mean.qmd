@@ -108,30 +108,6 @@ t.ppf(0.975, df=15)
 
 
 [233.7681 336.0720]{style="color: ghostwhite;"}
-  
-## Assumptions for inference on *&mu;*
-
-::: {.incremental}
-1. **Independent** observations
-2. One measure of centre can satisfactorily summarise the data
-3. Approximately symmetrical about the **sample mean**, $\bar{x}$, and there are no outliers
-:::
-
-. . .
-
-::: {style="border-bottom: 5px solid orange; width: 12.5%;"}
-More on **3.**
-:::
-
-. . .
-
-In practice: 
-
-::: {.incremental style="margin-top: -0.25em;"}
-- We must follow this assumption strictly for "[small]{style="color: tomato;"}" datasets ($n < 20$)
-- We can be lenient with this assumption for "[medium]{style="color: steelblue;"}" datasets **if** $\text{se}(\bar{x})$ is not heavily affected ($20 \leq n \leq 50$)
-- We can be **very** lenient with this assumption for "[large]{style="color: orchid;"}" datasets ($n > 50$)
-:::
 
 ## [Ex 1]{style='color: tomato;'} in [iNZight]{.R}
 
@@ -169,18 +145,4 @@ Suppose the confidence level is 95%. The following interpretations of a 95% conf
 
 ::: {.aside}
 Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
-:::
-
-
-## Linking *two-sided* tests and confidence intervals {.margin-bottom}
-
-Generally speaking, when there is a [two-sided]{.fragment .highlight-red} hypothesis test and a confidence interval (C.I.) for the *same* underlying parameter. The level, $\alpha$, determines the significance threshold for the *p*-value and the width of the confidence interval
-
-. . .
-
-**_Typically_**
-
-::: {.tightList style="font-size: 0.9em;"}
-- If you reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. does not capture the hypothesised value of the underlying parameter
-- If you fail to reject the null at the $\alpha$% level, the corresponding $(1-\alpha)$% C.I. captures the hypothesised value of the underlying parameter
 :::
