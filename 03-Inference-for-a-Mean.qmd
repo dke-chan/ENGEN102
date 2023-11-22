@@ -49,24 +49,34 @@ Montgomery, D. C., Runger, G. C., & Hubele, N. F. (2010). *Engineering Statistic
  --- Lock et al. (2021)
 :::
 
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data*. Wiley.
+:::
+
+## Statistical Inference in Pictures
+
 :::: {.r-stack}
-![](figures\StepOne.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+![](figures\StepOne.png){style="display: block; margin-left: auto; margin-right: auto; width: 90%; border: 1px solid #383d3d;"}
+
 ::: {.fragment}
-![](figures\StepTwo.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+![](figures\StepTwo.png){style="display: block; margin-left: auto; margin-right: auto; width: 90%; border: 1px solid #383d3d;"}
 :::
+
 ::: {.fragment}
-![](figures\StepThree.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+![](figures\StepThree.png){style="display: block; margin-left: auto; margin-right: auto; width: 90%; border: 1px solid #383d3d;"}
 :::
+
 ::: {.fragment}
-![](figures\StepFour.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+![](figures\StepFour.png){style="display: block; margin-left: auto; margin-right: auto; width: 90%; border: 1px solid #383d3d;"}
 :::
+
 ::: {.fragment}
-![](figures\StepFive.png){style="display: block; margin-left: auto; margin-right: auto; width: 60%; border: 1px solid #383d3d;"}
+![](figures\StepFive.png){style="display: block; margin-left: auto; margin-right: auto; width: 90%; border: 1px solid #383d3d;"}
 :::
 ::::
 
-::: {.aside}
-Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data*. Wiley.
+::: {.aside} 
+person by Brian Dys Sahagun from [Noun Project](https://thenounproject.com/browse/icons/term/person/) (CC BY 3.0).
 :::
 
 ## Sampling Distribution of the Sample Mean [(revisited)]{style="font-size: 0.7em;"}
@@ -87,6 +97,18 @@ $$
 
 ::: {style="margin-top: 50px;"}
 Similarly, $n \geq 30$ is "good enough" to use a Normally distributed **random variable** to model $\bar{X}$. Furthermore, if $X_i \sim \text{Normal}(\mu_X, \sigma_X)$, then $\bar{X} \sim \text{Normal} \! \left(\mu = \mu_X, \sigma = \frac{\sigma_X}{\sqrt{n}}\right)$.
+:::
+
+## Sampling Distribution of the Sample Mean [*in Action*]{.red}
+
+Recall the (virtual) data collection task where we wanted to estimate the *average* weight of these 100 blocks by selecting **only** 10 blocks.
+
+[**URL:** [bit.ly/choc-and-blocks](https://bit.ly/choc-and-blocks)]{style="margin-left: 1em;"}
+
+. . .
+
+::: {style="margin-top: 50px;"}
+What percentage of random samples could we expect to have a sample mean weight within *two standard deviations* of the average weight [_**by chance alone**_]{.highlight-blue-revealjs}? [&zigrarr; Approximately 95%]{.printOnly}
 :::
 
 ## Standard Error of *x&#772;*
@@ -240,7 +262,7 @@ cholest_ttest
 
 ## Linking *Two-sided* Tests and Confidence Intervals
 
-Commonly, a two-sided hypothesis test for a parameter at the [*&alpha;*%]{.tomato} level *and* a [(1 &minus; *&alpha;*)%]{.steelblue} confidence interval for the same parameter will lead to similar conclusions (based on the observed data).
+Commonly, a two-sided [*hypothesis test*]{.steelblue} for a parameter at the [*&alpha;*%]{.orchid} level *and* a [(1 &minus; *&alpha;*)%]{.teal} [*confidence interval*]{.tomato} for the same parameter will lead to similar conclusions (based on the observed data).
 
 . . .
 
@@ -249,7 +271,7 @@ Recall for [**Ex 5**]{.red} that we are tested $H_0\!: \mu = 200$ versus $H_1\!:
 :::
 
 :::: {.fragment .fade-in-then-semi-out style="margin-left: 25px; font-size: 0.9em;"}
-Suppose we explained the outcome of the hypothesis test at the 20% level. [&zigrarr; Do reject...]{.printOnly}
+Suppose we explained the outcome of the [*hypothesis test*]{.steelblue} at the 20% level. [&zigrarr; Do reject...]{.printOnly}
 
 ::: {style="width: 65%;"}
 ```{python Ex-5a}
@@ -260,7 +282,7 @@ cholest_ttest.confidence_interval(confidence_level = 0.80)
 ::::
 
 :::: {.fragment .fade-in-then-semi-out style="margin-left: 25px; margin-top: 25px; font-size: 0.9em;"}
-Suppose we explained the outcome of the hypothesis test at the 5% level. [&zigrarr; Fail to reject...]{.printOnly}
+Suppose we explained the outcome of the [*hypothesis test*]{.steelblue} at the 5% level. [&zigrarr; Fail to reject...]{.printOnly}
 
 ::: {style="width: 65%;"}
 ```{python Ex-5b}
@@ -271,7 +293,7 @@ cholest_ttest.confidence_interval(confidence_level = 0.95)
 ::::
 
 :::: {.fragment style="margin-left: 25px; margin-top: 25px; font-size: 0.9em;"}
-Suppose we explained the outcome of the hypothesis test at the 1% level. [&zigrarr; Fail to reject...]{.printOnly}
+Suppose we explained the outcome of the [*hypothesis test*]{.steelblue} at the 1% level. [&zigrarr; Fail to reject...]{.printOnly}
 
 ::: {style="width: 65%;"}
 ```{python Ex-5c}
@@ -282,7 +304,7 @@ cholest_ttest.confidence_interval(confidence_level = 0.99)
 ::::
 
 ::: {.aside}
-**Note:** A one-sided hypothesis test for a parameter at the [*&alpha;*%]{.tomato} level *does not* have an equivalent  relationship with [(1 &minus; *&alpha;*)%]{.steelblue} confidence<br>[**Note:**]{style="visibility: hidden;"} interval for the same parameter due to the nature of a one-sided test's rejection region.
+**Note:** A one-sided [*hypothesis test*]{.steelblue} for a parameter at the [*&alpha;*%]{.orchid} level *does not* have an equivalent  relationship with [(1 &minus; *&alpha;*)%]{.teal} [*confidence*]{.tomato}<br>[**Note:**]{style="visibility: hidden;"} [*interval*]{.tomato} for the same parameter due to the nature of a one-sided test's rejection region.
 :::
 
 ## Practice Exercises {visibility="uncounted"}

@@ -164,14 +164,14 @@ stats.t.ppf(0.975, 267)
 
 ## Interpretation of the Confidence Interval
 
-[**Ex 6:**]{.red} The 95% C.I. for $\mu_\text{Left} - \mu_\text{Right}$ is $(-0.7711021 , 1.3711021)$
+[**Ex 6:**]{.red} The 95% C.I. for $\mu_\text{Left} - \mu_\text{Right}$ is $[-0.7711021 , 1.3711021]$
 
 . . .
 
 <ul style="margin-top: 25px;">
   <li style="line-height: 1.1;">A [positive]{.tomato} number means that the true mean of the *first* group was estimated to be **greater than** that of the *second* group.</li>
   <li class="fragment" style="line-height: 1.1;">A [negative]{.steelblue} number means that the true mean of the *first* group was estimated to be **lower than** that of the *second* group.</li>
-  <li class="fragment" style="line-height: 1.1;">You can "invert" the signs of the C.I. to interpret it the other way around. Hence, the 95% C.I. for $\mu_\text{Right} - \mu_\text{Left}$ is? [$(-1.3711021, 0.7711021)$]{.printOnly}</li>
+  <li class="fragment" style="line-height: 1.1;">You can "invert" the signs of the C.I. to interpret it the other way around. Hence, the 95% C.I. for $\mu_\text{Right} - \mu_\text{Left}$ is? [$[-1.3711021, 0.7711021]$]{.printOnly}</li>
 </ul>
 
 ::: {.printOnly style="margin-top: 50px;"}
