@@ -13,7 +13,7 @@ format:
       - reveal-extra/title-block.html
     highlight-style: breeze
     code-line-numbers: false
-    embed-resources: false
+    embed-resources: true
 editor: source
 ---
 
@@ -437,23 +437,35 @@ What is "small enough" for a *p*-value? We can set a (significance) level, $\alp
 #| out-width: 100%
 #| fig-width: 8
 #| fig-height: 7
-#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827$.
+#| fig-cap: 
+#|   - "<strong>Figure&colon;</strong> Rejection region if $H_1\\!: \\mu \\neq \\mu_0$."
 
-ER <- \(z) {
+ER <- \(alpha, whichSide, nu = 37) {
   par(mai = c(0.6, 0.65, 0, 0))
   z0 <- seq(-4, 4, length.out = 1000)
   plot(0, type = "n", xlim = c(-3, 3), ylim = c(0, dnorm(0) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
-  lines(x = z0, y = dnorm(z0), col = "gray")
+  lines(x = z0, y = dt(z0, df = nu), col = "gray")
   abline(h = 0)
-  axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
-  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2, at = c(0, 0.1, 0.2, 0.3, 0.4, 1.0)); mtext("f(x; μ, σ)", side = 2, line = 2.25, font = 2)
+  axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("t", side = 1, line = 1.7, font = 2)
+  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2, at = c(0, 0.1, 0.2, 0.3, 0.4, 1.0)); mtext("f(t; v)", side = 2, line = 2.25, font = 2)
   
-  zz <- seq(-z, z, length.out = 1000)
-  
-  polygon(x = c(zz, rev(zz)), y = c(dnorm(zz), rep(0, length(zz))), col = "yellow", lwd = 2)
+  if (whichSide == "two.sided") {
+    zz <- seq(-4, qt(alpha/2, df = nu), length.out = 1000)
+    polygon(x = c(zz, rev(zz)), y = c(dt(zz, df = nu), rep(0, length(zz))), col = "#FFA500", lwd = 2)
+    
+    
+    zz <- seq(qt(1 - alpha/2, df = nu), 4, length.out = 1000)
+    polygon(x = c(zz, rev(zz)), y = c(dt(zz, df = nu), rep(0, length(zz))), col = "#FFA500", lwd = 2)
+  } else if (whichSide == "less") {
+    zz <- seq(-4, qt(alpha, df = nu), length.out = 1000)
+    polygon(x = c(zz, rev(zz)), y = c(dt(zz, df = nu), rep(0, length(zz))), col = "#008080", lwd = 2)
+  } else if (whichSide == "greater") {
+    zz <- seq(qt(1 - alpha, df = nu), 4, length.out = 1000)
+    polygon(x = c(zz, rev(zz)), y = c(dt(zz, df = nu), rep(0, length(zz))), col = "#DA70D6", lwd = 2)
+  }
 }
 
-ER(1)
+ER(0.05, "two.sided")
 ```
 :::
 ::: {.fragment width="33.33%" .column}
@@ -462,9 +474,10 @@ ER(1)
 #| out-width: 100%
 #| fig-width: 8
 #| fig-height: 7
-#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545$.
+#| fig-cap:
+#|   - "<strong>Figure&colon;</strong> Rejection region if $H_1\\!: \\mu > \\mu_0$."
 
-ER(2)
+ER(0.05, "greater")
 ```
 :::
 ::: {.fragment width="33.33%" .column}
@@ -473,9 +486,10 @@ ER(2)
 #| out-width: 100%
 #| fig-width: 8
 #| fig-height: 7
-#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973$.
+#| fig-cap:
+#|   - "<strong>Figure&colon;</strong> Rejection region if $H_1\\!: \\mu < \\mu_0$."
 
-ER(3)
+ER(0.05, "less")
 ```
 :::
 ::::
