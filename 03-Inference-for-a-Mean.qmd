@@ -50,7 +50,7 @@ Montgomery, D. C., Runger, G. C., & Hubele, N. F. (2010). *Engineering Statistic
 :::
 
 ::: {.aside}
-Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data*. Wiley.
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
 :::
 
 ## Statistical Inference in Pictures
@@ -135,25 +135,429 @@ $$
 **Note:** $\bar{x}$ is the *estimate* of the sampling distribution's *centre* given the **observed data**.
 :::
 
-## [Ex 4:]{.red}
+## [Ex 4:]{.red} IQ Scores of University Students
+
+<blockquote style="border-left: 0.25em solid #685f5f;">
+It was of interest to see whether the mean IQ of university students is the same as that of the population at large, which has a mean IQ of 100. This data comes from 38 subjects selected randomly from a population of university students, and their measured IQ scores have been numerically summarised below.
+</blockquote>
+
+$$
+\bar{x} = 111.3, \quad s = 22.6, \quad n = 38
+$$
+
+::: {.aside}
+Data from Sneyd, J., Fewster, R. M., & McGillivray, D. (2022). *Mathematics and Statistics for Science*. Springer.
+:::
 
 ## Estimation of the Mean
 
+:::::: {.columns}
+::::: {.column}
+**Point Estimate**
+
+::: {.definition style="width: 2.5%; margin-left: 0;"}
+$\bar{x}$
+:::
+
+:::: {.fragment}
+::: {style="margin-top: 50px;"}
+**Interval Estimate^a^**
+:::
+
+::: {.definition-orchid style="width: 34%; margin-left: 0;"}
+ $\bar{x} \pm t^*_p(\nu) \times \text{se}(\bar{x})$
+:::
+::::
+
+:::: {.fragment .incremental}
+where $t^*_p(\nu)$ is the *t*-multiplier such that:
+
+::: {style="margin-top: -15px;"}
+- $p = 1 - (1 - \text{Conf. Level})/2$^b^ 
+- $\nu = n - 1$
+:::
+::::
+:::::
+::::: {.fragment .column}
+Recall for [**Ex 4:**]{.red}
+<blockquote style="border-left: 0.25em solid #685f5f; margin-bottom: 50px;">
+$$
+\bar{x} = 111.3, \quad s = 22.6, \quad n = 38
+$$
+</blockquote>
+
+```{python IQ-multiplier}
+#| echo: true
+#| classes: fragment
+
+# Load in the stats submodule from the scipy package
+from scipy import stats
+
+# Determine the t-multiplier for a 95% C.I.
+stats.t.ppf(0.975, 37)
+```
+:::::
+::::::
+
+::: {.aside}
+a. By constructing a *[confidence interval]{.tomato}* for the "true" mean.
+b. $\text{Conf. Level}$ is short for *confidence level*.
+:::
+
+## Confidence Intervals
+
+> A [_**confidence interval**_]{.tomato} for a parameter is an interval computed from sample data by a method that will capture the parameter for a specified proportion of all samples.
+> 
+> The success rate (proportion of all samples whose intervals contain the parameter) is known as the _**confidence level**_.
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
+ --- Lock et al. (2021)
+:::
+
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
+:::
+
 ## Student's *t*-distribution
+
+Let $T$ be a *continuous* random variable that follows the *Student's t-distribution*.
+
+::::: {.columns}
+:::: {.column}
+::: {.fragment .definition style="width: 35%; margin-top: 50px; margin-left: auto !important; margin-right: auto !important;" fragment-index=0}
+$$
+T \sim \text{Student}(\nu)
+$$
+:::
+
+::: {.fragment style="margin-top: 50px;" fragment-index=1}
+It has a single parameter known as the degrees of freedom, $\nu$, provided that $\nu \in \mathbb{R}_{>0}$.
+:::
+
+::: {.fragment style="margin-top: 50px;" fragment-index=2}
+The value of a *t*-multiplier is, in fact, the outcome associated with a specific percentile of a Student's *t*-distribution with $\nu$ degrees of freedom.
+:::
+::::
+:::: {.column}
+::: {.fragment .panel-tabset fragment-index=1}
+#### *&nu;* = 1
+
+```{r Student-1}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dt, xlim = c(-25, 25), geom = "polygon", fill = "darkblue", alpha = 0.2, args = list(df = 1), n = 5000) +
+  geom_function(fun = dt, xlim = c(-5, 5), linewidth = 1, colour = "darkblue", args = list(df = 1), n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-4, 4))
+```
+
+#### *&nu;* = 5
+
+```{r Student-5}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dt, xlim = c(-25, 25), geom = "polygon", fill = "darkblue", alpha = 0.2, args = list(df = 5), n = 5000) +
+  geom_function(fun = dt, xlim = c(-5, 5), linewidth = 1, colour = "darkblue", args = list(df = 5), n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-4, 4))
+```
+
+#### *&nu;* = 25
+
+```{r Student-25}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dt, xlim = c(-25, 25), geom = "polygon", fill = "darkblue", alpha = 0.2, args = list(df = 25), n = 5000) +
+  geom_function(fun = dt, xlim = c(-5, 5), linewidth = 1, colour = "darkblue", args = list(df = 25), n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-4, 4))
+```
+
+#### *&nu;* = &infin;
+
+```{r Student-infin}
+#| fig-dpi: 300
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot() +
+  stat_function(fun = dt, xlim = c(-25, 25), geom = "polygon", fill = "darkblue", alpha = 0.2, args = list(df = Inf), n = 5000) +
+  geom_function(fun = dt, xlim = c(-5, 5), linewidth = 1, colour = "darkblue", args = list(df = Inf), n = 5000) +
+  theme_bw() +
+  labs(x = "x", y = "f(x; θ)") + 
+  coord_cartesian(xlim = c(-4, 4))
+```
+:::
+::::
+:::::
 
 ## Interpretation of the Confidence Interval
 
-## What a Confidence Interval is *Not*
+[**Ex 4:**]{.red} The 95% C.I. for $\mu$ is $[103.8716, 118.7284]$
 
-## Test for the Mean
+. . .
 
-## Hypotheses
+::: {style="margin-top: 50px;"}
+A good interpretation of a *[confidence interval]{.tomato}* addresses the...
+:::
+
+::: {.incremental style="margin-top: -12.5px;"}
+- Choice of *confidence level*
+- Uncertainty of the quantity estimated
+- Units where applicable
+:::
+
+::: {.printOnly style="margin-top: 50px;"}
+With 95% confidence, we estimate that the true mean IQ score of university students was somewhere between 103.87 and 118.73.
+:::
+
+## Test for the Mean<small>1</small>
+
+:::::: {.columns}
+::::: {.column}
+**Hypothesis Statements^2^**
+
+::: {.definition style="width: 22.5%; margin-left: 0;"}
+$H_0\!: \mu = \mu_0$  
+$H_1\!: \mu \neq \mu_0$
+:::
+
+::: {.fragment}
+where $\mu_0$ is the hypothesised value of the "true" mean.
+:::
+
+:::: {.fragment}
+::: {style="margin-top: 50px;"}
+**Test Statistic**
+:::
+
+::: {.definition-orchid style="width: 25%; margin-left: 0;"}
+$t_0 = \displaystyle \frac{\bar{x} - \mu_0}{ \text{se}(\bar{x})}$
+:::
+::::
+:::::
+::::: {.fragment .column}
+Recall for [**Ex 4:**]{.red}
+<blockquote style="border-left: 0.25em solid #685f5f; margin-bottom: 50px;">
+$$
+\bar{x} = 111.3, \quad s = 22.6, \quad n = 38
+$$
+</blockquote>
+:::::
+::::::
+
+::: {.aside}
+1. By conducting a one sample *t*-test, that is, a [*hypothesis test*]{.steelblue} for the "true" mean.
+2. By default, we conduct two-sided [*hypothesis tests*]{.steelblue} ($\neq$). A one-sided test can be conducted instead by changing the sign of the *alternative* hypothesis to $<$ or $>$.
+:::
+
+## Hypothesis Tests
+
+:::: {.fragment .fragment .semi-fade-out fragment-index=0}
+<blockquote style="border-left: 0.25em solid steelblue;">
+A [_**statistical (hypothesis) test**_]{.steelblue} is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.
+</blockquote>
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;"}
+ --- Lock et al. (2021)
+:::
+::::
+
+:::: {.columns}
+::: {.column .fragment .fade-in-then-semi-out fragment-index=0}
+<blockquote style="border-left: 0.25em solid orchid; margin-top: 50px">
+The **null hypothesis**, represented by the symbol *H&#8320;*, is a statement that there is "nothing" happening. In most situations, the researcher hopes to disprove or reject the null hypothesis.
+</blockquote>
+:::
+::: {.column .fragment .fade-in-then-semi-out fragment-index=1}
+<blockquote style="border-left: 0.25em solid teal; margin-top: 50px">
+The **alternative hypothesis**, represented by the symbol *H&#8321;* or *H&#8336;*, is a statement that "something" is happening. In most situations, this hypothesis is what the researcher hopes to prove.
+</blockquote>
+:::
+::::
+
+::: {style="font-size: 0.9em; text-align: right; margin-top: -0.5em;" .fragment fragment-index=0}
+ --- Utts & Heckard (2015)
+:::
+
+::: {.aside}
+Lock, R. H., Lock P. F., Morgan, K. L., Lock, E. F., & Lock, D. F. (2021). *Statistics: Unlocking the power of data* (3rd ed.). Wiley.
+
+Utts, J. M., & Heckard, R. F. (2015). *Mind on statistics* (5th ed.). Cengage Learning.
+:::
+
+## Student's *t*-distribution and *p*-values
+
+<blockquote style="border-left: 0.25em solid orange">
+The __*p*-value__ (or __*P*-value__) is calculated by assuming that the null hypothesis is true, and then determining the probability of a statistic as extreme as, or more extreme than, the observed statistic
+</blockquote>
+
+. . .
+
+::: {style="margin-top: 50px;"}
+The test statistic, $t_0$, as defined, describes the distance between the estimate *and* the hypothesised value in **standard error units**.
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+The sampling distribution of $t_0$ is modelled by a Student's *t*-distribution with $\nu = n-1$ degrees of freedom, [given that the **_null_ is true**]{.fragment .highlight-red}.
+:::
+
+. . .
+
+::: {style="margin-top: 50px;"}
+Hence, if a "small" *p*-value is calculated based on the observed $t_0$: [We essentially say our data is incompatible with the *null*, and, therefore, we reject it.]{.printOnly}
+:::
+
+::: {.aside}
+**Note:** A "large" *p*-value does not mean we can accept the *null*. One reason for this is that one component of $t_0$ is a value determined<br>[**Note:**]{style="visibility: hidden;"} by us and not by the observed data.
+:::
+
+## Rejection Regions and *p*-values
+
+What is "small enough" for a *p*-value? We can set a (significance) level, $\alpha\%$, to explain the outcome of the [hypothesis test]{.steelblue}.
+
+:::: {.columns}
+::: {.fragment .column width="33.33%"}
+```{r ER-1}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - \sigma < X < \mu + \sigma) \approx 0.6827$.
+
+ER <- \(z) {
+  par(mai = c(0.6, 0.65, 0, 0))
+  z0 <- seq(-4, 4, length.out = 1000)
+  plot(0, type = "n", xlim = c(-3, 3), ylim = c(0, dnorm(0) * 1.1), axes = FALSE, yaxs = "i", xlab = "", ylab = "")
+  lines(x = z0, y = dnorm(z0), col = "gray")
+  abline(h = 0)
+  axis(1, tcl = -0.2, mgp = c(0.75, 0.5, 0)); mtext("x", side = 1, line = 1.7, font = 2)
+  axis(2, tcl = -0.2, mgp = c(0.75, 0.5, 0), las = 2, at = c(0, 0.1, 0.2, 0.3, 0.4, 1.0)); mtext("f(x; μ, σ)", side = 2, line = 2.25, font = 2)
+  
+  zz <- seq(-z, z, length.out = 1000)
+  
+  polygon(x = c(zz, rev(zz)), y = c(dnorm(zz), rep(0, length(zz))), col = "yellow", lwd = 2)
+}
+
+ER(1)
+```
+:::
+::: {.fragment width="33.33%" .column}
+```{r ER-2}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.9545$.
+
+ER(2)
+```
+:::
+::: {.fragment width="33.33%" .column}
+```{r ER-3}
+#| fig-dpi: 300
+#| out-width: 100%
+#| fig-width: 8
+#| fig-height: 7
+#| fig-cap: <strong>Figure&colon;</strong> $\mathbb{P}(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.9973$.
+
+ER(3)
+```
+:::
+::::
+
+. . .
+
+These test statistic "thresholds", determined by $\alpha$, can also be found using *t*-multipliers. When a *t*-multiplier is used in this fashion, it is instead known as a **critical value**.
 
 ## Using Student's *t*-distribution to Calculate the *p*-value
 
-## Rejection Regions
+[**Ex 4:**]{.red} $t_0 = 3.082$ for $H_0\!: \mu = 100$ versus $H_1\!: \mu \neq 100$.
+
+. . .
+
+::: {style="margin-bottom: 50px;"}
+Under the *null*, $T \sim \text{Student}(\nu)$, where $\nu = n - 1$.
+:::
+
+::::: {.columns style="font-size: 0.9em;"}
+:::: {.column .fragment}
+::: {.definition style="width: 85%; margin-left: 0;"}
+If it is a two-sided test, e.g. $H_1 \! : \mu \neq \mu_0$
+
+$\quad p\text{-value} = 2 \times \mathbb{P}(T > |t_0|)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T > |t|) = \alpha/2$
+:::
+
+::: {.definition-orchid .fragment style="margin-top: 25px; width: 85%; margin-left: 0;"}
+If it is a one-sided test and $H_1 \! : \mu > \mu_0$
+
+$\quad p\text{-value} = \mathbb{P}(T > t_0)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T > t) = \alpha$
+:::
+
+::: {.definition-teal .fragment style="margin-top: 25px; width: 85%; margin-left: 0;"}
+If it is a one-sided test and $H_1 \! : \mu < \mu_0$
+
+$\quad p\text{-value} = \mathbb{P}(T < t_0)$
+
+$\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T < t) = \alpha$
+:::
+::::
+:::: {.column}
+```{python IQ-pvalue}
+#| echo: true
+#| classes: fragment
+
+# Load in the stats submodule from the scipy package
+from scipy import stats
+
+# Calculate the p-value using the "percentile" approach
+2 * (1 - stats.t.cdf(abs(3.082), 37))
+
+# Determine the critical value at the 5% level
+stats.t.ppf(0.975, 37)
+```
+::::
+:::::
 
 ## Explanation of the Outcome of the Hypothesis Test
+
+[**Ex 4:**]{.red} $t_0 = 3.082$ for $H_0\!: \mu = 100$ versus $H_1\!: \mu \neq 100$.
+
+The *p*-value was 0.0039 and the critical value was 2.026.
+
+. . .
+
+::: {style="margin-top: 50px;"}
+A good explanation of the outcome of the *[hypothesis test]{.steelblue}* includes...
+:::
+
+::: {.incremental style="margin-top: -12.5px;"}
+- Contextualisation of the hypothesis statements
+- The choice of level, *&alpha;*, used to quantify a "small enough" *p*-value
+- A quote of the *p*-value
+:::
+
+::: {.printOnly style="margin-top: 50px;"}
+We do reject the null that the true mean IQ score of university students was 100 in favour of the alternative that they are not 100 at the 5% level (*p*-value = 0.0039). 
+:::
 
 ## [Ex 5:]{.red} Cholesterol Levels
 

@@ -33,8 +33,8 @@ The following topics from @stroud13 are covered as part of the statistics compon
 
 The following topics from @lock21 _**Unit C:** Inference with Normal and t-Distributions_ are covered as part of the statistics component of ENGEN102.
 
-- *Inference for a Mean* (pg. 448--469)
-- *Inference for a Difference in Means* (pg. 485--501)
+- *Inference for a Mean* (pg. 448--469), access via [Waikato Reading Lists](https://rl.talis.com/3/waikato/items/421af47e-e7aa-41d6-8e3b-259c793562c3.html?lang=en&login=1)
+- *Inference for a Difference in Means* (pg. 485--501), access via [Waikato Reading Lists](https://rl.talis.com/3/waikato/items/03cadc1d-2612-4420-8098-e6340f870a64.html?lang=en&login=1)
 
 ::: {.callout-warning appearance="simple"}
 This is not an exhaustive list of all topics covered in the statistics component of ENGEN102.

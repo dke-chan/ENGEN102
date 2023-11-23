@@ -135,7 +135,7 @@ $\bar{x}_1 - \bar{x}_2$
 where $t^*_p(\nu)$ is the *t*-multiplier such that:
 
 ::: {style="margin-top: -15px;"}
-- $p = 1 - \text{Conf. Level}/2$ 
+- $p = 1 - (1 - \text{Conf. Level})/2$ 
 - $\nu = \text{min}(n_1 - 1, n_2 - 1)$ [*by hand*]{.fragment .highlight-blue}^[Statistically inclined software like [Python]{.cornflowerblue} use Satterthwaite's approximation to determine $\nu$.]
 :::
 ::::
@@ -216,7 +216,7 @@ $$
 
 ::: {.aside}
 1. By conducting a two sample *t*-test, that is, a [*hypothesis test*]{.steelblue} for the difference in the "true" means.
-2. By default, we conduct two-sided hypothesis tests ($\neq$). A one-sided test can be conducted instead by changing the sign of the *alternative* hypothesis to $<$ or $>$.
+2. By default, we conduct two-sided [*hypothesis tests*]{.steelblue} ($\neq$). A one-sided test can be conducted instead by changing the sign of the *alternative* hypothesis to $<$ or $>$.
 :::
 
 ## Using Student's *t*-distribution to Calculate the *p*-value
@@ -263,7 +263,7 @@ $\quad \text{Critical value, } t, ~ \text{fulfills:} ~ \mathbb{P}(T < t) = \alph
 # Load in the stats submodule from the scipy package
 from scipy import stats
 
-# Calculate the p-value using the CDF
+# Calculate the p-value using the "percentile" approach
 2 * (1 - stats.t.cdf(abs(0.584), 274))
 
 # Determine the critical value at the 5% level
@@ -279,7 +279,7 @@ stats.t.ppf(0.975, 274)
 The *p*-value was 0.5597 and the critical value was 1.969.
 
 ::: {.printOnly style="margin-top: 50px;"}
-We do not reject the null that the true average hourly earnings of left-handed American men were the same as that of right-handed American men in favour of the alternative that they are not at the 5% level (p-value = 0.5597). 
+We do not reject the null that the true average hourly earnings of left-handed American men were the same as that of right-handed American men in favour of the alternative that they are not at the 5% level (*p*-value = 0.5597). 
 :::
 
 
